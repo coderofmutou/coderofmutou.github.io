@@ -30,6 +30,7 @@ jobs:
         run: |
           remote_addr=`git remote get-url --push origin`
           echo 1 $remote_addr
+          echo remotev `git remote -v`
           commit_info=`git describe --all --always --long`
           user_name=`git log -1 --pretty=format:'%an'`
           user_email=`git log -1 --pretty=format:'%ae'`
@@ -44,10 +45,12 @@ jobs:
           git add -A
           git commit -m "auto deploy, $commit_info"
           remote_addr=`echo $remote_addr | awk -F'://' '{print $2}'`
+          echo remotev1 `git remote -v`
           echo 2 $remote_addr
           remote_addr=https://${user_name}:${{secrets.GITHUB_TOKEN}}@${remote_addr}
           echo user ${user_name}
           echo token ${{secrets.GITHUB_TOKEN}}   
           echo 3 $remote_addr
           git remote add origin ${remote_addr}
+          echo 4 `git remote get-url --push origin`
           git push origin HEAD:$deploy_branch --force # 推送到github $deploy_branch分支
