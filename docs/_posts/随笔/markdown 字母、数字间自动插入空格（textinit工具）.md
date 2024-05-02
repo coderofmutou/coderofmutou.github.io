@@ -1,3 +1,16 @@
+---
+title: markdown 字母、数字间自动插入空格（textinit工具）
+date: 2024-05-02 17:41:37
+permalink: /pages/c58665/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: bombax
+  link: https://github.com/coderofmutou
+---
 # markdown 字母、数字间自动插入空格（textinit工具）
 
 ## 介绍
@@ -44,7 +57,7 @@
 
 ## 常用规则
 
-https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule
+[Collection-of-textlint-rule](https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule)
 
 ## 推荐规则
 
@@ -52,9 +65,7 @@ https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule
 
 检查所有链接是否可用。
 
-### textlint-rule-ja-space-between-half-and-full-width
-
-[textlint-rule-ja-space-between-half-and-full-width](https://github.com/textlint-ja/textlint-rule-preset-ja-spacing/blob/master/packages/textlint-rule-ja-space-between-half-and-full-width/README.md)
+### [textlint-rule-ja-space-between-half-and-full-width](https://github.com/textlint-ja/textlint-rule-preset-ja-spacing/blob/master/packages/textlint-rule-ja-space-between-half-and-full-width/README.md)
 
 检测半角字符和全角字符之间是否有空格
 
@@ -80,17 +91,16 @@ https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule
 
 3. 选项
 
-    - `space`: "always"|| "never" || string[]
-
+    - `space`: "always" || "never" || string[]
         - 默认值: `never`
         - 总是空格（`always`）或不空格（`never`）
-
+        
         - 也可以使用 Array 格式: [`alphabets`,`numbers`，`punctuation`]
             - 只指定想要的对象
             - 例如，如果希望将数字和标点符号(、。)视为例外:["alphabets"]
-
+        
     - ...
-
+    
     ```
     {
         "rules": {
@@ -101,9 +111,7 @@ https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule
     }
     ```
 
-### textlint-rule-zh-half-and-full-width-bracket
-
-[textlint-rule-zh-half-and-full-width-bracket](https://github.com/ylc395/textlint-rule-zh-half-and-full-width-bracket)
+### [textlint-rule-zh-half-and-full-width-bracket](https://github.com/ylc395/textlint-rule-zh-half-and-full-width-bracket)
 
 检测是否正确地使用了全角或半角括号。默认情况下，半角和全角之间没有空格。("never")
 

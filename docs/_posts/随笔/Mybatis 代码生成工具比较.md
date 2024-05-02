@@ -1,3 +1,16 @@
+---
+title: Mybatis 代码生成工具比较
+date: 2024-05-02 17:41:37
+permalink: /pages/20b7dd/
+sidebar: auto
+categories:
+  - 随笔
+tags:
+  - 
+author: 
+  name: bombax
+  link: https://github.com/coderofmutou
+---
 # Mybatis-generator、通用Mapper与Mybatis-Plus对比
 
 ## [Mybatis-generator](https://mybatis.org/generator/index.html)
@@ -28,7 +41,7 @@
 
 **简介：**
 
-- [MyBatis 为什么需要通用 Mapper ?]([MyBatis 为什么需要通用 Mapper ?_为什么mybatis要增加mapper-CSDN博客](https://blog.csdn.net/isea533/article/details/83045335))
+- [MyBatis 为什么需要通用 Mapper ?](https://blog.csdn.net/isea533/article/details/83045335)
 - 当数据库字段变化频繁时，使用 MBG(mybatis-generator)会带来大量的重构工作，对此，通用 Mapper 给出的解决办法是：给予开发者一个具备丰富的单表方法并且容易扩展的通用的 Mapper。
 - 通用 Mapper 是一个基于 MyBatis 的通用 Mapper 接口，它提供了一套通用的 CRUD 操作方法，使得开发者无需编写 Mapper.xml 文件，只需继承通用 Mapper 接口，即可实现数据库的增删改查操作，同时它还允许开发人员便捷地对通用 Mapper 进行扩展。
 - 通用 Mapper 的代码生成实际上是使用了 MGB，因此通用 Mapper 的代码生成器只是调用了 MGB，然后在这个基础上加入了一些元素来方便开发。
