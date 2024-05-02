@@ -24,7 +24,7 @@ author:
 ```shell
 npm install markdown-it-disable-url-encode
 ```
-2. config.ts引入模块
+2. config.ts 引入模块
 ```ts
 import markdownItDisableUrlEncode from 'markdown-it-disable-url-encode';
 
