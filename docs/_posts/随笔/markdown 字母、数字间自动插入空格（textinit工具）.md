@@ -11,7 +11,7 @@ author:
   name: bombax
   link: https://github.com/coderofmutou
 ---
-# markdown 字母、数字间自动插入空格（textinit工具）
+# markdown 字母、数字间自动插入空格（textinit 工具）
 
 ## 介绍
 

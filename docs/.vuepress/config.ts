@@ -37,20 +37,20 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       { text: '首页', link: '/' },
       {
         text: 'Java基础',
-        link: '/java-basic/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
+        link: '/java-basic/software-install-config/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
         items: [
           // 说明：以下所有link的值只是在相应md文件头部定义的永久链接（不是什么特殊编码）。另外，注意结尾是有斜杠的
           {
-            text: '前端文章',
+            text: '前置',
             items: [
-              { text: 'JavaScript', link: '/pages/8143cc480faf9a11/' },
+              { text: '基础软件安装与配置', link: '/java-basic/software-install-config/' },
             ],
           },
           {
             text: '学习笔记',
             items: [
-              { text: '《JavaScript教程》', link: '/note/javascript/' },
-              { text: '《JavaScript高级程序设计》', link: '/note/js/' },
+              { text: 'POJO 概念', link: '/pages/pojo/' },
+              /*{ text: '《JavaScript高级程序设计》', link: '/note/js/' },
               { text: '《ES6 教程》', link: '/note/es6/' },
               { text: '《Vue》', link: '/note/vue/' },
               { text: '《React》', link: '/note/react/' },
@@ -69,17 +69,23 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
               {
                 text: 'JS设计模式总结',
                 link: '/pages/4643cd/',
-              },
+              },*/
             ],
           },
         ],
       },
       {
         text: '微服务核心',
-        link: '/micro-service-core/',
+        link: '/micro-service-core/SpringCloud/',
         items: [
-          { text: 'HTML', link: '/pages/8309a5b876fc95e3/' },
-          { text: 'CSS', link: '/pages/0a83b083bdf257cb/' },
+          { text: 'SpringCloud', link: '/micro-service-core/SpringCloud/' },
+          { text: 'SpringCloud-Alibaba', link: '/micro-service-core/SpringCloud-Alibaba/' },
+          {
+            text: '相关知识',
+            items: [
+              { text: 'Mybatis 代码生成工具比较', link: '/pages/20b7dd/' },
+            ],
+          }
         ],
       },
       {
@@ -92,9 +98,9 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
               { text: '安全框架之Spring Security', link: '/micro-service-ecology/SpringSecurity/' },
             ]
           },
-          { text: 'GitHub技巧', link: '/pages/4c778760be26d8b3/' },
+          /*{ text: 'GitHub技巧', link: '/pages/4c778760be26d8b3/' },
           { text: 'Nodejs', link: '/pages/117708e0af7f0bd9/' },
-          { text: '博客搭建', link: '/pages/41f87d890d0a02af/' },
+          { text: '博客搭建', link: '/pages/41f87d890d0a02af/' },*/
         ],
       },
       {
@@ -133,7 +139,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         link: '/archives/',
         items: [
           { text: '分类', link: '/categories/' },
-          { text: '标签', link: '/tags/' },
+          // { text: '标签', link: '/tags/' },
           { text: '归档', link: '/archives/' },
         ],
       },
@@ -155,7 +161,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     // archive: false, // 是否打开归档功能，默认true
     // categoryText: '随笔', // 碎片化文章（_posts文件夹的文章）预设生成的分类值，默认'随笔'
 
-    // pageStyle: 'line', // 页面风格，可选值：'card' 卡片 | 'line' 线（未设置bodyBgImg时才生效）， 默认 'card'。 说明：card时背景显示灰色衬托出卡片样式，line时背景显示纯色，并且部分模块带线条边框
+    pageStyle: 'card', // 页面风格，可选值：'card' 卡片 | 'line' 线（未设置bodyBgImg时才生效）， 默认 'card'。 说明：card时背景显示灰色衬托出卡片样式，line时背景显示纯色，并且部分模块带线条边框
 
     // bodyBgImg: [
     //   'https://jsd.cdn.zzko.cn/gh/xugaoyi/image_store/blog/20200507175828.jpeg',
@@ -183,7 +189,8 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     // defaultMode: 'auto',
 
     // 侧边栏  'structuring' | { mode: 'structuring', collapsable: Boolean} | 'auto' | <自定义>    温馨提示：目录页数据依赖于结构化的侧边栏数据，如果你不设置为'structuring',将无法使用目录页
-    sidebar: { mode: 'structuring', collapsable: false},
+    // sidebar: { mode: 'structuring', collapsable: false},
+    sidebar: 'auto',
 
     // 文章默认的作者信息，(可在md文件中单独配置此信息) string | {name: string, link?: string}
     author: {
