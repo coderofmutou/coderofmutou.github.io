@@ -107,7 +107,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         text: '实用工具',
         link: '/tool/',
         items: [
-          { text: 'test1', link: '/pages/5667fa/' },
+          { text: 'Java 日志热门框架', link: '/tools/java-logs/' },
           { text: '面试', link: '/pages/aea6571b7a8bae86/' },
           { text: '心情杂货', link: '/pages/2d615df9a36a98ed/' },
           { text: '实用技巧', link: '/pages/baaa02/' },
