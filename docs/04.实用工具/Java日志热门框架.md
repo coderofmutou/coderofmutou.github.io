@@ -1483,11 +1483,12 @@ log4j2 默认加载 classpath 下的 `log4j2.xml` 文件中的配置。
     - **全局异步**就是，所有的日志都异步的记录，在配置文件上不用做任何改动，只需要添加一个 `log4j2.component.properties` 配置；[log4j2 System Properties](https://logging.apache.org/log4j/2.x/manual/configuration.html#system-properties)
 
         ```properties
-        <!-- 使所有记录器异步 -->
+        # 使所有记录器异步
         Log4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
-        <!-- Log4j2 配置文件的路径。也可以包含一个以逗号分隔的配置文件名列表。可能包含URL。-->
+        # Log4j2 配置文件的路径。也可以包含一个以逗号分隔的配置文件名列表。可能包含URL。 -->
         log4j2.configurationFile=config/log/log4j2.xml
-        <!-- 如果未指定工厂，则记录器使用默认消息工厂：org.apache.logging.log4j.message.ParameterizedMessageFactory or org.apache.logging.log4j.message. ReusableMessageFactory in garbage-free mode -->
+        # 如果未指定工厂，则记录器使用默认消息工厂：org.apache.logging.log4j.message.ParameterizedMessageFactory 
+        # or org.apache.logging.log4j.message. ReusableMessageFactory in garbage-free mode
         log4j2.messageFactory=AAA.loghelper.log4j2.message.GeekPlusMessageFactory
         ```
     
