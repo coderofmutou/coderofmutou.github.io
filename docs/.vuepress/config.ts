@@ -98,6 +98,12 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
               { text: '安全框架之Spring Security', link: '/micro-service-ecology/SpringSecurity/' },
             ]
           },
+          {
+            text: '定时任务框架',
+            items: [
+              { text: '定时任务框架之 Quartz', link: '/micro-service-ecology/Quartz/' },
+            ]
+          },
           /*{ text: 'GitHub技巧', link: '/pages/4c778760be26d8b3/' },
           { text: 'Nodejs', link: '/pages/117708e0af7f0bd9/' },
           { text: '博客搭建', link: '/pages/41f87d890d0a02af/' },*/
@@ -108,10 +114,10 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         link: '/tool/',
         items: [
           { text: 'Java 日志热门框架', link: '/tools/java-logs/' },
-          { text: '面试', link: '/pages/aea6571b7a8bae86/' },
-          { text: '心情杂货', link: '/pages/2d615df9a36a98ed/' },
-          { text: '实用技巧', link: '/pages/baaa02/' },
-          { text: '友情链接', link: '/friends/' },
+          // { text: '面试', link: '/pages/aea6571b7a8bae86/' },
+          // { text: '心情杂货', link: '/pages/2d615df9a36a98ed/' },
+          // { text: '实用技巧', link: '/pages/baaa02/' },
+          // { text: '友情链接', link: '/friends/' },
         ],
       },
       {
@@ -128,6 +134,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           { text: 'ehcache java 缓存框架', link: 'https://www.ehcache.org/documentation/' },
           { text: 'jetcache java 缓存框架', link: 'https://github.com/alibaba/jetcache' },
           { text: '主流缓存框架调研', link: 'https://www.cnblogs.com/imyjy/p/15695160.html' },
+          { text: 'redisson 官方中文文档', link: 'https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95' },
           // { text: '面试', link: '/pages/aea6571b7a8bae86/' },
           // { text: '心情杂货', link: '/pages/2d615df9a36a98ed/' },
           // { text: '实用技巧', link: '/pages/baaa02/' },
