@@ -90,18 +90,19 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       },
       {
         text: '微服务生态',
-        link: '/micro-service-ecology/',
+        // link: '/micro-service-ecology/',
         items: [
           {
             text: '安全框架',
             items: [
-              { text: '安全框架之Spring Security', link: '/micro-service-ecology/SpringSecurity/' },
+              { text: '安全框架之 Spring Security', link: '/micro-service-ecology/SpringSecurity/' },
             ]
           },
           {
             text: '定时任务框架',
             items: [
               { text: '定时任务框架之 Quartz', link: '/micro-service-ecology/Quartz/' },
+              { text: '定时任务框架之 XXL-JOB', link: '/micro-service-ecology/XXL-JOB/' },
             ]
           },
           /*{ text: 'GitHub技巧', link: '/pages/4c778760be26d8b3/' },
