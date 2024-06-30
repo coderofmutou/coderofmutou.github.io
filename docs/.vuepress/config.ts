@@ -96,6 +96,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
             text: '安全框架',
             items: [
               { text: '安全框架之 Spring Security', link: '/micro-service-ecology/SpringSecurity/' },
+              { text: '安全框架之 Shiro', link: '/micro-service-ecology/Shiro/' },
             ]
           },
           {

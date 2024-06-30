@@ -1,3 +1,16 @@
+---
+title: 安全框架之 Shiro
+date: 2024-06-20 01:21:36
+permalink: /micro-service-ecology/Shiro/
+categories:
+  - 微服务生态
+  - 安全框架
+tags:
+  - 
+author: 
+  name: bombax
+  link: https://github.com/coderofmutou
+---
 # 安全框架之 Shiro
 
 ## 入门概述
