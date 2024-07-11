@@ -149,6 +149,8 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           { text: 'jetcache java 缓存框架', link: 'https://github.com/alibaba/jetcache' },
           { text: '主流缓存框架调研', link: 'https://www.cnblogs.com/imyjy/p/15695160.html' },
           { text: 'redisson 官方中文文档', link: 'https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95' },
+          { text: 'LiquiBase 中文学习指南', link: 'https://blog.csdn.net/u012934325/article/details/100652805' },
+          { text: 'LiquiBase 官方文档', link: 'https://blog.csdn.net/u012934325/article/details/100652805' },
           // { text: '面试', link: '/pages/aea6571b7a8bae86/' },
           // { text: '心情杂货', link: '/pages/2d615df9a36a98ed/' },
           // { text: '实用技巧', link: '/pages/baaa02/' },
