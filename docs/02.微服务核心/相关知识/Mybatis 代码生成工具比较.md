@@ -3,6 +3,7 @@ title: Mybatis 代码生成工具比较
 date: 2024-05-02 17:41:37
 permalink: /pages/20b7dd/
 categories:
+  - 微服务核心
   - 相关知识
 tags:
   - 

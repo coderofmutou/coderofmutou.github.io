@@ -1271,7 +1271,7 @@ public interface SchedulerListener {
     - `CronTrigger.MISFIRE_INSTRUCTION_FIRE_NOW`：`withMisfireHandlingInstructionFireAndProceed()`
         - 说明：错过的全部合并成一次，并立即补偿（即使任务终止时间已达到），然后正常调取。**默认值**。
     - `CronTrigger.MISFIRE_INSTRUCTION_IGNORE_MISFIRE_POLICY`：`withMisfireHandlingInstructionIgnoreMisfires()`
-        - 说明：错过的全部理解补偿（即使任务终止时间已达到），然后正常调度
+        - 说明：错过的全部立即补偿（即使任务终止时间已达到），然后正常调度
 
 ### Job Stores
 
