@@ -78,8 +78,20 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         text: '微服务核心',
         link: '/micro-service-core/SpringCloud/',
         items: [
-          { text: 'SpringCloud', link: '/micro-service-core/SpringCloud/' },
-          { text: 'SpringCloud-Alibaba', link: '/micro-service-core/SpringCloud-Alibaba/' },
+          {
+            text: 'Spring Cloud',
+            items: [
+              { text: 'SpringCloud', link: '/micro-service-core/SpringCloud/' },
+              { text: 'SpringCloud-Alibaba', link: '/micro-service-core/SpringCloud-Alibaba/' },
+            ]
+          },
+          {
+            text: '持久层框架',
+            items: [
+              { text: 'MyBatis', link: '/micro-service-core/MyBatis/' },
+              { text: 'MyBatis-Plus', link: '/micro-service-core/MyBatisPlus/' },
+            ]
+          },
           {
             text: '相关知识',
             items: [
@@ -90,7 +102,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       },
       {
         text: '微服务生态',
-        // link: '/micro-service-ecology/',
+        link: '/micro-service-ecology/SpringSecurity/',
         items: [
           {
             text: '安全框架',
@@ -113,7 +125,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       },
       {
         text: '实用工具',
-        link: '/tool/',
+        link: '/tools/java-logs/',
         items: [
           { text: 'Java 日志热门框架', link: '/tools/java-logs/' },
           // { text: '面试', link: '/pages/aea6571b7a8bae86/' },
@@ -124,7 +136,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       },
       {
         text: '更多',
-        link: '/more/',
+        // link: '/more/',
         items: [
           { text: 'Motan RPC', link: 'https://github.com/weibocom/motan/wiki/zh_overview' },
           { text: 'Lombok Tutorial', link: 'https://www.knowledgedict.com/tutorial/lombok-intro.html' },
