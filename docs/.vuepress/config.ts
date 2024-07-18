@@ -128,7 +128,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
         link: '/tools/java-logs/',
         items: [
           { text: 'Java 日志热门框架', link: '/tools/java-logs/' },
-          // { text: '面试', link: '/pages/aea6571b7a8bae86/' },
+          { text: 'Git 常用命令', link: '/tools/git/' },
           // { text: '心情杂货', link: '/pages/2d615df9a36a98ed/' },
           // { text: '实用技巧', link: '/pages/baaa02/' },
           // { text: '友情链接', link: '/friends/' },
