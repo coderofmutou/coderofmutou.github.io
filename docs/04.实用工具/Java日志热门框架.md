@@ -1489,7 +1489,7 @@ log4j2 默认加载 classpath 下的 `log4j2.xml` 文件中的配置。
         log4j2.configurationFile=config/log/log4j2.xml
         # 如果未指定工厂，则记录器使用默认消息工厂：org.apache.logging.log4j.message.ParameterizedMessageFactory 
         # or org.apache.logging.log4j.message. ReusableMessageFactory in garbage-free mode
-        log4j2.messageFactory=AAA.loghelper.log4j2.message.GeekPlusMessageFactory
+        log4j2.messageFactory=AAA.loghelper.log4j2.message.MyGeekPlusMessageFactory
         ```
     
     - **混合异步**就是，你可以在应用中同时使用同步日志和异步日志，这使得日志的配置方式更加灵活。
