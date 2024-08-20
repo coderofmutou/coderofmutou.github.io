@@ -281,7 +281,7 @@ mybatis-plus:
 
 ## 基本 CRUD
 
-### BaseMapper\<T\>
+### BaseMapper\<T>
 
 说明：
 

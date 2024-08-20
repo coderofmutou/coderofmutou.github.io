@@ -1796,3 +1796,454 @@ public void testPageHelp() {
 }
 ```
 
+## Spring 整合 MyBatis
+
+### 引入依赖
+
+```xml
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+ 
+    <!--添加jar包依赖-->
+    <!--1.spring 5.0.2.RELEASE相关-->
+    <spring.version>5.0.2.RELEASE</spring.version>
+    <!--2.mybatis相关-->
+    <mybatis.version>3.4.5</mybatis.version>
+    <!--mysql-->
+    <mysql.version>5.1.44</mysql.version>
+    <!--pagehelper分页jar依赖-->
+    <pagehelper.version>5.1.2</pagehelper.version>
+    <!--mybatis与spring集成jar依赖-->
+    <mybatis.spring.version>1.3.1</mybatis.spring.version>
+    <!--3.dbcp2连接池相关 druid-->
+    <commons.dbcp2.version>2.1.1</commons.dbcp2.version>
+    <commons.pool2.version>2.4.3</commons.pool2.version>
+    <!--4.log日志相关-->
+    <log4j2.version>2.9.1</log4j2.version>
+    <!--5.其他-->
+    <junit.version>4.12</junit.version>
+    <servlet.version>4.0.0</servlet.version>
+    <lombok.version>1.18.2</lombok.version>
+</properties>
+ 
+<dependencies>
+    <!--1.spring相关-->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-orm</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-tx</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aspects</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+    </dependency>
+ 
+    <!--2.mybatis相关-->
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis.version}</version>
+    </dependency>
+    <!--mysql-->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+    </dependency>
+    <!--pagehelper分页插件jar包依赖-->
+    <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper</artifactId>
+        <version>${pagehelper.version}</version>
+    </dependency>
+    <!--mybatis与spring集成jar包依赖-->
+    <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>${mybatis.spring.version}</version>
+    </dependency>
+ 
+    <!--3.dbcp2连接池相关-->
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-dbcp2</artifactId>
+        <version>${commons.dbcp2.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-pool2</artifactId>
+        <version>${commons.pool2.version}</version>
+    </dependency>
+ 
+    <!--4.log日志相关依赖-->
+    <!--核心log4j2jar包-->
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j2.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>${log4j2.version}</version>
+    </dependency>
+    <!--web工程需要包含log4j-web，非web工程不需要-->
+    <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-web</artifactId>
+        <version>${log4j2.version}</version>
+    </dependency>
+ 
+    <!--5.其他-->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${servlet.version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+    </dependency>
+ 
+</dependencies>
+
+<resources>
+    <!--解决mybatis-generator-maven-plugin运行时没有将XxxMapper.xml文件放入target文件夹的问题-->
+    <resource>
+        <directory>src/main/java</directory>
+        <includes>
+            <include>**/*.xml</include>
+        </includes>
+    </resource>
+    <!--解决mybatis-generator-maven-plugin运行时没有将jdbc.properites文件放入target文件夹的问题-->
+    <resource>
+        <directory>src/main/resources</directory>
+        <includes>
+            <include>jdbc.properties</include>
+            <include>*.xml</include>
+        </includes>
+    </resource>
+</resources>
+
+<plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven.compiler.plugin.version}</version>
+        <configuration>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
+            <encoding>${project.build.sourceEncoding}</encoding>
+        </configuration>
+    </plugin>
+    <plugin>
+        <groupId>org.mybatis.generator</groupId>
+        <artifactId>mybatis-generator-maven-plugin</artifactId>
+        <version>1.3.2</version>
+        <dependencies>
+            <!--使用Mybatis-generator插件不能使用太高版本的mysql驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+        </dependencies>
+        <configuration>
+            <overwrite>true</overwrite>
+        </configuration>
+    </plugin>
+</plugins>
+```
+
+### 配置文件
+
+#### `generatorConfig.xml`
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="jdbc.properties"/>
+ 
+    <!--指定数据库jdbc驱动jar包的位置 maven里面 -->
+    <classPathEntry
+            location="D:\\zking App\\mvn_repository\\mysql\\mysql-connector-java\\5.1.44\\mysql-connector-java-5.1.44.jar"/>
+ 
+    <!-- 一个数据库一个context -->
+    <context id="infoGuardian">
+        <!-- 注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true"/> <!-- 是否生成注释代时间戳 -->
+        </commentGenerator>
+ 
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${jdbc.driver}"
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}" password="${jdbc.password}"/>
+ 
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+ 
+        <!-- 01 指定javaBean生成的位置 -->
+        <!-- targetPackage：指定生成的model生成所在的包名 -->
+        <!-- targetProject：指定在该项目下所在的路径  -->
+        <javaModelGenerator targetProject="src/main/java" targetPackage="com.tgq.model">
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 是否对model添加构造函数 -->
+            <property name="constructorBased" value="true"/>
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="false"/>
+            <!-- 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
+            <property name="immutable" value="false"/>
+        </javaModelGenerator>
+ 
+        <!-- 02 指定sql映射文件生成的位置 -->
+        <sqlMapGenerator targetProject="src/main/java" targetPackage="com.tgq.mapper">
+            <!-- 是否允许子包，即targetPackage.schemaName.tableName -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+ 
+        <!-- 03 生成XxxMapper接口 -->
+        <!-- type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象 -->
+        <!-- type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象 -->
+        <!-- type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口 -->
+        <javaClientGenerator targetProject="src/main/java" targetPackage="com.tgq.mapper" type="XMLMAPPER">
+            <!-- 是否在当前路径下新加一层schema,false路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+ 
+        <!-- 配置表信息 -->
+        <!-- schema即为数据库名 -->
+        <!-- tableName为对应的数据库表 -->
+        <!-- domainObjectName是要生成的实体类 -->
+        <!-- enable*ByExample是否生成 example类 -->
+        <!--<table schema="" tableName="t_book" domainObjectName="Book"-->
+        <!--enableCountByExample="false" enableDeleteByExample="false"-->
+        <!--enableSelectByExample="false" enableUpdateByExample="false">-->
+        <!--&lt;!&ndash; 忽略列，不生成bean 字段 &ndash;&gt;-->
+        <!--&lt;!&ndash; <ignoreColumn column="FRED" /> &ndash;&gt;-->
+        <!--&lt;!&ndash; 指定列的java数据类型 &ndash;&gt;-->
+        <!--&lt;!&ndash; <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> &ndash;&gt;-->
+        <!--</table>-->
+ 
+        <table schema="" tableName="t_mvc_Book" domainObjectName="Book"
+               enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" enableUpdateByExample="false">
+            <!-- 忽略列，不生成bean 字段 -->
+            <!-- <ignoreColumn column="FRED" /> -->
+            <!-- 指定列的java数据类型 -->
+            <!-- <columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" /> -->
+        </table>
+ 
+    </context>
+</generatorConfiguration>
+```
+
+#### `jdbc.properties`
+
+```properties
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/mybatis_ssm?useUnicode=true&characterEncoding=UTF-8
+jdbc.username=root
+jdbc.password=123456
+```
+
+#### `spring-mybatis.xml`
+
+1. 扫描所有 JavaBean，将对应的组件加载到 spring 的上下文
+2. 配置 session 连接工厂
+3. 配置 mapper 扫描接口
+4. 配置事务管理器
+5. 配置 aop 自动代理
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--1. 注解式开发 -->
+    <!-- 注解驱动 -->
+    <context:annotation-config/>
+    <!-- 用注解方式注入bean，并指定查找范围：com.javaxl.ssm及子子孙孙包-->
+    <context:component-scan base-package="com.tgq"/>
+ 
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+ 
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!--初始连接数-->
+        <property name="initialSize" value="10"/>
+        <!--最大活动连接数-->
+        <property name="maxTotal" value="100"/>
+        <!--最大空闲连接数-->
+        <property name="maxIdle" value="50"/>
+        <!--最小空闲连接数-->
+        <property name="minIdle" value="10"/>
+        <!--设置为-1时，如果没有可用连接，连接池会一直无限期等待，直到获取到连接为止。-->
+        <!--如果设置为N（毫秒），则连接池会等待N毫秒，等待不到，则抛出异常-->
+        <property name="maxWaitMillis" value="-1"/>
+    </bean>
+ 
+    <!--4. spring和MyBatis整合 -->
+    <!--1) 创建sqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描XxxMapping.xml文件，**任意路径 -->
+        <property name="mapperLocations" value="classpath*:com/tgq/**/mapper/*.xml"/>
+        <!-- 指定别名 -->
+        <property name="typeAliasesPackage" value="com/javaxl/ssm/**/model"/>
+        <!--配置pagehelper插件-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+ 
+    <!--2) 自动扫描com/javaxl/ssm/**/mapper下的所有XxxMapper接口(其实就是DAO接口)，并实现这些接口，-->
+    <!--   即可直接在程序中使用dao接口，不用再获取sqlsession对象-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--basePackage 属性是映射器接口文件的包路径。-->
+        <!--你可以使用分号或逗号 作为分隔符设置多于一个的包路径-->
+        <property name="basePackage" value="com/tgq/**/mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+ 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <aop:aspectj-autoproxy/>
+</beans>
+```
+
+#### `spring-context.xml`
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--    spring与mybatis整合的配置文件加载spring的上下文-->
+    <import resource="classpath:spring-mybatis.xml"></import>
+</beans>
+```
+
+## SpringBoot 整合 MyBatis
+
+### 引入依赖
+
+```xml
+<!--SpringBoot集成mybatis-->
+<dependency>
+	<groupId>org.mybatis.spring.boot</groupId>
+	<artifactId>mybatis-spring-boot-starter</artifactId>
+	<version>3.0.2</version>
+</dependency>
+<!--Mysql数据库驱动8 -->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>8.0.11</version>
+</dependency>
+<!--SpringBoot集成druid连接池-->
+<dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid-spring-boot-starter</artifactId>
+    <version>1.1.20</version>
+</dependency>
+<!--通用Mapper4之tk.mybatis-->
+<dependency>
+    <groupId>tk.mybatis</groupId>
+    <artifactId>mapper</artifactId>
+    <version>4.2.3</version>
+</dependency>
+<!--persistence-->
+<dependency>
+    <groupId>javax.persistence</groupId>
+    <artifactId>persistence-api</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
+
+### 数据源配置
+
+```yml
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # MySQL8.x
+    url: jdbc:mysql://localhost:3306/db2024?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    # MySQL5.7
+    # jdbc:mysql://localhost:3306/db2024?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: 123456
+
+# ========================mybatis===================
+mybatis:
+  mapper-locations: classpath:com.a.c.mapper/*.xml
+  type-aliases-package: com.a.b.entities
+  configuration:
+    map-underscore-to-camel-case: true
+```
+
+### 在启动类添加 `@MapperScan` 注解
+
+```java
+// 指定 mapper 接口所在的包
+@MapperScan("com.a.b.c.mapper")
+```
+
