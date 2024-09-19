@@ -1,6 +1,6 @@
 ---
 home: true
-# heroImage: /微服务核心.assets/web.png
+# heroImage: /img/web.png
 heroText: Bombax's Knowledge Document Notes
 tagline: 技术知识学习笔记。
 # actionText: 立刻进入 →
@@ -11,20 +11,18 @@ tagline: 技术知识学习笔记。
 #  - title: 前端
 #    details: JavaScript、ES6、Vue框架等前端技术
 #    link: /web/ # 可选
-#    imgUrl: /微服务核心.assets/web.png # 可选
+#    imgUrl: /img/web.png # 可选
 #  - title: 页面
 #    details: html(5)/css(3)，前端页面相关技术
 #    link: /ui/
-#    imgUrl: /微服务核心.assets/ui.png
+#    imgUrl: /img/ui.png
 #  - title: 技术
 #    details: 技术文档、教程、技巧、总结等文章
 #    link: /technology/
-#    imgUrl: /微服务核心.assets/other.png
+#    imgUrl: /img/other.png
 
 # 文章列表显示方式: detailed 默认，显示详细版文章列表（包括作者、分类、标签、摘要、分页等）| simple => 显示简约版文章列表（仅标题和日期）| none 不显示文章列表
 # postList: detailed
 # simplePostListLength: 10 # 简约版文章列表显示的文章数量，默认10。（仅在postList设置为simple时生效）
 # hideRightBar: true # 是否隐藏右侧边栏
 ---
-
-

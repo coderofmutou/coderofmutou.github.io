@@ -348,6 +348,11 @@ Shiro 默认的登录认证是不带加密的，如果想要实现加密认证�
 
 ## 与 Spring Boot 整合
 
+### 开发环境
+
+- JDK：JDK8+
+- Spring Boot：2.7.6（shiro-spring-boot-web-starter 1.13.0 内部包含 2.7.17）
+
 ### 框架整合
 
 #### 创建模块

@@ -161,7 +161,7 @@ swagger 文档中组名默认是 default，可通过 `groupName(String)` 修改�
 public Docket docket1() {
     // 创建一个 swagger 的 bean 实例
     return new Docket(DocumentationType.SWAGGER_2)
-        .groupName("a") // 修改组名为 "mike"
+        .groupName("a") // 修改组名为 "a"
         // 配置接口信息
         .select() // 设置扫描接口
         // 配置如何扫描接口
@@ -176,7 +176,7 @@ public Docket docket1() {
 public Docket docket2() {
     // 创建一个 swagger 的 bean 实例
     return new Docket(DocumentationType.SWAGGER_2)
-        .groupName("b") // 修改组名为 "yank"
+        .groupName("b") // 修改组名为 "b"
         // 配置接口信息
         .select() // 设置扫描接口
         // 配置如何扫描接口
@@ -188,7 +188,7 @@ public Docket docket2() {
 
 #### 访问 Swagger
 
-项目正常启动之后使用 [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html) 访问 Swagger 页面
+项目正常启动之后使用 `http://localhost:8080/swagger-ui.html` 访问 Swagger 页面
 
 ### Swagger UI 增强
 
@@ -266,14 +266,14 @@ public class SwaggerConfig {
 
 #### 访问 Swagger
 
-新版本的 Swagger 访问地址和老版本的地址是不同的，新版版的访问地址是 [localhost:8080/swagger-ui/](localhost:8080/swagger-ui/)。
+新版本的 Swagger 访问地址和老版本的地址是不同的，新版版的访问地址是 `http://localhost:8080/swagger-ui/`。
 
 ### 新版本 VS 老版本
 
 1. 依赖项的添加不同：新版本只需要添加一项，而老版本需要添加两项；
 2. 启动 Swagger 的注解不同：新版本使用的是 `@EnableOpenApi`，而老版本是 `@EnableSwagger2`；
 3. `Docket`（文档摘要信息）的文件类型配置不同：新版本配置的是 `OAS_3`，而老版本是 `SWAGGER_2`；
-4. Swagger UI 访问地址不同：新版本访问地址是 [localhost:8080/swagger-ui/](localhost:8080/swagger-ui/)，而老版本访问地址是 [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)。
+4. Swagger UI 访问地址不同：新版本访问地址是 `http://localhost:8080/swagger-ui/`，而老版本访问地址是 `http://localhost:8080/swagger-ui.html`。
 
 
 
@@ -293,7 +293,7 @@ Swagger 新版本让人印象深刻的优点有两个：第一，配置变得简
 
 1. SpringBoot 2.6(7).x 以下 + Swagger-ui 和 Swagger2 2.9.2
 
-2. SpringBoo 2.6(7).x 往上 + springfox-boot-starter（3.0.0 包括 Swagger-ui 和 Swagger2 3.0.0）
+2. SpringBoo 2.6(7).x 往上 + springfox-boot-starter（3.0.0 包括 Swagger-ui 和 Swagger2 3.0）
 
 3. 修改配置
 
@@ -361,7 +361,7 @@ Swagger 新版本让人印象深刻的优点有两个：第一，配置变得简
 - Spring Boot 2.x.x
 - JDK 1.8+
 
-[localhost:8080/swagger-ui/](localhost:8080/swagger-ui/)
+`http://localhost:8080/swagger-ui/index.html`
 
 #### 添加依赖
 
@@ -405,19 +405,15 @@ OpenAPI对象是Swagger中的核心类之一，用于描述整个API的结构和
 ```
 
 ```java
-package com.mcode.swaggertest.config;
-
-import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
-import org.springdoc.core.GroupedOpenApi;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -425,42 +421,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * ClassName: SpringDocConfig
- * Package: com.mcode.swaggertest.config
- * Description:
- *
- * @Author: robin
- * @Create: 2023/9/9 - 7:00 PM
- * @Version: v1.0
- */
-
 @Configuration
 public class SpringDocConfig {
 
-//    @Bean
-//    public GroupedOpenApi productApi() {
-//        return GroupedOpenApi.builder()
-//                .group("product-service")
-//                .pathsToMatch("/product/**")
-//                .build();
-//    }
-//
-//    @Bean
-//    public GroupedOpenApi orderApi() {
-//        return GroupedOpenApi.builder()
-//                .group("order-service")
-//                .pathsToMatch("/order/**")
-//                .build();
-//    }
-
     @Bean
     public OpenAPI openAPI(){
-       // 联系人信息(contact)，构建API的联系人信息，用于描述API开发者的联系信息，包括名称、URL、邮箱等
+        // 联系人信息(contact)，构建API的联系人信息，用于描述API开发者的联系信息，包括名称、URL、邮箱等
         Contact contact = new Contact()
-                .name("robin")  // 作者名称
-                .email("code9342@gmail.com") // 作者邮箱
-                .url("https://www.cnblogs.com/") // 介绍作者的URL地址
+                .name("bombax")  // 作者名称
+                .email("aa@qq.com") // 作者邮箱
+                .url("https://aa.com/") // 介绍作者的URL地址
                 .extensions(new HashMap<String,Object>());// 使用Map配置信息（如key为"name","email","url"）
 
         License license = new License()
@@ -474,18 +444,18 @@ public class SpringDocConfig {
                 .title("Api接口文档标题")      // Api接口文档标题（必填）
                 .description("项目描述")     // Api接口文档描述
                 .version("1.0.0")                                  // Api接口版本
-                .termsOfService("https://www.cnblogs.com/vic-tory/")    // Api接口的服务条款地址
+                .termsOfService("https://www.aa.com/")    // Api接口的服务条款地址
                 .license(license)  //   授权名称                                
                 .contact(contact); // 设置联系人信息
 
-         List<Server>  servers = new ArrayList<>(); //多服务
-         // 表示服务器地址或者URL模板列表，多个服务地址随时切换（只不过是有多台IP有当前的服务API）
-         servers.add(new Server().url("http://localhost:8080").description("服务1"));
-         servers.add(new Server().url("http://localhost:8081").description("服务2"));
+        List<Server>  servers = new ArrayList<>(); //多服务
+        // 表示服务器地址或者URL模板列表，多个服务地址随时切换（只不过是有多台IP有当前的服务API）
+        servers.add(new Server().url("http://localhost:8080").description("服务1"));
+        servers.add(new Server().url("http://localhost:8081").description("服务2"));
 
         // // 设置 spring security apikey accessToken 认证的请求头 X-Token: xxx.xxx.xxx
         SecurityScheme securityScheme = new SecurityScheme()
-                .name("x-token") 
+                .name("x-token")
                 .type(SecurityScheme.Type.APIKEY)
                 .description("APIKEY认证描述")
                 .in(SecurityScheme.In.HEADER);
@@ -515,7 +485,7 @@ public class SpringDocConfig {
                 .security(securityRequirements) //全部添加鉴权小锁
                 .externalDocs(new ExternalDocumentation()
                         .description("对外说明") //对外说明
-                        .url("https://www.cnblogs.com/vic-tory/"));       // 配置Swagger3.0描述信息
+                        .url("https://www.aa.com"));       // 配置Swagger3.0描述信息
     }
 }
 ```
@@ -535,8 +505,6 @@ public class SpringDocConfig {
 ```
 
 ```java
-package com.mcode.swaggertest.config;
-
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
@@ -551,15 +519,6 @@ import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * ClassName: SpringDocConfig
- * Package: com.mcode.swaggertest.config
- * Description:
- *
- * @Author: robin
- * @Create: 2023/9/9 - 7:00 PM
- * @Version: v1.0
- */
 
 @Configuration
 @OpenAPIDefinition(
@@ -567,11 +526,11 @@ import org.springframework.context.annotation.Configuration;
                 title = "Api接口文档标题",
                 description = "项目描述",
                 version = "1.0.0",
-                termsOfService = "https://www.cnblogs.com/",
+                termsOfService = "https://www.aa.com/",
                 contact = @Contact(
                         name = "robin",                            // 作者名称
                         email = "aaa@gmail.com",                  // 作者邮箱
-                        url = "https://www.cnblogs.com"  // 介绍作者的URL地址
+                        url = "https://www.aa.com"  // 介绍作者的URL地址
                 ),
                 license = @License(name = "Apache 2.0",
                         url = "http://www.apache.org/licenses",
@@ -609,7 +568,7 @@ public class SpringDocConfig2 {
                 @Tag(name = "用户控制器", description = "用户控制器描述",
                     externalDocs = @ExternalDocumentation(
                     description = "文档接口描述",
-                    url = "https://www.cnblogs.com/vic-tory/"))
+                    url = "https://www.aa.com/"))
     ```
 
 2. 配置文档下的每一个接口信息，就是 Controller 里的每一个 RequestMapping

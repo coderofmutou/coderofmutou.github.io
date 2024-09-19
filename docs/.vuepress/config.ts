@@ -152,7 +152,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           { text: '主流缓存框架调研', link: 'https://www.cnblogs.com/imyjy/p/15695160.html' },
           { text: 'redisson 官方中文文档', link: 'https://github.com/redisson/redisson/wiki/%E7%9B%AE%E5%BD%95' },
           { text: 'LiquiBase 中文学习指南', link: 'https://blog.csdn.net/u012934325/article/details/100652805' },
-          { text: 'LiquiBase 官方文档', link: 'https://blog.csdn.net/u012934325/article/details/100652805' },
+          { text: 'LiquiBase 官方文档', link: 'https://docs.liquibase.com/concepts/introduction-to-liquibase.html' },
           // { text: '实用技巧', link: '/pages/baaa02/' },
           // { text: '友情链接', link: '/friends/' },
         ],
