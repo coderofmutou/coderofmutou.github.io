@@ -19,12 +19,13 @@ author:
    - 用户认证指的是验证某个用户是否为系统中的合法主体，也就是说用户能否访问该系统。用户认证一般要求用户提供用户名和密码。系统通过校验用户名和密码来完成认证过程。**通俗点说就是系统认为用户是否能登录**。
    - 用户授权指的是验证某个用户是否有权限执行某个操作。在一个系统中，不同用户所具有的权限是不同的。比如对一个文件来说，有的用户只能进行读取，而有的用户可以进行修改。一般来说，系统会为不同的用户分配不同的角色，而每个角色则对应一系列的权限。**通俗点讲就是系统判断用户是否有权限去做某些事情。**
 
-Spring Security 是一个框架，提供针对常见攻击的身份验证，授权和保护。通过对命令式和反应式应用程序的一流支持，它是保护基于 Spring 的应用程序的事实标准。
+> Spring Security 是一个框架，提供针对常见攻击的身份验证，授权和保护。通过对命令式和反应式应用程序的一流支持，它是保护基于 Spring 的应用程序的事实标准。
 
 ### 同款产品对比
 #### [Spring Security](https://spring.io/projects/spring-security)
 Spring 技术栈的组成部分。通过提供完整可扩展的认证和授权支持保护你的应用程序。
-特点：
+
+**特点：**
 
 1. 和 Spring 无缝整合。
 2. 全面的权限控制。
@@ -35,7 +36,9 @@ Spring 技术栈的组成部分。通过提供完整可扩展的认证和授权�
 
 #### Shiro
 Apache 旗下的轻量级权限控制框架。
-特点：
+
+**特点：**
+
 1. 轻量级。Shiro 主张的理念是把复杂的事情变简单。针对对性能有更高要求的互联网应用有更好表现。
 2. 通用性。
 3. 好处：不局限于 Web 环境，可以脱离 Web 环境使用。
@@ -49,76 +52,76 @@ Apache 旗下的轻量级权限控制框架。
    - SSM + Shiro
    - Spring Boot/Spring Cloud + Spring Security
 
-以上只是一个推荐的组合而已，如果单纯从技术上来说，无论怎么组合，都是可以运行的。
+> 以上只是一个推荐的组合而已，如果单纯从技术上来说，无论怎么组合，都是可以运行的。
 
 ### 项目模块划分
 在 Spring Security 3.0 中，代码库被细分为单独的 jar，它们更清楚地区分不同的功能区域和第三方依赖项。如
 
-#### Core - spring-security-core .jar
-包含核心身份验证和 access-contol 类和接口，远程支持和基本配置 API。任何使用 Spring Security 的应用程序都需要。支持独立应用程序，远程客户端，方法（服务层）安全性和 JDBC 用户配置。包含顶级包：
+1. **Core**
 
-- `org.springframework.security.core`
-- `org.springframework.security.access`
-- `org.springframework.security.authentication`
-- `org.springframework.security.provisioning`
+> `spring-security-core.jar` 包含核心身份验证和 access-contol 类和接口，远程支持和基本配置 API。任何使用 Spring Security 的应用程序都需要。支持独立应用程序，远程客户端，方法（服务层）安全性和 JDBC 用户配置。包含顶级包：`org.springframework.security.core`、`org.springframework.security.access`、`org.springframework.security.authentication`、`org.springframework.security.provisioning`。
 
-#### Remoting - spring-security-remoting.jar
-提供与 Spring Remoting 的整合。除非正在编写使用 Spring 远程处理的远程客户端，否则不需要此操作。主要包是`org.springframework.security.remoting`。
+2. **Remoting**
 
-#### Web - spring-security-web.jar
-包含过滤器和相关的 web - 安全基础结构代码。任何具有 servlet API 依赖性的东西。如果您需要 Spring Security web 身份验证服务和基于 URL 的访问控制，则需要它。主要包是`org.springframework.security.web`。
+> `spring-security-remoting.jar`提供与 Spring Remoting 的整合。除非正在编写使用 Spring 远程处理的远程客户端，否则不需要此操作。主要包是`org.springframework.security.remoting`。
 
-#### Config - spring-security-config .jar
-包含安全名称空间解析代码和 Java 配置代码。如果您使用 Spring Security XML 命名空间进行配置或 Spring Security 的 Java 配置支持，则需要它。主要包是`org.springframework.security.config`。这些类都不打算直接用于应用程序。
+3. **Web**
 
-#### LDAP - spring-security-ldap.jar
-LDAP 身份验证和配置代码。如果需要使用 LDAP 身份验证或管理 LDAP 用户条目，则为必需。顶级包是`org.springframework.security.ldap`。
+> `spring-security-web.jar`包含过滤器和相关的 web - 安全基础结构代码。任何具有 servlet API 依赖性的东西。如果您需要 Spring Security web 身份验证服务和基于 URL 的访问控制，则需要它。主要包是`org.springframework.security.web`。
 
-#### OAuth 2.0 Core - spring-security-oauth2-core.jar
-spring-security-oauth2-core.jar 包含为_OAuth 2.0 授权框架_和_OpenID Connect Core 1.0_提供支持的核心类和接口。使用_OAuth 2.0_或_OpenID Connect Core 1.0_的应用程序（例如客户端，资源服务器和授权服务器）需要它。顶级包是`org.springframework.security.oauth2.core`。
+4. **Config**
 
-#### OAuth 2.0 Client - spring-security-oauth2-client.jar
-spring-security-oauth2-client.jar 是 Spring Security 对_OAuth 2.0 授权框架_和_OpenID Connect Core 1.0_的客户端支持。应用程序需要利用**OAuth 2.0 登录**和/或 OAuth 客户端支持。顶级包是`org.springframework.security.oauth2.client`。
+> `spring-security-config.jar`包含安全名称空间解析代码和 Java 配置代码。如果您使用 Spring Security XML 命名空间进行配置或 Spring Security 的 Java 配置支持，则需要它。主要包是`org.springframework.security.config`。这些类都不打算直接用于应用程序。
 
-#### OAuth 2.0 JOSE - spring-security-oauth2-jose.jar
-spring-security-oauth2-jose.jar 包含 Spring Security 对_JOSE_（Javascript 对象签名和加密）框架的支持。JOSE 旨在提供安全地传输双方之间的权利要求的方法。它由一系列规范构建：
+5. **LDAP**
 
--  JSON Web 令牌(JWT) 
--  JSON Web 签名(JWS) 
--  JSON Web 加密(JWE) 
--  JSON Web 密钥(JWK) 
+> `spring-security-ldap.jar`LDAP 身份验证和配置代码。如果需要使用 LDAP 身份验证或管理 LDAP 用户条目，则为必需。顶级包是`org.springframework.security.ldap`。
 
-它包含顶级包：
+6. **OAuth 2.0 Core**
 
-- `org.springframework.security.oauth2.jwt`
-- `org.springframework.security.oauth2.jose`
+> `spring-security-oauth2-core.jar` 包含为 OAuth 2.0 授权框架和 OpenID Connect Core 1.0 提供支持的核心类和接口。使用 OAuth 2.0 或 OpenID Connect Core 1.0 的应用程序（例如客户端，资源服务器和授权服务器）需要它。顶级包是`org.springframework.security.oauth2.core`。
 
-#### ACL - spring-security-acl.jar
-专门的域对象 ACL 实现。用于将安全性应用于应用程序中的特定域对象实例。顶级包是`org.springframework.security.acls`。
+7. **OAuth 2.0 Client**
 
-#### CAS - spring-security-cas .jar
-Spring Security CAS 客户端集成。如果要对 CAS 单点登录服务器使用 Spring Security web 身份验证。顶级包是`org.springframework.security.cas`。
+> `spring-security-oauth2-client.jar` 是 Spring Security 对 OAuth 2.0 授权框架和 OpenID Connect Core 1.0 的客户端支持。应用程序需要利用**OAuth 2.0 登录**和/或 OAuth 客户端支持。顶级包是`org.springframework.security.oauth2.client`。
 
-#### OpenID - spring-security-openid .jar
-OpenID web 身份验证支持。用于针对外部 OpenID 服务器对用户进行身份验证。`org.springframework.security.openid`.需要 OpenID4Java。
+8. **OAuth 2.0 JOSE**
 
-#### Test - spring-security-test.jar
-支持使用 Spring Security 进行测试。
+> `spring-security-oauth2-jose.jar` 包含 Spring Security 对 JOSE（Javascript 对象签名和加密）框架的支持。JOSE 旨在提供安全地传输双方之间的权利要求的方法。它由一系列规范构建：
+>
+> -  JSON Web 令牌(JWT) 
+> -  JSON Web 签名(JWS) 
+> -  JSON Web 加密(JWE) 
+> -  JSON Web 密钥(JWK) 
+>
+> 它包含顶级包：`org.springframework.security.oauth2.jwt`、`org.springframework.security.oauth2.jose`
+>
+
+9. **ACL**
+
+> `spring-security-acl.jar` 专门的域对象 ACL 实现。用于将安全性应用于应用程序中的特定域对象实例。顶级包是`org.springframework.security.acls`。
+
+10. **CAS**
+
+> `spring-security-cas.jar` Spring Security CAS 客户端集成。如果要对 CAS 单点登录服务器使用 Spring Security web 身份验证。顶级包是`org.springframework.security.cas`。
+
+11. **OpenID**
+
+> `spring-security-openid.jar` OpenID web 身份验证支持。用于针对外部 OpenID 服务器对用户进行身份验证。`org.springframework.security.openid`。需要 OpenID4Java。
+
+12. **Test**
+
+>  `spring-security-test.jar` 支持使用 Spring Security 进行测试。
 
 ### 权限管理中的相关概念
 #### 主体
-英文单词：principal
-使用系统的用户或设备或从其他系统远程登录的用户等等。简单说就是谁使用系统谁就是主体。
+英文单词：principal。**使用系统的用户或设备或从其他系统远程登录的用户等等**。简单说就是谁使用系统谁就是主体。
 
 #### 认证
-英文单词：authentication
-权限管理系统确认一个主体的身份，允许主体进入系统。简单说就是“主体”证明自己是谁。
-笼统的认为就是以前所做的登录操作。
+英文单词：authentication。**权限管理系统确认一个主体的身份，允许主体进入系统**。简单说就是“主体”证明自己是谁。笼统的认为就是以前所做的登录操作。
 
 #### 授权
-英文单词：authorization
-将操作系统的“权力”“授予”“主体”，这样主体就具备了操作系统中特定功能的能力。
-所以简单来说，授权就是给用户分配权限。
+英文单词：authorization。**将操作系统的“权力”“授予”“主体”，这样主体就具备了操作系统中特定功能的能力**。所以简单来说，授权就是给用户分配权限。
 
 ### 获取 Spring Security
 #### Spring Boot 和 Maven
@@ -150,7 +153,10 @@ OpenID web 身份验证支持。用于针对外部 OpenID 服务器对用户进�
     </dependencies>
 </dependencyManagement>
 ```
-### 基本原理
+### 概述
+
+#### 基本原理
+
 本质是一个过滤器链：
 ```java
 org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter
@@ -169,6 +175,7 @@ org.springframework.security.web.access.ExceptionTranslationFilter
 org.springframework.security.web.access.intercept.FilterSecurityInterceptor
 ```
 主要的三个过滤器：
+
 `FilterSecurityInterceptor`：是一个方法级的权限过滤器, 基本位于过滤链的最底部。
 
 - `super.beforeInvocation(fi)` 表示查看之前的 filter 是否通过。
@@ -184,15 +191,14 @@ org.springframework.security.web.access.intercept.FilterSecurityInterceptor
 
 ![UsernamePasswordAuthenticationFilter](SpringSecurity.assets/287e656c211711034807997-ada2495c-fa0a-4f21-8008-452ce0675f45.png)
 
-### UserDetailsService 接口
+#### UserDetailsService 接口
 
 - 当什么也没有配置的时候，账号和密码是由 Spring Security 定义生成的。而在实际项目中账号和密码都是从数据库中查询出来的。 所以我们要通过自定义逻辑控制认证逻辑。
-- 如果需要自定义逻辑时，只需要实现 UserDetailsService 接口即可。接口定义如下：
+- **如果需要自定义逻辑时，只需要实现 UserDetailsService 接口即可**。接口定义如下：
 
 ![aa2c45CDD71706802405020](SpringSecurity.assets/aa2c45CDD71706802405020-a58103b3-5190-4f4d-a382-37ddfd7e20c1.png)
 
-返回值 UserDetails
-这个类是系统默认的用户“主体”，我们只需要使用 User 这个实体类即可！
+返回值 UserDetails。这个类是系统默认的用户“主体”，我们只需要使用 User 这个实体类即可！
 
 ```java
 // 表示获取登录用户所有权限
@@ -218,12 +224,11 @@ boolean isEnabled();
 ```
 ![809bBEbC851706802592723](SpringSecurity.assets/809bBEbC851706802592723-4599e3c9-52c8-470c-a8bd-faa9ffc4a745.png)
 
-方法参数 username：表示用户名。此值是客户端表单传递过来的数据。默认情况下必须叫 username，否则无法接收。
-但可以在配置类中通过以下方法修改：
+方法参数 username：表示用户名。此值是客户端表单传递过来的数据。默认情况下必须叫 username，否则无法接收。但可以在配置类中通过以下方法修改：
 
 ![image](SpringSecurity.assets/FbaE5DB92b1706803688705-d8b19cdf-1ee9-4282-9327-4725674d2c3b.png)
 
-### PasswordEncoder 接口
+#### PasswordEncoder 接口
 ```java
 // 表示把参数按照特定的解析规则进行解析
 String encode(CharSequence rawPassword);
@@ -232,17 +237,13 @@ String encode(CharSequence rawPassword);
 boolean matches(CharSequence rawPassword, String encodedPassword);
 
 // 表示如果解析的密码能够再次进行解析且达到更安全的结果则返回 true，否则返回false。默认返回 false。
-default boolean upgradeEncoding(String encodedPassword) {
-return false;
-}
+default boolean upgradeEncoding(String encodedPassword) { return false; }
 ```
 接口实现类：
 
 ![e6da9DdfF51706802715081](SpringSecurity.assets/e6da9DdfF51706802715081-12d2a7e5-1236-4927-9457-e6906b97e084.png)
 
-BCryptPasswordEncoder 是 Spring Security 官方推荐的密码解析器，平时多使用这个解析器。
-BCryptPasswordEncoder 是对 bcrypt 强散列方法的具体实现。是基于 Hash 算法实现的单向加密。可以通过 strength 控制加密强度，默认 10。
-方法使用：
+**BCryptPasswordEncoder 是 Spring Security 官方推荐的密码解析器，平时多使用这个解析器**。BCryptPasswordEncoder 是对 bcrypt 强散列方法的具体实现。是基于 Hash 算法实现的单向加密。可以通过 strength 控制加密强度，默认 10。
 
 ```java
 @Test
@@ -259,7 +260,10 @@ public void test01(){
     System.out.println("比较结果：\t"+result);
 }
 ```
-### 配置类实现 WebSecurityConfigurerAdapter 类
+#### 配置类实现 WebSecurityConfigurerAdapter 类
+
+> 后续版本已经没有该配置类
+
 ```java
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -306,23 +310,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService);
     }	
 }
-
 ```
-### CSRF
+#### CSRF
 
 - 跨站请求伪造（英语：Cross-site request forgery），也被称为 one-click attack 或者 session riding，通常缩写为 CSRF 或者 XSRF， 是一种挟制用户在当前已登录的 Web 应用程序上执行非本意的操作的攻击方法。跟跨网站脚本(XSS)相比，XSS 利用的是用户对指定网站的信任，CSRF 利用的是网站对用户网页浏览器的信任。
 - 跨站请求攻击，简单地说，是攻击者通过一些技术手段欺骗用户的浏览器去访问一个自己曾经认证过的网站并运行一些操作（如发邮件，发消息，甚至财产操作如转账和购买商品）。由于浏览器曾经认证过，所以被访问的网站会认为是真正的用户操作而去运行。这利用了 web 中用户身份验证的一个漏洞：简单的身份验证只能保证请求发自某个用户的浏览器，却不能保证请求本身是用户自愿发出的。
 - 从 Spring Security 4.0 开始，**默认情况下会启用 CSRF 保护**，以防止 CSRF 攻击应用程序，Spring Security CSRF **会针对 PATCH，POST，PUT 和 DELETE 方法进行防护**。
-### SpringSecurity 微服务权限方案
+#### SpringSecurity 微服务权限方案
 
-1. 如果是基于 Session，那么 Spring-security 会对 cookie 里的 sessionid 进行解析，找到服务器存储的 session 信息，然后判断当前用户是否符合请求的要求。
-2. 如果是 token，则是解析出 token，然后将当前请求加入到 Spring-security 管理的权限信息中去。
+1. 如果是基于 Session，那么 Spring security 会对 cookie 里的 sessionid 进行解析，找到服务器存储的 session 信息，然后判断当前用户是否符合请求的要求。
+2. 如果是 token，则是解析出 token，然后将当前请求加入到 Spring security 管理的权限信息中去。
 
 ![过程](SpringSecurity.assets/C0FaDfdDAA1711036428762-f5cbfac2-3a98-4238-96d9-cb4985d4419a.png)
 
-如果系统的模块众多，每个模块都需要进行授权与认证，所以我们选择基于 token 的形式进行授权与认证，用户根据用户名密码认证成功，然后获取当前用户角色的一系列权限 值，并以用户名为 key，权限列表为 value 的形式存入 redis 缓存中，根据用户名相关信息生成 token 返回，浏览器将 token 记录到 cookie 中，每次调用 api 接口都默认将 token 携带到 header 请求头中，Spring-security 解析 header 头获取 token 信息，解析 token 获取当前用户名，根据用户名就可以从 redis 中获取权限列表，这样 Spring-security 就能够判断当前请求是否有权限访问
+如果系统的模块众多，每个模块都需要进行授权与认证，所以我们选择基于 token 的形式进行授权与认证，用户根据用户名密码认证成功，然后获取当前用户角色的一系列权限值，并以用户名为 key，权限列表为 value 的形式存入 redis 缓存中，根据用户名相关信息生成 token 返回，浏览器将 token 记录到 cookie 中，每次调用 api 接口都默认将 token 携带到 header 请求头中，Spring security 解析 header 头获取 token 信息，解析 token 获取当前用户名，根据用户名就可以从 redis 中获取权限列表，这样 Spring-security 就能够判断当前请求是否有权限访问。
 
-### 访问令牌 JWT
+#### 访问令牌 JWT
 ![JWT](SpringSecurity.assets/Be47C62fbA1711036511382-98c8f918-b082-4ae4-9a4c-c5d8f3e141b4.png)
 ### SpringSecurity 原理总结
 #### SpringSecurity 的过滤器介绍
@@ -488,42 +491,32 @@ ProviderManager 是 AuthenticationManager 接口的实现类，该接口是认�
 **功能：**
 
 - 身份认证(authentication)
+    - 身份认证是验证`谁正在访问系统资源`，判断用户是否为合法用户。认证用户的常见方式是要求用户输入用户名和密码。
+
 - 授权(authorization)
+    - 用户进行身份认证后，系统会控制`谁能访问哪些资源`，这个过程叫做授权。用户无法访问没有权限的资源。
+
 - 防御常见攻击(protection against common attacks)
+    - CSRF
+    - HTTP Headers
+    - HTTP Requests
 
-**身份认证：**
-
-- 身份认证是验证`谁正在访问系统资源`，判断用户是否为合法用户。认证用户的常见方式是要求用户输入用户名和密码。
-
-**授权：**
-
-- 用户进行身份认证后，系统会控制`谁能访问哪些资源`，这个过程叫做授权。用户无法访问没有权限的资源。
-
-**防御常见攻击：**
-
-- CSRF
-- HTTP Headers
-- HTTP Requests
 
 ### 身份认证(authentication)
 
 **官方代码示例：**[GitHub - spring-projects/spring-security-samples](https://github.com/spring-projects/spring-security-samples/tree/main)
 
-#### 创建 Spring Boot 项目
+##### 创建 Spring Boot 项目
 
-项目名：security-demo
+项目名：[security-demo](https://gitee.com/ismutou/workspace_atguigu_idea/tree/master/springsecurity-study/springsecutity-new/security-demo)
 
-JDK：17
+- JDK：17
+- SpringBoot：3.2.0（依赖了 Spring Security 6.2.0）
+- Dependencies：Spring Web、Spring Security、Thymeleaf
 
-SpringBoot：3.2.0（依赖了 Spring Security 6.2.0）
-
-Dependencies：Spring Web、Spring Security、Thymeleaf
-
-#### 创建 IndexController
+##### 创建 IndexController
 
 ```java
-package com.atguigu.securitydemo.controller;
-
 @Controller
 public class IndexController {
 
@@ -534,7 +527,7 @@ public class IndexController {
 }
 ```
 
-#### 创建 index.html
+##### 创建 index.html
 
 在路径 `resources/templates` 中创建 `index.html`
 
@@ -554,11 +547,11 @@ public class IndexController {
 </html>
 ```
 
-#### 启动项目测试 Controller
+##### 启动项目测试 Controller
 
-浏览器中访问：http://localhost:8080/
+浏览器中访问：`http://localhost:8080/`
 
-**浏览器自动跳转到登录页面：**http://localhost:8080/login
+**浏览器自动跳转到登录页面**：`http://localhost:8080/login`
 
 ![image-20240623221627090](SpringSecurity.assets/image-20240623221627090.png)
 
@@ -566,9 +559,9 @@ public class IndexController {
 2. 输入密码：在控制台的启动日志中查找初始的默认密码
 3. 点击"Sign in"进行登录，浏览器就跳转到了 index 页面
 
-#### 注意事项
+##### 注意事项
 
-##### `@{/logout}` 的作用
+###### `@{/logout}` 的作用
 
 通过使用 `@{/logout}`，Thymeleaf 将自动处理生成正确的 URL，以适应当前的上下文路径。这样，无论应用程序部署在哪个上下文路径下，生成的 URL 都能正确地指向注销功能。
 
@@ -580,7 +573,7 @@ server.servlet.context-path=/demo
 
 那么 `@{/logout}` 可以自动处理 url 为正确的相对路径，但是如果是普通的 `/logout`，路径就会不正确
 
-##### 页面样式无法加载的问题
+###### 页面样式无法加载的问题
 
 页面样式 `bootstrap.min.css` 是一个 CDN 地址，需要通过科学上网的方式访问
 
@@ -590,7 +583,7 @@ server.servlet.context-path=/demo
 
 ![image-20240623221930704](SpringSecurity.assets/image-20240623221930704.png)
 
-#### Spring Security 默认做了什么
+##### Spring Security 默认做了什么
 
 - 保护应用程序 URL，要求对应用程序的任何交互进行身份验证。
 - 程序启动时生成一个默认用户“user”。
@@ -672,7 +665,7 @@ public class WebSecurityConfig {
 }
 ```
 
-**测试：**使用用户名 user，密码 111111 登录
+**测试**：使用用户名 user，密码 111111 登录
 
 #### 基于内存的用户认证流程
 
@@ -830,7 +823,7 @@ public class UserController {
 }
 ```
 
-**测试：**[localhost:8080/demo/user/list](http://localhost:8080/demo/user/list)
+**测试：**`http://localhost:8080/demo/user/list`
 
 ### 基于数据库的用户认证
 
@@ -913,7 +906,7 @@ public UserDetailsService userDetailsService() {
 
 **或者直接在 DBUserDetailsManager 类上添加 `@Component` 注解**
 
-**测试：**使用数据库中配置的用户名和密码进行登录(password:password)
+**测试**：使用数据库中配置的用户名和密码进行登录(password:password)
 
 ### SpringSecurity 的默认配置
 
@@ -1001,13 +994,13 @@ pom 中添加配置用于测试
 </dependency>
 ```
 
-**Swagger 测试地址：**http://localhost:8080/demo/doc.html
+**Swagger 测试地址**：`http://localhost:8080/demo/doc.html`
 
 ![image-20240624213206246](SpringSecurity.assets/image-20240624213206246.png)
 
 #### 关闭 csrf 攻击防御
 
-默认情况下 SpringSecurity 开启了 csrf 攻击防御的功能，这要求请求参数中必须有一个隐藏的**_csrf**字段，如下：
+默认情况下 SpringSecurity 开启了 csrf 攻击防御的功能，这要求请求参数中必须有一个隐藏的 **_csrf** 字段，如下：
 
 ![image-20240624213236887](SpringSecurity.assets/image-20240624213236887.png)
 
@@ -1028,11 +1021,11 @@ http.csrf((csrf) -> {
 
 #### 密码加密方式
 
-1. **明文密码：**
+1. **明文密码**
 
     最初，密码以明文形式存储在数据库中。但是恶意用户可能会通过 SQL 注入等手段获取到明文密码，或者程序员将数据库数据泄露的情况也可能发生。
 
-2. **Hash 算法：**
+2. **Hash 算法**
 
     Spring Security 的 `PasswordEncoder` 接口用于对密码进行`单向转换`，从而将密码安全地存储。对密码单向转换需要用到`哈希算法`，例如 MD5、SHA-256、SHA-512 等，哈希算法是单向的，`只能加密，不能解密`。
 
@@ -1040,15 +1033,15 @@ http.csrf((csrf) -> {
 
     因此，如果发生数据泄露，只有密码的单向哈希会被暴露。由于哈希是单向的，并且在给定哈希的情况下只能通过`暴力破解的方式猜测密码`。
 
-3. **彩虹表：**
+3. **彩虹表**
 
     恶意用户创建称为`彩虹表`的查找表。彩虹表就是一个庞大的、针对各种可能的字母组合预先生成的哈希值集合，有了它可以快速破解各类密码。越是复杂的密码，需要的彩虹表就越大，主流的彩虹表都是 100G 以上，目前主要的算法有 LM, NTLM, MD5, SHA1, MYSQLSHA1, HALFLMCHALL, NTLMCHALL, ORACLE-SYSTEM, MD5-HALF。
 
-4. **加盐密码：**
+4. **加盐密码**
 
     为了减轻彩虹表的效果，开发人员开始使用加盐密码。不再只使用密码作为哈希函数的输入，而是为每个用户的密码生成随机字节（称为盐）。盐和用户的密码将一起经过哈希函数运算，生成一个唯一的哈希。盐将以明文形式与用户的密码一起存储。然后，当用户尝试进行身份验证时，盐和用户输入的密码一起经过哈希函数运算，再与存储的密码进行比较。唯一的盐意味着彩虹表不再有效，因为对于每个盐和密码的组合，哈希都是不同的。
 
-5. **自适应单向函数：**
+5. **自适应单向函数**
 
     随着硬件的不断发展，加盐哈希也不再安全。原因是，计算机可以每秒执行数十亿次哈希计算。这意味着我们可以轻松地破解每个密码。
 
@@ -1569,7 +1562,7 @@ http.exceptionHandling(exception  -> {
 
 #### 用户-角色-资源
 
-**需求：**角色为 `ADMIN` 的用户才可以访问 `/user/**` 路径下的资源
+**需求**：角色为 `ADMIN` 的用户才可以访问 `/user/**` 路径下的资源
 
 ##### 配置角色
 
@@ -1829,7 +1822,7 @@ https://a.com/callback#token=ACCESS_TOKEN
 
 #### 相关角色
 
-**回顾：**OAuth 2 中的角色
+**回顾**：OAuth 2 中的角色
 
 1. 资源所有者(Resource Owner)
 2. 客户应用(Client)
@@ -2039,6 +2032,12 @@ GITHUB {
 ```
 
 ## 案例实战
+
+### 开发环境
+
+- JDK：jdk8
+- springboot：2.6.13
+- spring security：5.6.8
 
 ### 认证
 
@@ -3880,3 +3879,5 @@ protected void configure(HttpSecurity http) throws Exception {
 [Spring Security 中文文档](https://www.springcloud.cc/spring-security.html)
 
 [Spring Security 中文文档 :: Spring Security Reference (springdoc.cn)](https://springdoc.cn/spring-security/)
+
+[Spring Security：升级已弃用的 WebSecurityConfigurerAdapter - spring 中文网 (springdoc.cn)](https://springdoc.cn/spring-deprecated-websecurityconfigureradapter/)
