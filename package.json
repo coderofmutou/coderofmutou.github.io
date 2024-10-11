@@ -15,6 +15,7 @@
     "updateTheme": "yarn remove vuepress-theme-vdoing && rm -rf node_modules && yarn && yarn add vuepress-theme-vdoing -D"
   },
   "license": "MIT",
+  "private": true,
   "workspaces": [
     "utils/*"
   ],
