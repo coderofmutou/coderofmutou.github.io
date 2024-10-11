@@ -45,7 +45,7 @@ author:
 
 ### 基本功能
 
-![ShiroFeatures](Shiro.assets/ShiroFeatures.png)
+![ShiroFeatures](Shiro.assets/ShiroFeatures.webp)
 
 1. **Authentication**：身份认证/登录，验证用户是不是拥有相应的身份；
 2. **Authorization**：授权，即权限验证，验证某个已认证的用户是否拥有某个权限；即判断用户是否能进行什么操作，如：验证某个用户是否拥有某个角色。或者细粒度的验证某个用户对某个资源是否具有某个权限；
@@ -62,7 +62,7 @@ author:
 
 #### Shiro 架构概述
 
-![ShiroBasicArchitecture](Shiro.assets/ShiroBasicArchitecture.png)
+![ShiroBasicArchitecture](Shiro.assets/ShiroBasicArchitecture.webp)
 
 - **Subject**：应用代码直接交互的对象是 Subject，也就是说 Shiro 的对外 API 核心就是 Subject。Subject 代表了当前“用户”， 这个用户不一定是一个具体的人，与当前应用交互的任何东西都是 Subject，如网络爬虫， 机器人等；与 Subject 的所有交互都会委托给 SecurityManager；Subject 其实是一个门面，SecurityManager 才是实际的执行者；
 - **SecurityManager**：安全管理器；即所有与安全有关的操作都会与 SecurityManager 交互；且其管理着所有 Subject；可以看出它是 Shiro 的核心，它负责与 Shiro 的其他组件进行交互，它相当于 SpringMVC 中 DispatcherServlet 的角色；
@@ -70,7 +70,7 @@ author:
 
 #### Shiro 架构详情
 
-![ShiroArchitecture](Shiro.assets/ShiroArchitecture.png)
+![ShiroArchitecture](Shiro.assets/ShiroArchitecture.webp)
 
 - **Subject** `org.apache.shiro.subject.Subject`：任何可以与应用交互的“用户”；
 - **SecurityManager **`org.apache.shiro.mgt.SecurityManager`：相当于 SpringMVC 中的 DispatcherServlet；是 Shiro 的心脏； 所有具体的交互都通过 SecurityManager 进行控制；它管理着所有 Subject、且负责进行认证、授权、会话及缓存的管理。
@@ -130,7 +130,7 @@ lisi=l4
 
 #### 登录认证基本流程
 
-![ShiroAuthenticationSequence](Shiro.assets/ShiroAuthenticationSequence.png)
+![ShiroAuthenticationSequence](Shiro.assets/ShiroAuthenticationSequence.webp)
 
 1. 收集用户身份/凭证，即如用户名/密码；
 2. 调用 `Subject.login()` 进行登录，如果失败将得到相应的 `AuthenticationException` 异常，根据异常提示用户错误信息；否则登录成功；
@@ -219,7 +219,7 @@ public class ShiroRun {
 
 #### 授权流程
 
-![Shiro authorization sequence graphic](Shiro.assets/ShiroAuthorizationSequence.png)
+![Shiro authorization sequence graphic](Shiro.assets/ShiroAuthorizationSequence.webp)
 
 1. 首先调用 `Subject.isPermitted/hasRole` 接口，其会委托给 `SecurityManager`，而 `SecurityManager` 接着会委托给 `Authorizer`；
 2. `Authorizer` 是真正的授权者，如果调用如 `isPermitted("user:view")`，其首先会通过 `PermissionResolver` 把字符串转换成相应的 `Permission` 实例；
@@ -275,7 +275,7 @@ public class ShiroRun {
 
 shiro 中实现的常见加密算法：
 
-![image-20240616222048673](Shiro.assets/image-20240616222048673.png)
+![image-20240616222048673](Shiro.assets/image-20240616222048673.webp)
 
 使用 Shiro 进行密码加密(MD5)：
 
@@ -696,17 +696,17 @@ Shiro 整合 Thymeleaf
 
 5. 修改配置文件
 
-    ![image-20240617234248824](Shiro.assets/image-20240617234248824.png)
+    ![image-20240617234248824](Shiro.assets/image-20240617234248824.webp)
 
 6. 修改配置类
 
-    ![image-20240617234310359](Shiro.assets/image-20240617234310359.png)
+    ![image-20240617234310359](Shiro.assets/image-20240617234310359.webp)
 
 7. 启动，访问测试
 
-    ![image-20240617234329390](Shiro.assets/image-20240617234329390.png)
+    ![image-20240617234329390](Shiro.assets/image-20240617234329390.webp)
 
-    ![image-20240617234341805](Shiro.assets/image-20240617234341805.png)
+    ![image-20240617234341805](Shiro.assets/image-20240617234341805.webp)
 
 ### 多个 realm 的认证策略设置
 
@@ -1047,7 +1047,7 @@ Shiro 提供了记住我(RememberMe)的功能，比如访问一些网站时，�
 
 4. 运行测试
 
-    ![image-20240618234221639](Shiro.assets/image-20240618234221639.png)
+    ![image-20240618234221639](Shiro.assets/image-20240618234221639.webp)
 
 #### 授权验证-获取角色进行验证
 
@@ -1415,9 +1415,9 @@ Shiro 提供了记住我(RememberMe)的功能，比如访问一些网站时，�
 
 5. 测试
 
-    ![image-20240619231406513](Shiro.assets/image-20240619231406513.png)
+    ![image-20240619231406513](Shiro.assets/image-20240619231406513.webp)
 
-    ![image-20240619231418274](Shiro.assets/image-20240619231418274.png)
+    ![image-20240619231418274](Shiro.assets/image-20240619231418274.webp)
 
 ### 实现缓存
 
@@ -1602,7 +1602,7 @@ Shiro 官方提供了 `shiro-ehcache`，实现了整合 EhCache 作为 Shiro 的
 
 #### 会话管理实现
 
-![image-20240620000832311](Shiro.assets/image-20240620000832311.png)
+![image-20240620000832311](Shiro.assets/image-20240620000832311.webp)
 
 SessionManager 由 SecurityManager 管理。Shiro 提供了三种实现
 

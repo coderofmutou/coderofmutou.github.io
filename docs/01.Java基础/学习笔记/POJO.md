@@ -15,7 +15,7 @@ author:
 
 ## 架构图
 
-![v2-24e3ed681c02b6434681719753c53b40_r](POJO.assets/v2-24e3ed681c02b6434681719753c53b40_r.jpg)
+![v2-24e3ed681c02b6434681719753c53b40_r](POJO.assets/v2-24e3ed681c02b6434681719753c53b40_r.webp)
 
 ## VO、BO、 PO、 DTO、DO 的定义与区别
 

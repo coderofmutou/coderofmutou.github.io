@@ -43,7 +43,7 @@ author:
 
 ### 框架结构
 
-![framework](MyBatisPlus.assets/mybatis-plus-framework.jpg)
+![framework](MyBatisPlus.assets/mybatis-plus-framework.webp)
 
 ### 代码及文档地址
 
@@ -259,7 +259,7 @@ public class MyBatisPlusTest {
 
 **控制台打印查询结果：**
 
-![image-20240707193924105](MyBatisPlus.assets/image-20240707193924105.png)
+![image-20240707193924105](MyBatisPlus.assets/image-20240707193924105.webp)
 
 **注意：**
 
@@ -277,7 +277,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
-![image-20240707194106608](MyBatisPlus.assets/image-20240707194106608.png)
+![image-20240707194106608](MyBatisPlus.assets/image-20240707194106608.webp)
 
 ## 基本 CRUD
 
@@ -572,7 +572,7 @@ MyBatis-Plus 提供的注解可以帮我们解决一些数据库与实体之间�
 
 我们将表 user 更名为 `t_user`，测试查询功能 => 程序抛出异常，`Table 'mybatis_plus.user' doesn't exist`，因为现在的表名为 `t_user`，而默认操作的表名和实体类型的类名一致，即 `user` 表
 
-![image-20220520094126411](MyBatisPlus.assets/image-20220520094126411.png)
+![image-20220520094126411](MyBatisPlus.assets/image-20220520094126411.webp)
 
 #### 解决问题
 
@@ -617,13 +617,13 @@ mybatis-plus:
 
 - 我们实体类中的属性 id 改为 uid，将表中的字段 id 也改为 uid，测试添加功能
 
-    ![image-20240707222251334](MyBatisPlus.assets/image-20240707222251334.png)
+    ![image-20240707222251334](MyBatisPlus.assets/image-20240707222251334.webp)
 
-    ![image-20240707222310936](MyBatisPlus.assets/image-20240707222310936.png)
+    ![image-20240707222310936](MyBatisPlus.assets/image-20240707222310936.webp)
 
 - 程序抛出异常，Field 'uid' doesn't have a default value，说明 MyBatis-Plus 没有将 uid 作为主键赋值
 
-    ![image-20240707222108860](MyBatisPlus.assets/image-20240707222108860.png)
+    ![image-20240707222108860](MyBatisPlus.assets/image-20240707222108860.webp)
 
 #### 通过 `@TableId` 解决问题
 
@@ -647,7 +647,7 @@ public class User {
 
 若实体类中主键对应的属性为 `id`，而表中表示主键的字段为 `uid`，此时若只在属性 `id` 上添加注解 `@TableId`，则抛出异常 `Unknown column 'id' in 'field list'`，即 MyBatis-Plus 仍然会将 `id` 作为表的主键操作，而表中表示主键的是字段 `uid`
 
-![image-20240707222845509](MyBatisPlus.assets/image-20240707222845509.png)
+![image-20240707222845509](MyBatisPlus.assets/image-20240707222845509.webp)
 
 此时需要通过 `@TableId 注解的 value 属性`，指定表中的主键字段，`@TableId("uid")` 或 `@TableId(value="uid")`
 
@@ -714,7 +714,7 @@ mybatis-plus:
 
 单表数据拆分有两种方式：垂直分表和水平分表。示意图如下：
 
-![image-20240707224456732](MyBatisPlus.assets/image-20240707224456732.png)
+![image-20240707224456732](MyBatisPlus.assets/image-20240707224456732.webp)
 
 - **垂直分表**
     - 垂直分表适合将表中某些不常用且占了大量空间的列拆分出去。
@@ -754,7 +754,7 @@ mybatis-plus:
 
                 - 12bit 作为毫秒内的流水号（意味着每个节点在每毫秒可以产生 4096 个 ID）。
 
-                    ![image-20240707230652767](MyBatisPlus.assets/image-20240707230652767.png)
+                    ![image-20240707230652767](MyBatisPlus.assets/image-20240707230652767.webp)
 
             - 优点：整体上按照时间自增排序，并且整个分布式系统内不会产生 ID 碰撞，并且效率较高。
 
@@ -811,11 +811,11 @@ public class User {
 
 1. 数据库中创建逻辑删除状态列，设置默认值为 0
 
-    ![image-20240707230046341](MyBatisPlus.assets/image-20240707230046341.png)
+    ![image-20240707230046341](MyBatisPlus.assets/image-20240707230046341.webp)
 
 2. 实体类中添加逻辑删除属性
 
-    ![image-20240707230146870](MyBatisPlus.assets/image-20240707230146870.png)
+    ![image-20240707230146870](MyBatisPlus.assets/image-20240707230146870.webp)
 
 3. 测试删除功能，真正执行的是修改
 
@@ -833,7 +833,7 @@ public class User {
 
 ### Wrapper 介绍
 
-![image-20240707232239045](MyBatisPlus.assets/image-20240707232239045.png)
+![image-20240707232239045](MyBatisPlus.assets/image-20240707232239045.webp)
 
 Wrapper ： 条件构造抽象类，最顶端父类
 
@@ -1358,7 +1358,7 @@ public void testProduct01() {
 }
 ```
 
-![image-20240709001209496](MyBatisPlus.assets/image-20240709001209496.png)
+![image-20240709001209496](MyBatisPlus.assets/image-20240709001209496.webp)
 
 ## 通用枚举
 
@@ -1758,6 +1758,6 @@ MyBatisX 一款基于 IDEA 的快速开发插件，为效率而生。
 
 用法：[Mybatis X 插件](https://baomidou.com/guides/mybatis-x/)
 
-![image-20220522122127649](MyBatisPlus.assets/image-20220522122127649.png)
+![image-20220522122127649](MyBatisPlus.assets/image-20220522122127649.webp)
 
-![image-20220522122525598](MyBatisPlus.assets/image-20220522122525598.png)
+![image-20220522122525598](MyBatisPlus.assets/image-20220522122525598.webp)

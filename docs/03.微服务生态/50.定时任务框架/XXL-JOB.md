@@ -90,7 +90,7 @@ author:
 
 #### 系统架构图
 
-![img_Qohm](XXL-JOB.assets/img_Qohm.png)
+![img_Qohm](XXL-JOB.assets/img_Qohm.webp)
 
 #### 设计思想
 
@@ -229,7 +229,7 @@ xxl.job.logretentiondays=30
 
 默认登录账号 “admin/123456”, 登录后运行界面如下图所示。
 
-![image-20240616152253533](XXL-JOB.assets/image-20240616152253533.png)
+![image-20240616152253533](XXL-JOB.assets/image-20240616152253533.webp)
 
 至此“调度中心”项目已经部署成功。
 
@@ -330,25 +330,25 @@ public class SimpleXxlJob {
 
 登录调度中心,在任务管理中新增任务,配置内容如下：
 
-![image-20240616152355027](XXL-JOB.assets/image-20240616152355027.png)
+![image-20240616152355027](XXL-JOB.assets/image-20240616152355027.webp)
 
 新增后界面如下：
 
-![image-20240616152720266](XXL-JOB.assets/image-20240616152720266.png)
+![image-20240616152720266](XXL-JOB.assets/image-20240616152720266.webp)
 
 接着启动定时调度任务：
 
-![image-20240616152439324](XXL-JOB.assets/image-20240616152439324.png)
+![image-20240616152439324](XXL-JOB.assets/image-20240616152439324.webp)
 
 #### 查看日志
 
 在调度中心的调度日志中就可以看到，任务的执行结果。
 
-![image-20240616152547407](XXL-JOB.assets/image-20240616152547407.png)
+![image-20240616152547407](XXL-JOB.assets/image-20240616152547407.webp)
 
 管控台也可以看到任务的执行信息。
 
-![image-20240616152758426](XXL-JOB.assets/image-20240616152758426.png)
+![image-20240616152758426](XXL-JOB.assets/image-20240616152758426.webp)
 
 ### GLUE 模式(Java)
 
@@ -371,11 +371,11 @@ public class HelloService {
 
 **添加任务配置**
 
-![image-20240616153003026](XXL-JOB.assets/image-20240616153003026.png)
+![image-20240616153003026](XXL-JOB.assets/image-20240616153003026.webp)
 
 **通过 GLUE IDE 在线编辑代码**
 
-![image-20240616153050588](XXL-JOB.assets/image-20240616153050588.png)
+![image-20240616153050588](XXL-JOB.assets/image-20240616153050588.webp)
 
 ****
 
@@ -410,7 +410,7 @@ public class DemoGlueJobHandler extends IJobHandler {
 
 在 IDEA 中设置 SpringBoot 项目运行开启多个集群
 
-![image-20240616154835583](XXL-JOB.assets/image-20240616154835583.png)
+![image-20240616154835583](XXL-JOB.assets/image-20240616154835583.webp)
 
 启动两个 SpringBoot 程序,需要修改 Tomcat 端口和执行器端口
 
@@ -428,17 +428,17 @@ public class DemoGlueJobHandler extends IJobHandler {
 
 在任务管理中，修改路由策略，修改成`轮询`
 
-![image-20240616154612541](XXL-JOB.assets/image-20240616154612541.png)
+![image-20240616154612541](XXL-JOB.assets/image-20240616154612541.webp)
 
 重新启动，我们可以看到效果是,定时任务会在这两台机器中进行轮询的执行
 
 - 8088 端口的控制台日志如下:
 
-  ![image-20240616154646701](XXL-JOB.assets/image-20240616154646701.png)
+  ![image-20240616154646701](XXL-JOB.assets/image-20240616154646701.webp)
 
 - 8089 端口的控制台日志如下:
 
-  ![image-20240616154724410](XXL-JOB.assets/image-20240616154724410.png)
+  ![image-20240616154724410](XXL-JOB.assets/image-20240616154724410.webp)
 
 #### 调度路由算法讲解
 

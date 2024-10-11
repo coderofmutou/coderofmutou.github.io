@@ -524,7 +524,7 @@ public class MybatisTest {
 
 ### 设置核心配置文件模板
 
-![image-20240701001143151](MyBatis.assets/image-20240701001143151.png)
+![image-20240701001143151](MyBatis.assets/image-20240701001143151.webp)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -1678,7 +1678,7 @@ sql 片段，可以记录一段公共 sql 片段，在使用的地方通过 `inc
 
 效果：
 
-![image-20240706221032030](MyBatis.assets/image-20240706221032030.png)
+![image-20240706221032030](MyBatis.assets/image-20240706221032030.webp)
 
 ### QBC 查询
 

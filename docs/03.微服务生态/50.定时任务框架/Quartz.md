@@ -143,7 +143,7 @@ author:
 
 ### Quartz 的体系结构
 
-![Architecture](Quartz.assets/Architecture.png)
+![Architecture](Quartz.assets/Architecture.webp)
 
 ### Quartz 的几个常用 API
 以下是 Quartz 编程 API 几个重要接口，也是 Quartz 的重要组件
@@ -272,7 +272,7 @@ Quartz Scheduler 是一个功能强大且广泛使用的开源调度框架，用
     
 3. 实现效果
 
-![image-20240603002347458](Quartz.assets/image-20240603002347458.png)
+![image-20240603002347458](Quartz.assets/image-20240603002347458.webp)
 
 ### Job 和 JobDetail 介绍
 
@@ -280,7 +280,7 @@ Quartz Scheduler 是一个功能强大且广泛使用的开源调度框架，用
 
 - **Job 实例在 Quartz 中的生命周期**：每次调度器执行 Job 时，它在调用 execute 方法前会**创建一个新的 Job 实例**，当调用完成后，关联的 Job 对象实例会被释放，释放的实例会被垃圾回收机制回收。
 
-    ![image-20240603220339957](Quartz.assets/image-20240603220339957.png)
+    ![image-20240603220339957](Quartz.assets/image-20240603220339957.webp)
 
 - JobDetail：JobDetail 为 Job 实例提供了许多设置属性，以及 JobDetaMap 成员变量属性，它用来存储特定 Job 实例的状态信息，调度器需要借助 JobDetail 对象来添加 Job 实例。
 
@@ -405,7 +405,7 @@ public void setMessage(String message) {
 ### Trigger 介绍
 
 
-![Trigger](Quartz.assets/Trigger.png)
+![Trigger](Quartz.assets/Trigger.webp)
 
 Quartz 有一些不同的触发器类型，不过，用得最多的是 SimpleTrigger 和 CronTrigger。
 
@@ -580,12 +580,12 @@ Trigger trigger = TriggerBuilder.newTrigger()
     7. Year (optional field) 年（可选的域）
 
 取值：
-![CronExpressionsValue](Quartz.assets/CronExpressionsValue.png)
+![CronExpressionsValue](Quartz.assets/CronExpressionsValue.webp)
 
 - 单个子表达式可以包含范围或者列表。例如：前面例子中的周中的天这个域（这里是"WED"）可以被替换为"MON-FRI", "MON, WED, FRI"或者甚至"MON-WED,SAT"。
 - 所有的域中的值都有特定的合法范围，这些值的合法范围相当明显，例如：秒和分域的合法值为 0 到 59，小时的合法范围是 0 到 23，Day-of-Month 中值得合法凡范围是 1 到 31，但是需要注意不同的月份中的天数不同。月份的合法值是 1 到 12。或者用字符串 JAN,FEB MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV 及 DEC 来表示。Days-of-Week 可以用 1 到 7 来表示（1=星期日）或者用字符串 SUN, MON, TUE, WED, THU, FRI 和 SAT 来表示。
 
-![08](Quartz.assets/08.jpg)
+![08](Quartz.assets/08.webp)
 
 **练习：**
 
@@ -664,11 +664,11 @@ public class HelloSchedulerDemoCronTrigger {
 - 所有的 Scheduler 实例由 SchedulerFactory 创建。
 - Quartz 的三个核心概念：调度器、任务、触发器，三者之间的关系是：
 
-![SchedulerFactory](Quartz.assets/SchedulerFactory.png)
+![SchedulerFactory](Quartz.assets/SchedulerFactory.webp)
 
 一个作业，比较重要的三个要素就是 Schduler，jobDetail，Trigger；而 Trigger 对于 job 而言就好比一个驱动器；没有触发器来定时驱动作业，作业就无法运行；对于 Job 而言，**一个 job 可以对应多个 Trigger**，但对于 Trigger 而言，**一个 Trigger 只能对应一个 job**；所以一个 Trigger 只能被指派给一个 Job；如果你需要一个更复杂的触发计划，你可以创建多个 Trigger 并指派它们给同一个 Job。
 
-![image-20240607172849499](Quartz.assets/image-20240607172849499.png)
+![image-20240607172849499](Quartz.assets/image-20240607172849499.webp)
 
 **Scheduler 的创建方式：**
 
@@ -738,7 +738,7 @@ public class HelloSchedulerDemoCronTrigger {
         scheduler.start();
         ```
 
-        ![image-20240604221224298](Quartz.assets/image-20240604221224298.png)
+        ![image-20240604221224298](Quartz.assets/image-20240604221224298.webp)
 
     - 测试二：
 
@@ -1474,21 +1474,21 @@ public class SpringbootQuartzApplication {
 
     - 不使用 `@PersistJobDataAfterExecution`  注解
 
-        ![image-20240607181500661](Quartz.assets/image-20240607181500661.png)
+        ![image-20240607181500661](Quartz.assets/image-20240607181500661.webp)
 
     - 使用 `@PersistJobDataAfterExecution`  注解
 
-        ![image-20240607181727420](Quartz.assets/image-20240607181727420.png)
+        ![image-20240607181727420](Quartz.assets/image-20240607181727420.webp)
 
 2. `@DisallowConcurrentExecution` ：当任务处理时间超过了定时的时间，禁止并发访问同一个 job 定义。
 
     - 不使用`@DisallowConcurrentExecution`
 
-        ![image-20240607182216331](Quartz.assets/image-20240607182216331.png)
+        ![image-20240607182216331](Quartz.assets/image-20240607182216331.webp)
 
     - 使用`@DisallowConcurrentExecution`
 
-        ![image-20240607182322001](Quartz.assets/image-20240607182322001.png)
+        ![image-20240607182322001](Quartz.assets/image-20240607182322001.webp)
 
 ### Quartz 实现定时任务的动态调度
 

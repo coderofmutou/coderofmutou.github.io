@@ -235,7 +235,7 @@ git merge <branch_name>
 
 ## git fetch & pull
 
-![img](Git.assets/git.jpg)
+![img](Git.assets/git.webp)
 
 
 

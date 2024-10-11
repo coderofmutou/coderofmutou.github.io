@@ -181,22 +181,22 @@ org.springframework.security.web.access.intercept.FilterSecurityInterceptor
 - `super.beforeInvocation(fi)` 表示查看之前的 filter 是否通过。
 - `fi.getChain().doFilter(fi.getRequest(), fi.getResponse());`表示真正的调用后台的服务。
 
-![FilterSecurityInterceptor](SpringSecurity.assets/C38b0edDEb1711034791318-4b839450-b27a-472f-a61a-00e3606394df.png)
+![FilterSecurityInterceptor](SpringSecurity.assets/C38b0edDEb1711034791318-4b839450-b27a-472f-a61a-00e3606394df.webp)
 
 `ExceptionTranslationFilter`：是个异常过滤器，用来处理在认证授权过程中抛出的异常。
 
-![ExceptionTranslationFilter](SpringSecurity.assets/F9E78A11AB1711034804386-3ec8dbfc-8f07-4dc7-8119-b4630cb3b3ce.png)
+![ExceptionTranslationFilter](SpringSecurity.assets/F9E78A11AB1711034804386-3ec8dbfc-8f07-4dc7-8119-b4630cb3b3ce.webp)
 
 `UsernamePasswordAuthenticationFilter` ：对 `/login` 的 POST 请求做拦截，校验表单中用户名，密码。
 
-![UsernamePasswordAuthenticationFilter](SpringSecurity.assets/287e656c211711034807997-ada2495c-fa0a-4f21-8008-452ce0675f45.png)
+![UsernamePasswordAuthenticationFilter](SpringSecurity.assets/287e656c211711034807997-ada2495c-fa0a-4f21-8008-452ce0675f45.webp)
 
 #### UserDetailsService 接口
 
 - 当什么也没有配置的时候，账号和密码是由 Spring Security 定义生成的。而在实际项目中账号和密码都是从数据库中查询出来的。 所以我们要通过自定义逻辑控制认证逻辑。
 - **如果需要自定义逻辑时，只需要实现 UserDetailsService 接口即可**。接口定义如下：
 
-![aa2c45CDD71706802405020](SpringSecurity.assets/aa2c45CDD71706802405020-a58103b3-5190-4f4d-a382-37ddfd7e20c1.png)
+![aa2c45CDD71706802405020](SpringSecurity.assets/aa2c45CDD71706802405020-a58103b3-5190-4f4d-a382-37ddfd7e20c1.webp)
 
 返回值 UserDetails。这个类是系统默认的用户“主体”，我们只需要使用 User 这个实体类即可！
 
@@ -222,11 +222,11 @@ boolean isCredentialsNonExpired();
 // 表示当前用户是否可用
 boolean isEnabled();
 ```
-![809bBEbC851706802592723](SpringSecurity.assets/809bBEbC851706802592723-4599e3c9-52c8-470c-a8bd-faa9ffc4a745.png)
+![809bBEbC851706802592723](SpringSecurity.assets/809bBEbC851706802592723-4599e3c9-52c8-470c-a8bd-faa9ffc4a745.webp)
 
 方法参数 username：表示用户名。此值是客户端表单传递过来的数据。默认情况下必须叫 username，否则无法接收。但可以在配置类中通过以下方法修改：
 
-![image](SpringSecurity.assets/FbaE5DB92b1706803688705-d8b19cdf-1ee9-4282-9327-4725674d2c3b.png)
+![image](SpringSecurity.assets/FbaE5DB92b1706803688705-d8b19cdf-1ee9-4282-9327-4725674d2c3b.webp)
 
 #### PasswordEncoder 接口
 ```java
@@ -241,7 +241,7 @@ default boolean upgradeEncoding(String encodedPassword) { return false; }
 ```
 接口实现类：
 
-![e6da9DdfF51706802715081](SpringSecurity.assets/e6da9DdfF51706802715081-12d2a7e5-1236-4927-9457-e6906b97e084.png)
+![e6da9DdfF51706802715081](SpringSecurity.assets/e6da9DdfF51706802715081-12d2a7e5-1236-4927-9457-e6906b97e084.webp)
 
 **BCryptPasswordEncoder 是 Spring Security 官方推荐的密码解析器，平时多使用这个解析器**。BCryptPasswordEncoder 是对 bcrypt 强散列方法的具体实现。是基于 Hash 算法实现的单向加密。可以通过 strength 控制加密强度，默认 10。
 
@@ -321,12 +321,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 1. 如果是基于 Session，那么 Spring security 会对 cookie 里的 sessionid 进行解析，找到服务器存储的 session 信息，然后判断当前用户是否符合请求的要求。
 2. 如果是 token，则是解析出 token，然后将当前请求加入到 Spring security 管理的权限信息中去。
 
-![过程](SpringSecurity.assets/C0FaDfdDAA1711036428762-f5cbfac2-3a98-4238-96d9-cb4985d4419a.png)
+![过程](SpringSecurity.assets/C0FaDfdDAA1711036428762-f5cbfac2-3a98-4238-96d9-cb4985d4419a.webp)
 
 如果系统的模块众多，每个模块都需要进行授权与认证，所以我们选择基于 token 的形式进行授权与认证，用户根据用户名密码认证成功，然后获取当前用户角色的一系列权限值，并以用户名为 key，权限列表为 value 的形式存入 redis 缓存中，根据用户名相关信息生成 token 返回，浏览器将 token 记录到 cookie 中，每次调用 api 接口都默认将 token 携带到 header 请求头中，Spring security 解析 header 头获取 token 信息，解析 token 获取当前用户名，根据用户名就可以从 redis 中获取权限列表，这样 Spring-security 就能够判断当前请求是否有权限访问。
 
 #### 访问令牌 JWT
-![JWT](SpringSecurity.assets/Be47C62fbA1711036511382-98c8f918-b082-4ae4-9a4c-c5d8f3e141b4.png)
+![JWT](SpringSecurity.assets/Be47C62fbA1711036511382-98c8f918-b082-4ae4-9a4c-c5d8f3e141b4.webp)
 ### SpringSecurity 原理总结
 #### SpringSecurity 的过滤器介绍
 
@@ -352,9 +352,9 @@ SpringSecurity 采用的是责任链的设计模式，它有一条很长的过�
 
 Spring Security 采取过滤链实现认证与授权，只有当前过滤器通过，才能进入下一个过滤器：
 
-![image-20240422214525224](SpringSecurity.assets/image-20240422214525224.png)
+![image-20240422214525224](SpringSecurity.assets/image-20240422214525224.webp)
 
-![image-20240625232502614](SpringSecurity.assets/image-20240625232502614.png)
+![image-20240625232502614](SpringSecurity.assets/image-20240625232502614.webp)
 
 **绿色部分**是认证过滤器，需要我们自己配置，可以配置多个认证过滤器。认证过滤器可以使用 Spring Security 提供的认证过滤器，也可以自定义过滤器（例如：短信验证）。认证过滤器要在 configure(HttpSecurity http)方法中配置，没有配置不生效。下面会重点介绍以下三个过滤器：
 
@@ -368,39 +368,39 @@ Spring Security 采取过滤链实现认证与授权，只有当前过滤器通�
 
 认证流程是在 `UsernamePasswordAuthenticationFilter` 过滤器中处理的，具体流程如下所示：
 
-![23-认证流程](SpringSecurity.assets/23-%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.jpg)
+![23-认证流程](SpringSecurity.assets/23-%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B.webp)
 
-![image-20240625233441022](SpringSecurity.assets/image-20240625233441022.png)
+![image-20240625233441022](SpringSecurity.assets/image-20240625233441022.webp)
 
 ##### UsernamePasswordAuthenticationFilter 源码
 
 当前端提交的是一个 POST 方式的登录表单请求，就会被该过滤器拦截，并进行身份认证。该过滤器的 doFilter() 方法实现在其抽象父类`AbstractAuthenticationProcessingFilter` 中，查看相关源码：
 
-![image-20240422215055748](SpringSecurity.assets/image-20240422215055748.png)
+![image-20240422215055748](SpringSecurity.assets/image-20240422215055748.webp)
 
-![image-20240422215122699](SpringSecurity.assets/image-20240422215122699.png)
+![image-20240422215122699](SpringSecurity.assets/image-20240422215122699.webp)
 
-![image-20240422215214361](SpringSecurity.assets/image-20240422215152167.png)
+![image-20240422215214361](SpringSecurity.assets/image-20240422215152167.webp)
 
-![image-20240422215214361](SpringSecurity.assets/image-20240422215214361.png)
+![image-20240422215214361](SpringSecurity.assets/image-20240422215214361.webp)
 
-![image-20240422215231178](SpringSecurity.assets/image-20240422215231178.png)
+![image-20240422215231178](SpringSecurity.assets/image-20240422215231178.webp)
 
 上述的 第二 过程调用了 `UsernamePasswordAuthenticationFilter` 的 `attemptAuthentication() `方法，源码如下：
 
-![image-20240422215359136](SpringSecurity.assets/image-20240422215359136.png)
+![image-20240422215359136](SpringSecurity.assets/image-20240422215359136.webp)
 
-![image-20240422215419826](SpringSecurity.assets/image-20240422215419826.png)
+![image-20240422215419826](SpringSecurity.assets/image-20240422215419826.webp)
 
-![image-20240422215434883](SpringSecurity.assets/image-20240422215434883.png)
+![image-20240422215434883](SpringSecurity.assets/image-20240422215434883.webp)
 
 上述的(3)过程创建的 `UsernamePasswordAuthenticationToken` 是 `Authentication` 接口的实现类，该类有两个构造器，一个用于封装前端请求传入的未认证的用户信息，一个用于封装认证成功后的用户信息：
 
-![image-20240422215532309](SpringSecurity.assets/image-20240422215532309.png)
+![image-20240422215532309](SpringSecurity.assets/image-20240422215532309.webp)
 
 `Authentication` 接口的实现类用于存储用户认证信息，查看该接口具体定义：
 
-![image-20240422215608321](SpringSecurity.assets/image-20240422215608321.png)
+![image-20240422215608321](SpringSecurity.assets/image-20240422215608321.webp)
 
 ##### ProviderManager 源码
 
@@ -408,29 +408,29 @@ Spring Security 采取过滤链实现认证与授权，只有当前过滤器通�
 
 ProviderManager 是 AuthenticationManager 接口的实现类，该接口是认证相关的核心接口，也是认证的入口。在实际开发中，我们可能有多种不同的认证方式，例如：用户名+ 密码、邮箱+密码、手机号+验证码等，而这些认证方式的入口始终只有一个，那就是 AuthenticationManager。在该接口的常用实现类 ProviderManager 内部会维护一个 `List<AuthenticationProvider>` 列表，存放多种认证方式，实际上这是委托者模式(Delegate)的应用。每种认证方式对应着一个 AuthenticationProvider， AuthenticationManager 根据认证方式的不同（根据传入的 Authentication 类型判断）委托对应的 AuthenticationProvider 进行用户认证。
 
-![image-20240422215814055](SpringSecurity.assets/image-20240422215814055.png)
+![image-20240422215814055](SpringSecurity.assets/image-20240422215814055.webp)
 
-![image-20240422215855846](SpringSecurity.assets/image-20240422215855846.png)
+![image-20240422215855846](SpringSecurity.assets/image-20240422215855846.webp)
 
-![image-20240422220007046](SpringSecurity.assets/image-20240422220007046.png)
+![image-20240422220007046](SpringSecurity.assets/image-20240422220007046.webp)
 
-![image-20240422220029162](SpringSecurity.assets/image-20240422220029162.png)
+![image-20240422220029162](SpringSecurity.assets/image-20240422220029162.webp)
 
 上述认证成功之后的(6)过程，调用 `CredentialsContainer` 接口定义的 `eraseCredentials()` 方法去除敏感信息。查看`UsernamePasswordAuthenticationToken` 实现的 `eraseCredentials()` 方法，该方法实现在其父类中：
 
-![image-20240422220125987](SpringSecurity.assets/image-20240422220125987.png)
+![image-20240422220125987](SpringSecurity.assets/image-20240422220125987.webp)
 
 ##### 认证成功/失败处理
 
 上述过程就是认证流程的最核心部分，接下来重新回到 `UsernamePasswordAuthenticationFilter` 过滤器的 `doFilter()` 方法，查看认证成功/失败的处理：
 
-![image-20240422220235323](SpringSecurity.assets/image-20240422220235323.png)
+![image-20240422220235323](SpringSecurity.assets/image-20240422220235323.webp)
 
 查看 `successfulAuthentication()` 和 `unsuccessfulAuthentication()` 方法源码
 
-![image-20240422220550530](SpringSecurity.assets/image-20240422220550530.png)
+![image-20240422220550530](SpringSecurity.assets/image-20240422220550530.webp)
 
-![24-认证流程中各核心类和接口的关系](SpringSecurity.assets/24-%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%E4%B8%AD%E5%90%84%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%85%B3%E7%B3%BB%E5%9B%BE.jpg)
+![24-认证流程中各核心类和接口的关系](SpringSecurity.assets/24-%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%E4%B8%AD%E5%90%84%E6%A0%B8%E5%BF%83%E7%B1%BB%E5%92%8C%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%85%B3%E7%B3%BB%E5%9B%BE.webp)
 
 #### SpringSecurity 权限访问流程
 
@@ -440,13 +440,13 @@ ProviderManager 是 AuthenticationManager 接口的实现类，该接口是认�
 
 该过滤器是用于处理异常的，不需要我们配置，对于前端提交的请求会直接放行，捕获后续抛出的异常并进行处理（例如：权限访问限制）。具体源码如下：
 
-![image-20240422220805549](SpringSecurity.assets/image-20240422220805549.png)
+![image-20240422220805549](SpringSecurity.assets/image-20240422220805549.webp)
 
 ##### FilterSecurityInterceptor 过滤器
 
 `FilterSecurityInterceptor` 是过滤器链的最后一个过滤器，该过滤器是过滤器链的最后一个过滤器，根据资源权限配置来判断当前请求是否有权限访问对应的资源。如果访问受限会抛出相关异常，最终所抛出的异常会由前一个过滤器 `ExceptionTranslationFilter` 进行捕获和处理。具体源码如下：
 
-![image-20240422220933151](SpringSecurity.assets/image-20240422220933151.png)
+![image-20240422220933151](SpringSecurity.assets/image-20240422220933151.webp)
 
 需要注意，Spring Security 的过滤器链是配置在 SpringMVC 的核心组件 DispatcherServlet 运行之前。也就是说，请求通过 Spring Security 的所有过滤器， 不意味着能够正常访问资源，该请求还需要通过 SpringMVC 的拦截器链。
 
@@ -454,23 +454,23 @@ ProviderManager 是 AuthenticationManager 接口的实现类，该接口是认�
 
 一般认证成功后的用户信息是通过 Session 在多个请求之间共享，那么 Spring Security 中是如何实现将已认证的用户信息对象 Authentication 与 Session 绑定的进行具体分析。
 
-![image-20240422221118815](SpringSecurity.assets/image-20240422221118815.png)
+![image-20240422221118815](SpringSecurity.assets/image-20240422221118815.webp)
 
 - 在前面讲解认证成功的处理方法 `successfulAuthentication()` 时，有以下代码：
 
-    ![image-20240422221210869](SpringSecurity.assets/image-20240422221210869.png)
+    ![image-20240422221210869](SpringSecurity.assets/image-20240422221210869.webp)
 
 - 查看 SecurityContext 接口及其实现类 `SecurityContextImpl`， 该类其实就是对 Authentication 的封装
 
-    ![image-20240422221347113](SpringSecurity.assets/image-20240422221347113.png)
+    ![image-20240422221347113](SpringSecurity.assets/image-20240422221347113.webp)
 
 - 查看  `SecurityContextHolder` 类 ， 该类其实是对 ThreadLocal 的封装 ， 存储 SecurityContext 对象
 
-    ![image-20240422221423767](SpringSecurity.assets/image-20240422221423767.png)
+    ![image-20240422221423767](SpringSecurity.assets/image-20240422221423767.webp)
 
-    ![image-20240422221444667](SpringSecurity.assets/image-20240422221444667.png)
+    ![image-20240422221444667](SpringSecurity.assets/image-20240422221444667.webp)
 
-![image-20240422221511108](SpringSecurity.assets/image-20240422221511108.png)
+![image-20240422221511108](SpringSecurity.assets/image-20240422221511108.webp)
 
 ##### SecurityContextPersistenceFilter 过滤器
 
@@ -480,9 +480,9 @@ ProviderManager 是 AuthenticationManager 接口的实现类，该接口是认�
 
 认证成功的响应通过 `SecurityContextPersistenceFilter` 过滤器时，会从 `SecurityContextHolder` 中取出封装了已认证用户信息对象 Authentication 的 SecurityContext，放进 Session 中。当请求再次到来时，请求首先经过该过滤器，该过滤器会判断当前请求的 Session 是否存有 SecurityContext 对象，如果有则将该对象取出再次放入 `SecurityContextHolder` 中，之后该请求所在的线程获得认证用户信息，后续的资源访问不需要进行身份认证；当响应再次返回时，该过滤器同样从 `SecurityContextHolder` 取出 SecurityContext 对象，放入 Session 中。具体源码如下：
 
-![image-20240422221927771](SpringSecurity.assets/image-20240422221927771.png)
+![image-20240422221927771](SpringSecurity.assets/image-20240422221927771.webp)
 
-![image-20240422222009702](SpringSecurity.assets/image-20240422222009702.png)
+![image-20240422222009702](SpringSecurity.assets/image-20240422222009702.webp)
 
 ## Spring Security 快速入门
 
@@ -553,7 +553,7 @@ public class IndexController {
 
 **浏览器自动跳转到登录页面**：`http://localhost:8080/login`
 
-![image-20240623221627090](SpringSecurity.assets/image-20240623221627090.png)
+![image-20240623221627090](SpringSecurity.assets/image-20240623221627090.webp)
 
 1. 输入用户名：user
 2. 输入密码：在控制台的启动日志中查找初始的默认密码
@@ -577,11 +577,11 @@ server.servlet.context-path=/demo
 
 页面样式 `bootstrap.min.css` 是一个 CDN 地址，需要通过科学上网的方式访问
 
-![image-20240623221916041](SpringSecurity.assets/image-20240623221916041.png)
+![image-20240623221916041](SpringSecurity.assets/image-20240623221916041.webp)
 
 否则你的登录页会加载很久，并且看到的页面是这样的（登录按钮没有样式文件渲染，但是不影响登录功能的执行）
 
-![image-20240623221930704](SpringSecurity.assets/image-20240623221930704.png)
+![image-20240623221930704](SpringSecurity.assets/image-20240623221930704.webp)
 
 ##### Spring Security 默认做了什么
 
@@ -613,13 +613,13 @@ Spring Security 之所以默认帮助我们做了那么多事情，它的底层�
 
 SecurityFilterChain 接口的实现，加载了默认的 16 个 Filter（根据版本不同可能有所不同）
 
-![image-20240623224306903](SpringSecurity.assets/image-20240623224306903.png)
+![image-20240623224306903](SpringSecurity.assets/image-20240623224306903.webp)
 
 #### SecuritProperties
 
 默认情况下 Spring Security 将初始的用户名和密码存在了 SecurityProperties 类中。这个类中有一个静态内部类 User，配置了默认的用户名（`name = "user"`）和密码（`password = uuid`）
 
-![image-20240623224335383](SpringSecurity.assets/image-20240623224335383.png)
+![image-20240623224335383](SpringSecurity.assets/image-20240623224335383.webp)
 
 我们也可以将用户名、密码配置在 SpringBoot 的配置文件中：在 `application.properties` 中配置自定义用户名和密码
 
@@ -648,7 +648,7 @@ spring.security.user.password=111111
 package com.atguigu.securitydemo.config;
 
 @Configuration
-//@EnableWebSecurity // Spring 项目总需要添加此注解(再 SpringBoot 项目中可以省略此注解）
+//@EnableWebSecurity // Spring 项目总需要添加此注解(在 SpringBoot 项目中可以省略此注解）
 public class WebSecurityConfig {
 
     @Bean
@@ -996,13 +996,13 @@ pom 中添加配置用于测试
 
 **Swagger 测试地址**：`http://localhost:8080/demo/doc.html`
 
-![image-20240624213206246](SpringSecurity.assets/image-20240624213206246.png)
+![image-20240624213206246](SpringSecurity.assets/image-20240624213206246.webp)
 
 #### 关闭 csrf 攻击防御
 
 默认情况下 SpringSecurity 开启了 csrf 攻击防御的功能，这要求请求参数中必须有一个隐藏的 **_csrf** 字段，如下：
 
-![image-20240624213236887](SpringSecurity.assets/image-20240624213236887.png)
+![image-20240624213236887](SpringSecurity.assets/image-20240624213236887.webp)
 
 在 filterChain 方法中添加如下代码，关闭 csrf 攻击防御
 
@@ -1063,7 +1063,7 @@ http.csrf((csrf) -> {
 
     使用 PBKDF2 算法对密码进行哈希处理。为了防止密码破解，PBKDF2 是一种故意缓慢的算法。与其他自适应单向函数一样，它应该在您的系统上调整为大约 1 秒来验证一个密码。当需要 FIPS 认证时，这种算法是一个很好的选择。
 
-![image-20240624214136392](SpringSecurity.assets/image-20240624214136392.png)
+![image-20240624214136392](SpringSecurity.assets/image-20240624214136392.webp)
 
 4. **SCryptPasswordEncoder** 
 
@@ -1094,7 +1094,7 @@ void testPassword() {
 - 通过如下源码可以知道：可以通过`{bcrypt}`前缀动态获取和密码的形式类型一致的 PasswordEncoder 对象
 - 目的：方便随时做密码策略的升级，兼容数据库中的老版本密码策略生成的密码
 
-![image-20240624215713088](SpringSecurity.assets/image-20240624215713088.png)
+![image-20240624215713088](SpringSecurity.assets/image-20240624215713088.webp)
 
 ### 自定义登录页面
 
@@ -1181,7 +1181,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 - 登录成功后调用：AuthenticationSuccessHandler
 - 登录失败后调用：AuthenticationFailureHandler
 
-![usernamepasswordauthenticationfilter](SpringSecurity.assets/usernamepasswordauthenticationfilter.png)
+![usernamepasswordauthenticationfilter](SpringSecurity.assets/usernamepasswordauthenticationfilter.webp)
 
 ### 引入 fastjson
 
@@ -1394,7 +1394,7 @@ http.cors(withDefaults());
 
 #### 基本概念
 
-![securitycontextholder](SpringSecurity.assets/securitycontextholder.png)
+![securitycontextholder](SpringSecurity.assets/securitycontextholder.webp)
 
 在 Spring Security 框架中，SecurityContextHolder、SecurityContext、Authentication、Principal 和 Credential 是一些与身份验证和授权相关的重要概念。它们之间的关系如下：
 
@@ -1716,7 +1716,7 @@ OAuth 2 协议包含以下角色：
 - 资源服务器(Resource Server)：存储受保护资源的服务器或定义了可以访问到资源的 API，接收并验证客户端的访问令牌，以决定是否授权访问资源。
 - 授权服务器(Authorization Server)：负责验证资源所有者的身份并向客户端颁发访问令牌。
 
-![image-20240625000050755](SpringSecurity.assets/image-20240625000050755.png)
+![image-20240625000050755](SpringSecurity.assets/image-20240625000050755.webp)
 
 #### OAuth2 的使用场景
 
@@ -1726,23 +1726,23 @@ OAuth 2 协议包含以下角色：
 
 在传统的身份验证中，用户需要提供用户名和密码，还有很多网站登录时，允许使用第三方网站的身份，这称为"第三方登录"。所谓第三方登录，实质就是 OAuth 授权。用户想要登录 A 网站，A 网站让用户提供第三方网站的数据，证明自己的身份。获取第三方网站的身份数据，就需要 OAuth 授权。
 
-![image-20240625000144124](SpringSecurity.assets/image-20240625000144124.png)
+![image-20240625000144124](SpringSecurity.assets/image-20240625000144124.webp)
 
 ###### 开放 API
 
 例如云冲印服务的实现
 
-![image-20240625000115745](SpringSecurity.assets/image-20240625000115745.png)
+![image-20240625000115745](SpringSecurity.assets/image-20240625000115745.webp)
 
 ##### 现代微服务安全
 
 ###### 单块应用安全
 
-![image-20240625000232166](SpringSecurity.assets/image-20240625000232166.png)
+![image-20240625000232166](SpringSecurity.assets/image-20240625000232166.webp)
 
 ###### 微服务安全
 
-![image-20240625000259879](SpringSecurity.assets/image-20240625000259879.png)
+![image-20240625000259879](SpringSecurity.assets/image-20240625000259879.webp)
 
 ##### 企业内部应用认证授权
 
@@ -1773,11 +1773,11 @@ RFC6749：
 
 这种方式是最常用，最复杂，也是最安全的，它适用于那些有后端的 Web 应用。授权码通过前端传送，令牌则是储存在后端，而且所有与资源服务器的通信都在后端完成。这样的前后端分离，可以避免令牌泄漏。
 
-![image-20240625001044802](SpringSecurity.assets/image-20240625001044802.png)
+![image-20240625001044802](SpringSecurity.assets/image-20240625001044802.webp)
 
 - 注册客户应用：客户应用如果想要访问资源服务器需要有凭证，需要在授权服务器上注册客户应用。注册后会**获取到一个 ClientID 和 ClientSecrets**
 
-![image-20240625001058120](SpringSecurity.assets/image-20240625001058120.png)
+![image-20240625001058120](SpringSecurity.assets/image-20240625001058120.webp)
 
 ##### 第二种方式：隐藏式
 
@@ -1785,9 +1785,9 @@ RFC6749：
 
 RFC 6749 规定了这种方式，允许直接向前端颁发令牌。这种方式没有授权码这个中间步骤，所以称为隐藏式。这种方式把令牌直接传给前端，是很不安全的。因此，只能用于一些安全要求不高的场景，并且令牌的有效期必须非常短，通常就是会话期间(session)有效，浏览器关掉，令牌就失效了。
 
-![image-20240625001113875](SpringSecurity.assets/image-20240625001113875.png)
+![image-20240625001113875](SpringSecurity.assets/image-20240625001113875.webp)
 
-![image-20240625001121743](SpringSecurity.assets/image-20240625001121743.png)
+![image-20240625001121743](SpringSecurity.assets/image-20240625001121743.webp)
 
 ```
 https://a.com/callback#token=ACCESS_TOKEN
@@ -1800,9 +1800,9 @@ https://a.com/callback#token=ACCESS_TOKEN
 
 这种方式需要用户给出自己的用户名/密码，显然风险很大，因此只适用于其他授权方式都无法采用的情况，而且必须是用户高度信任的应用。
 
-![image-20240625001140201](SpringSecurity.assets/image-20240625001140201.png)
+![image-20240625001140201](SpringSecurity.assets/image-20240625001140201.webp)
 
-![image-20240625001146274](SpringSecurity.assets/image-20240625001146274.png)
+![image-20240625001146274](SpringSecurity.assets/image-20240625001146274.webp)
 
 ##### 第四种方式：凭证式
 
@@ -1810,13 +1810,13 @@ https://a.com/callback#token=ACCESS_TOKEN
 
 这种方式给出的令牌，是针对第三方应用的，而不是针对用户的，即有可能多个用户共享同一个令牌。
 
-![image-20240625001154666](SpringSecurity.assets/image-20240625001154666.png)
+![image-20240625001154666](SpringSecurity.assets/image-20240625001154666.webp)
 
-![image-20240625001200165](SpringSecurity.assets/image-20240625001200165.png)
+![image-20240625001200165](SpringSecurity.assets/image-20240625001200165.webp)
 
 #### 授权类型的选择
 
-![image-20240625001221009](SpringSecurity.assets/image-20240625001221009.png)
+![image-20240625001221009](SpringSecurity.assets/image-20240625001221009.webp)
 
 ### Spring 中的 OAuth2
 
@@ -1870,7 +1870,7 @@ https://a.com/callback#token=ACCESS_TOKEN
 
 使用 OAuth2 Login
 
-![image-20240625001240274](SpringSecurity.assets/image-20240625001240274.png)
+![image-20240625001240274](SpringSecurity.assets/image-20240625001240274.webp)
 
 ### GiuHub 社交登录案例
 
@@ -1880,21 +1880,21 @@ https://a.com/callback#token=ACCESS_TOKEN
 
 登录 GitHub，在开发者设置中找到 OAuth Apps，创建一个 application，为客户应用创建访问 GitHub 的凭据：
 
-![image-20240625001249858](SpringSecurity.assets/image-20240625001249858.png)
+![image-20240625001249858](SpringSecurity.assets/image-20240625001249858.webp)
 
 填写应用信息：`默认的重定向URI模板为{baseUrl}/login/oauth2/code/{registrationId}`。registrationId 是 ClientRegistration 的唯一标识符。
 
-![image-20240625001302113](SpringSecurity.assets/image-20240625001302113.png)
+![image-20240625001302113](SpringSecurity.assets/image-20240625001302113.webp)
 
 获取应用程序 id，生成应用程序密钥：
 
-![image-20240625001311418](SpringSecurity.assets/image-20240625001311418.png)
+![image-20240625001311418](SpringSecurity.assets/image-20240625001311418.webp)
 
 #### 创建测试项目
 
 创建一个 springboot 项目 `oauth2-login-demo`，创建时引入如下依赖
 
-![image-20240625001322523](SpringSecurity.assets/image-20240625001322523.png)
+![image-20240625001322523](SpringSecurity.assets/image-20240625001322523.webp)
 
 示例代码参考：[spring-security-samples/servlet/spring-boot/java/oauth2/login at 6.2.x · spring-projects/spring-security-samples (github.com)](https://github.com/spring-projects/spring-security-samples/tree/6.2.x/servlet/spring-boot/java/oauth2/login)
 
@@ -1996,7 +1996,7 @@ public class IndexController {
 7. GitHub 返回用户数据
 8. **A 网站使用 GitHub 用户数据登录**
 
-![image-20240625001338793](SpringSecurity.assets/image-20240625001338793.png)
+![image-20240625001338793](SpringSecurity.assets/image-20240625001338793.webp)
 
 #### CommonOAuth2Provider
 
@@ -3153,7 +3153,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ##### 测试
 
-![image-20240626234832545](SpringSecurity.assets/image-20240626234832545.png)
+![image-20240626234832545](SpringSecurity.assets/image-20240626234832545.webp)
 
 #### 认证过滤器
 
@@ -3282,7 +3282,7 @@ public ResponseResult logout() {
 
 RBAC 权限模型(Role-Based Access Control)，即：基于角色的权限控制。这是目前最常被开发者使用也是相对易用、通用权限模型。
 
-![image-20240627234251159](SpringSecurity.assets/image-20240627234251159.png)
+![image-20240627234251159](SpringSecurity.assets/image-20240627234251159.webp)
 
 ##### 准备工作
 
