@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "compress-images": "node compress-images.js",
-    "compress-images2": "node compress-images2.js"
+    "compress-images2": "node compress-images2.js",
+    "search-unused-images": "node search-unused-images.js",
+    "search-unused-images2": "node search-unused-images2.js ../../docs"
   },
   "devDependencies": {
     "sharp": "^0.33.5"
