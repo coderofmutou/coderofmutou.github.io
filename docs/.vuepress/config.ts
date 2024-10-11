@@ -427,5 +427,27 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
   extraWatchFiles: [
     '.vuepress/config.ts',
     '.vuepress/config/htmlModules.ts',
-  ]
+  ],
+
+  /*
+    url-loader 优点:
+      1. 可以将小于特定大小（如 8KB）的文件转换为 Base64 格式，减少 HTTP 请求。
+      2. 对于小图标或小图片非常方便，因为它们会被内联到 CSS 或 HTML 中，从而减少请求数量。
+      3. 对于大于 8KB 的文件，url-loader 会自动使用 file-loader 的功能，直接将文件输出到指定的路径
+    url-loader 缺点:
+      1. Base64 编码会增加文件大小（约增加 33%），对于较大的文件并不高效。
+   */
+  chainWebpack: (config) => {
+    config.module
+        .rule('url-loader') // 定义规则名称
+        .test(/\.(webp)(\?.*)?$/) // 支持的图片格式
+        .use('url-loader') // 使用 url-loader
+        .loader('url-loader') // 指定加载器
+        .options({
+          limit: 8192, // 小于8KB的文件会转为base64
+          name: '[name].[hash:8].[ext]', // 输出文件命名规则
+          outputPath: 'assets/img/', // 输出路径
+        })
+        .end();
+  }
 })
