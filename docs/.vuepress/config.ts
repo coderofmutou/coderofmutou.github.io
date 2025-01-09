@@ -43,6 +43,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           {
             text: '前置',
             items: [
+              { text: '尚硅谷Java学习', link: '/java-basic/java-learning/' },
               { text: '基础软件安装与配置', link: '/java-basic/software-install-config/' },
             ],
           },
