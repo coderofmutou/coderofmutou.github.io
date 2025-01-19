@@ -1,4 +1,9 @@
-// file: compress-images2.js
+/*
+功能概述：将图片文件夹中的图片压缩为.webp，并替换markdown文件中的引用路径。
+        原图片移动到backup文件夹中，生成的新Markdown文件以_new.md结尾
+    npm run compress-images ./example.md
+    需要图片文件夹名 = markdown文件名 + .assets，且在markdown文件同层目录
+ */
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
@@ -77,7 +82,7 @@ async function compressImagesAndUpdateMarkdown(markdownFilePath) {
 const [markdownFilePath] = process.argv.slice(2);
 
 if (!markdownFilePath) {
-  console.error('请提供Markdown文件路径作为参数，例如：npm run compress-images ./01.基础软件安装与配置.md');
+  console.error('请提供Markdown文件路径作为参数，例如：npm run compress-images ./example.md');
   process.exit(1);
 }
 

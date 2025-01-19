@@ -1,3 +1,8 @@
+/*
+功能概述：检索未在Markdown文件中使用的图片文件夹中的图片
+    node search-unused-images2.js ./目标目录
+    需要目标目录中图片文件夹名 = markdown文件名 + .assets
+ */
 const fs = require('fs');
 const path = require('path');
 

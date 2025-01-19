@@ -1,9 +1,12 @@
+/*
+功能概述：将图片文件夹中的图片压缩为.webp
+    npm run compress-images-in-dir docs/.vuepress/public/img'
+ */
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
 
 async function compressImagesInDir(directory) {
-  // 获取Markdown文件名和路径
   // 获取目录中的所有图片文件
   const files = fs.readdirSync(directory);
 
@@ -45,11 +48,11 @@ async function compressImagesInDir(directory) {
 const [directory] = process.argv.slice(2);
 
 if (!directory) {
-  console.error('请提供图片文件路径作为参数，例如：npm run compress-images docs/.vuepress/public/img');
+  console.error('请提供图片文件路径作为参数，例如：npm run compress-images-in-dir docs/.vuepress/public/img');
   process.exit(1);
 }
 
-// 执行图片压缩和Markdown文件更新
+// 执行图片压缩
 compressImagesInDir(directory)
   .catch(err => {
     console.error('处理过程中发生错误:', err);

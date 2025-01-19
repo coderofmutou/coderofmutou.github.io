@@ -1,4 +1,8 @@
-// file: search-unused-images.js
+/*
+功能概述：检索未在Markdown文件中使用的图片文件夹中的图片
+    npm run search-unused-images ./images ./example.md
+    参数1：图片文件路径，参数2：md文件路径
+ */
 const fs = require('fs');
 const path = require('path');
 
@@ -8,7 +12,7 @@ async function searchUnusedImages(directory, markdownFilePath) {
   // 获取目录中的所有文件
   const files = fs.readdirSync(directory);
 
-  // 压缩图片
+  // 检索图片是否在Markdown文件中引用
   for (const file of files) {
     const imageName = path.basename(file)
     const encodedFileName = encodeURIComponent(imageName);
