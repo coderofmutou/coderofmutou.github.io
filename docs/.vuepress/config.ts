@@ -37,7 +37,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       { text: '首页', link: '/' },
       {
         text: 'Java基础',
-        link: '/java-basic/software-install-config/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
+        link: '/java-basic/', //目录页链接，此处link是vdoing主题新增的配置项，有二级导航时，可以点击一级导航跳到目录页
         items: [
           // 说明：以下所有link的值只是在相应md文件头部定义的永久链接（不是什么特殊编码）。另外，注意结尾是有斜杠的
           {
@@ -45,6 +45,12 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
             items: [
               { text: '尚硅谷Java学习', link: '/java-basic/java-learning/' },
               { text: '基础软件安装与配置', link: '/java-basic/software-install-config/' },
+            ],
+          },
+          {
+            text: '核心',
+            items: [
+              { text: 'Java从入门到精通(JDK17版)', link: '/java-basic/java-from-entry-to-proficiency/' },
             ],
           },
           {
@@ -77,7 +83,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       },
       {
         text: '微服务核心',
-        link: '/micro-service-core/SpringCloud/',
+        link: '/micro-service-core/',
         items: [
           {
             text: 'Spring Cloud',
@@ -103,7 +109,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       },
       {
         text: '微服务生态',
-        link: '/micro-service-ecology/SpringSecurity/',
+        link: '/micro-service-ecology/',
         items: [
           {
             text: '安全框架',
@@ -126,7 +132,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       },
       {
         text: '实用工具',
-        link: '/tools/java-logs/',
+        link: '/tools/',
         items: [
           { text: 'Java 日志热门框架', link: '/tools/java-logs/' },
           { text: 'Git 常用命令', link: '/tools/git/' },
@@ -222,8 +228,9 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     // defaultMode: 'auto',
 
     // 侧边栏  'structuring' | { mode: 'structuring', collapsable: Boolean} | 'auto' | <自定义>    温馨提示：目录页数据依赖于结构化的侧边栏数据，如果你不设置为'structuring',将无法使用目录页
-    // sidebar: { mode: 'structuring', collapsable: false},
-    sidebar: 'auto',
+    // sidebar: 'structuring',
+    sidebar: { mode: 'structuring', collapsable: false},
+    // sidebar: 'auto',
 
     // 文章默认的作者信息，(可在md文件中单独配置此信息) string | {name: string, link?: string}
     author: {
