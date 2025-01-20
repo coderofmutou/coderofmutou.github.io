@@ -20,12 +20,16 @@
     "utils/*"
   ],
   "devDependencies": {
+    "@xiaopanda/vuepress-plugin-code-copy": "^1.0.3",
     "dayjs": "^1.9.7",
     "inquirer": "^7.1.0",
     "json2yaml": "^1.1.0",
+    "markdown-it-disable-url-encode": "^1.0.1",
+    "markdown-it-image-lazy-loading": "^2.0.1",
     "vuepress": "1.9.9",
     "vuepress-plugin-baidu-autopush": "^1.0.1",
     "vuepress-plugin-baidu-tongji": "^1.0.1",
+    "vuepress-plugin-code-copy": "^1.0.6",
     "vuepress-plugin-comment": "^0.7.3",
     "vuepress-plugin-demo-block": "^0.7.2",
     "vuepress-plugin-fulltext-search": "^2.2.1",
@@ -35,9 +39,5 @@
     "vuepress-plugin-zooming": "^1.1.7",
     "vuepress-theme-vdoing": "^1.12.9",
     "yamljs": "^0.3.0"
-  },
-  "dependencies": {
-    "markdown-it-disable-url-encode": "^1.0.1",
-    "markdown-it-image-lazy-loading": "^2.0.1"
   }
 }

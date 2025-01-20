@@ -364,11 +364,33 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       'one-click-copy', // 代码块复制按钮
       {
         copySelector: ['div[class*="language-"] pre', 'div[class*="aside-code"] aside'], // String or Array
-        copyMessage: '复制成功', // default is 'Copy successfully and then paste it for use.'
-        duration: 1000, // prompt message display time.
+        copyMessage: '复制成功！', // default is 'Copy successfully and then paste it for use.'
+        toolTipMessage: '复制', // default is ''Copy to clipboard'
+        duration: 300, // prompt message display time.
         showInMobile: false, // whether to display on the mobile side, default: false.
       },
     ],
+    /*[
+      '@xiaopanda/vuepress-plugin-code-copy', // 代码复制插件
+      {
+        buttonStaticIcon: false,
+        buttonIconTitle: 'copy',
+        buttonAlign: 'top',
+        buttonColor: '#779ecd'
+      }
+    ],*/
+    /*[
+      "vuepress-plugin-code-copy",  // 代码复制插件
+      {
+        selector: ['div[class*="language-"] pre', 'div[class*="aside-code"] aside'],
+        align: 'top',
+        color: '#27b1ff',
+        backgroundTransition: true,
+        backgroundColor: '#0075b8',
+        successText: '复制成功',
+        staticIcon: false
+      }
+    ],*/
 
     [
       'demo-block', // demo演示模块 https://github.com/xiguaxigua/vuepress-plugin-demo-block
