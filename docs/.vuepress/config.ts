@@ -13,7 +13,15 @@ import dayjs from 'dayjs'
 import markdownItDisableUrlEncode from 'markdown-it-disable-url-encode';
 import markdownItImageLazyLoading from "markdown-it-image-lazy-loading";
 
-const DOMAIN_NAME = 'bombax.asia' // 域名 (不带https)
+import {readFileSync} from 'fs';
+import {join} from 'path';
+
+const CNAMEContent = readFileSync(
+  join(__dirname, 'public/CNAME'),
+  'utf-8'
+).trim()
+
+const DOMAIN_NAME = CNAMEContent; // 域名 (不带https)
 const WEB_SITE = `https://${DOMAIN_NAME}` // 网址
 
 export default defineConfig4CustomTheme<VdoingThemeConfig>({
