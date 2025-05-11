@@ -51,6 +51,8 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
             text: '核心',
             items: [
               { text: 'Java从入门到精通(JDK17版)', link: '/java-basic/java-from-entry-to-proficiency/' },
+              { text: 'MySQL从入门到高级-基础篇', link: '/java-basic/mysql-from-beginners-to-advanced/beginners/' },
+              { text: 'MySQL从入门到高级-高级篇', link: '/java-basic/mysql-from-beginners-to-advanced/advanced/' },
             ],
           },
           {
@@ -228,8 +230,8 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     // defaultMode: 'auto',
 
     // 侧边栏  'structuring' | { mode: 'structuring', collapsable: Boolean} | 'auto' | <自定义>    温馨提示：目录页数据依赖于结构化的侧边栏数据，如果你不设置为'structuring',将无法使用目录页
-    // sidebar: 'structuring',
-    sidebar: { mode: 'structuring', collapsable: false},
+    sidebar: 'structuring',
+    // sidebar: { mode: 'structuring', collapsable: false},
     // sidebar: 'auto',
 
     // 文章默认的作者信息，(可在md文件中单独配置此信息) string | {name: string, link?: string}
