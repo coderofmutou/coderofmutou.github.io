@@ -3,9 +3,6 @@
   "filters": {},
   "rules": {
     "alive-link": false,
-    "zh-half-and-full-width-bracket": {
-		"bracket": "mixed"
-	},
 	"ja-space-between-half-and-full-width": {
 		"space": "always",
 		"lintStyledNode": true
