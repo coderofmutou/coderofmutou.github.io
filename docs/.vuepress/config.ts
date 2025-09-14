@@ -460,7 +460,15 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
     extendMarkdown: md => {
       md.use(markdownItDisableUrlEncode)
       md.use(markdownItImageLazyLoading)
-    }
+      // 暂时禁用mermaid-it-markdown插件，因为它需要crypto
+      // md.use(mermaidItMarkdown) // 注册 Mermaid 插件
+      // md.use(require('markdown-it-mathjax3'))  // 注册数学公式插件
+      // md.linkify.set({  fuzzyEmail: false }) // 可选：禁用邮箱链接识别
+    },
+    plugins: [
+      'markdown-it-mathjax3',
+      // 'vuepress-plugin-mermaidjs'
+    ]
   },
 
   // 监听文件变化并重新构建

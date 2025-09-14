@@ -1,11 +1,11 @@
-'''
+"""
     使用正则表达式匹配 HTML 中的 <img> 标签。
     提取 src 和 alt 属性，并将其转换为 Markdown 格式 ![]()。
     如果 alt 为空，提取文件名作为 alt 值
     如果没有需要转换的图片标签，则不生成新文件。
 
     返回最终的output_file
-'''
+"""
 import re
 import os
 
@@ -47,8 +47,6 @@ def process_html_file(input_file, output_file):
     else:
         print("没有需要转换的图片标签，未进行文件生成。")
         return input_file
-
-    return output_file  # 返回最终的 output_file（可以传递到后续方法）
 
 if __name__ == "__main__":
     # 示例文件路径（可以修改为你自己的文件路径）

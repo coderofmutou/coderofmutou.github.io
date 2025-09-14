@@ -26,7 +26,7 @@ def compress_images(directory, markdown_file_path):
     changes_made = False  # 用于标记是否有图片被修改或压缩
     for file in files:
         extname = os.path.splitext(file)[1].lower()
-        if extname in ['.jpg', '.jpeg', '.png', '.gif']:
+        if extname in ['.jpg', '.jpeg', '.png', '.gif', '.bmp']:
             image_name = os.path.basename(file)
             encoded_image_name = urllib.parse.quote(image_name)  # URL 编码后的文件名
 

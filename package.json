@@ -17,7 +17,7 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "utils/*"
+    "utils/**"
   ],
   "devDependencies": {
     "@xiaopanda/vuepress-plugin-code-copy": "^1.0.3",
@@ -38,6 +38,7 @@
     "vuepress-plugin-thirdparty-search": "^1.0.2",
     "vuepress-plugin-zooming": "^1.1.8",
     "vuepress-theme-vdoing": "^1.12.9",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "url-loader": "^4.1.1"
   }
 }

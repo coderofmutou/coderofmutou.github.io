@@ -1,6 +1,6 @@
-'''
+"""
 功能概述：检索未在Markdown文件中使用的图片文件夹中的图片
-'''
+"""
 import os
 import urllib.parse
 
