@@ -33,7 +33,7 @@ jobs:
           user_name=`git log -1 --pretty=format:'%an'`
           user_email=`git log -1 --pretty=format:'%ae'`
           deploy_branch=gh-pages
-          yarn
+          yarn install --ignore-engines
           yarn build
           cd docs/.vuepress/dist
           # echo 'bombax.asia' > CNAME
