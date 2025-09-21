@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20.x]
 
     steps:
       - name: Checkout # 步骤1
@@ -33,7 +33,7 @@ jobs:
           user_name=`git log -1 --pretty=format:'%an'`
           user_email=`git log -1 --pretty=format:'%ae'`
           deploy_branch=gh-pages
-          yarn install --ignore-engines
+          yarn
           yarn build
           cd docs/.vuepress/dist
           # echo 'bombax.asia' > CNAME
