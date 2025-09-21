@@ -464,6 +464,58 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
       // md.use(mermaidItMarkdown) // 注册 Mermaid 插件
       // md.use(require('markdown-it-mathjax3'))  // 注册数学公式插件
       // md.linkify.set({  fuzzyEmail: false }) // 可选：禁用邮箱链接识别
+
+      // 自定义语言别名映射 - 解决Vdoing主题语言标注识别问题
+      const defaultRender = md.renderer.rules.fence;
+      md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+        const token = tokens[idx];
+        const lang = token.info.trim();
+
+        // 定义语言别名映射
+        const langAliases = {
+          'init': 'bash',      // init -> bash
+          'mysql': 'sql',    // mysql -> sql
+          // 'sql': 'sql',        // sql -> sql
+          // 'pgsql': 'sql',    // pgsql -> pgsql (保持为pgsql)
+          // 'sqlite': 'sqlite',  // sqlite -> sqlite (保持为sqlite)
+          // 'plsql': 'plsql',    // plsql -> plsql (保持为plsql)
+          // 'nginx': 'nginx',    // nginx -> nginx
+          // 'apache': 'apache',  // apache -> apache
+          // 'docker': 'dockerfile', // docker -> dockerfile
+          // 'dockerfile': 'dockerfile', // dockerfile -> dockerfile
+          'yml': 'yaml',       // yml -> yaml
+          // 'yaml': 'yaml',      // yaml -> yaml
+          // 'properties': 'properties', // properties -> properties
+          // 'toml': 'toml',      // toml -> toml
+          'shell': 'bash',     // shell -> bash
+          // 'sh': 'bash',        // sh -> bash
+          // 'py': 'python',      // py -> python
+          // 'js': 'javascript',  // js -> javascript
+          // 'ts': 'typescript',  // ts -> typescript
+          // 'html': 'html',      // html -> html
+          'jsp': 'html',       // jsp -> html
+          // 'css': 'css',        // css -> css
+          // 'java': 'java',      // java -> java
+          // 'kotlin': 'kotlin',  // kotlin -> kotlin
+          // 'scala': 'scala',    // scala -> scala
+          // 'swift': 'swift',    // swift -> swift
+          // 'c': 'c',            // c -> c
+          // 'cpp': 'cpp',        // cpp -> cpp
+          // 'csharp': 'csharp',  // csharp -> csharp
+          // 'go': 'go',          // go -> go
+          // 'rust': 'rust',      // rust -> rust
+          // 'php': 'php',        // php -> php
+          // 'ruby': 'ruby',      // ruby -> ruby
+          // 'perl': 'perl',      // perl -> perl
+        };
+
+        // 如果找到别名映射，则替换语言标识
+        if (lang && langAliases[lang]) {
+          token.info = langAliases[lang];
+        }
+
+        return defaultRender(tokens, idx, options, env, self);
+      };
     },
     plugins: [
       'markdown-it-mathjax3',
