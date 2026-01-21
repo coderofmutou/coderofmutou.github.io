@@ -75,8 +75,10 @@ def compress_images(directory, markdown_file_path):
         with open(new_markdown_file_path, 'w', encoding='utf-8') as f:
             f.write(markdown_text)
         print(f"已保存更新后的Markdown文件: {new_markdown_file_path}")
+        return new_markdown_file_path
     else:
         print("没有进行图片压缩或路径替换，未生成新的Markdown文件。")
+        return markdown_file_path
 
     # 检查Markdown文件中是否还有未替换为webp格式的图片
     check_for_unreplaced_images(markdown_text)

@@ -1,5 +1,6 @@
 from compress_images import *
 from convert_html_to_markdown import *
+from search_unused_images import *
 
 if __name__ == "__main__":
     # 示例文件路径（可以修改为你自己的文件路径）
@@ -15,7 +16,7 @@ if __name__ == "__main__":
 
     # 执行图片压缩和Markdown文件更新
     try:
-        compress_images(images_dir, output_markdown_file)
+        output_markdown_file = compress_images(images_dir, output_markdown_file)
     except Exception as e:
         print("处理过程中发生错误:", e)
 
@@ -24,7 +25,7 @@ if __name__ == "__main__":
 
 #   当使用compress_images_new脚本时，最终没有放入backup文件夹中的非webp格式图片大概率就是未被引用过的图片
     # 执行搜索未使用图片的功能
-#     try:
-#         search_unused_images(images_dir, markdown_file_path)
-#     except Exception as e:
-#         print(f"处理过程中发生错误: {e}")
+    # try:
+    #     search_unused_images(images_dir, output_markdown_file)
+    # except Exception as e:
+    #     print(f"处理过程中发生错误: {e}")
