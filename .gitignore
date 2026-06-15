@@ -24,3 +24,11 @@ urls.txt
 # idea
 .idea
 .trae
+
+# 备份文件
+package-lock_back.json
+yarn_back.lock
+
+# Python 编译缓存
+__pycache__/
+*.pyc
