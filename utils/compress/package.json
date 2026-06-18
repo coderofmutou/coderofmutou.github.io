@@ -1,14 +1,16 @@
 {
-  "name": "compress-images",
+  "name": "kb-image-pipeline",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "compress-images": "node compress-images.js",
-    "compress-images2": "node compress-images2.js",
-    "search-unused-images": "node search-unused-images.js",
-    "search-unused-images2": "node search-unused-images2.js ../../docs",
-    "compress-images-in-dir": "node compress-images-in-dir.js"
+    "kb:download": "node download.mjs",
+    "kb:compress": "node compress.mjs",
+    "kb:scan": "node scan.mjs",
+    "kb:all": "node image-pipeline.mjs",
+    "kb:test": "node --test tests/extract-image-references.test.mjs tests/resolve-markdown-inputs.test.mjs tests/markdown-link.test.mjs tests/download-image.test.mjs"
   },
-  "devDependencies": {
-    "sharp": "^0.33.5"
+  "dependencies": {
+    "sharp": "^0.33.5",
+    "gray-matter": "^4.0.3"
   }
 }
