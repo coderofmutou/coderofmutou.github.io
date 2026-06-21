@@ -1,43 +1,24 @@
-# 知识库 Skills 总览
+# 知识库 Skills
 
-本仓库共有 3 个 Skill，分层管理。
+本目录是本仓库（vuepress-theme-vdoing 知识库）的 Claude 技能目录。
 
-## 技能地图
+## 当前技能
 
-```
-vdoing-knowledge-base（总入口 / 调度 / 验收）
-├── java-note-synthesis（笔记整合专项）
-└── knowledge-image-pipeline（图片治理专项）
-```
+仅一个技能：[vdoing-knowledge-base](./vdoing-knowledge-base/SKILL.md) —— 知识库维护唯一入口，覆盖新增/整合/更新/拆分笔记、frontmatter 与 permalink、config.ts 导航与目录页、批量改 frontmatter、外链图片本地化、转 webp、清理未使用图片、Markdown 结构归一化、中英文混排排版、发布前质量验收、Git 提交、链接/路径/404 排查。
 
-## 快速路由
+不确定该做什么时，直接用 `/vdoing-knowledge-base`，它会指引到对应 references。
 
-| 你的需求 | 推荐 Skill |
-|----------|-----------|
-| 新增一篇 Java/Spring/MyBatis 笔记 | `vdoing-knowledge-base` |
-| 更新导航栏（config.ts）或目录页 | `vdoing-knowledge-base` |
-| 完善 frontmatter / permalink | `vdoing-knowledge-base` |
-| 将多份课程资料整合为一篇笔记 | `java-note-synthesis` |
-| 处理版本差异（如 Spring Boot 2→3）| `java-note-synthesis` |
-| 现有笔记去噪/去重/结构优化 | `java-note-synthesis` |
-| 下载外链图片并本地化 | `knowledge-image-pipeline` |
-| 批量图片转 webp / 压缩 | `knowledge-image-pipeline` |
-| 清理未使用图片 | `knowledge-image-pipeline` |
-| 修复图片 404 / 路径中文问题 | `knowledge-image-pipeline` |
-| 全流程（整合 + 图片 + 导航更新） | 先 `java-note-synthesis` → 再 `knowledge-image-pipeline` → 最后 `vdoing-knowledge-base` 验收 |
+## 历史路由（已合并）
 
-## 示例 Prompt
+以下技能已合并入 `vdoing-knowledge-base`，不再独立存在：
 
-```
-/vdoing-knowledge-base 新增 Redis 笔记到 docs/02.微服务核心，需要更新导航
-/java-note-synthesis 整合三份 MyBatis 动态 SQL 资料，输出一篇面向面试的笔记
-/knowledge-image-pipeline 处理 docs/03.微服务生态 下所有外链图片并转 webp
-```
+| 旧技能 | 合并去向 |
+|--------|---------|
+| `java-note-synthesis` | `vdoing-knowledge-base` 第二节「整合多份笔记」+ [note-synthesis.md](./vdoing-knowledge-base/references/note-synthesis.md) |
+| `knowledge-image-pipeline` | `vdoing-knowledge-base` 第四节「图片处理」+ [image-pipeline.md](./vdoing-knowledge-base/references/image-pipeline.md) |
 
-## 各 Skill 详情
+历史 commit 中提到的 `/java-note-synthesis`、`/knowledge-image-pipeline` 命令已失效，统一改用 `/vdoing-knowledge-base`。
 
-| Skill | 文件 | 参考文档 |
-|-------|------|----------|
-| `vdoing-knowledge-base` | [SKILL.md](./vdoing-knowledge-base/SKILL.md) | [frontmatter 模板](./vdoing-knowledge-base/references/frontmatter-template.md) · [config 指南](./vdoing-knowledge-base/references/config-guide.md) · [笔记整合](./vdoing-knowledge-base/references/note-synthesis.md) · [笔记维护](./vdoing-knowledge-base/references/note-maintenance.md) · [Git 规范](./vdoing-knowledge-base/references/git-commit-guide.md) |
-| `java-note-synthesis` | [SKILL.md](./java-note-synthesis/SKILL.md) | [整合模板](./java-note-synthesis/references/synthesis-template.md) · [版本差异示例](./java-note-synthesis/references/version-diff-examples.md) |
-| `knowledge-image-pipeline` | [SKILL.md](./knowledge-image-pipeline/SKILL.md) | [执行清单](./knowledge-image-pipeline/references/pipeline-checklist.md) · [路径修复示例](./knowledge-image-pipeline/references/link-rewrite-examples.md) |
+## references 索引
+
+见 [vdoing-knowledge-base/SKILL.md 末尾的 references 索引](./vdoing-knowledge-base/SKILL.md#references-索引)。

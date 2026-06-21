@@ -163,9 +163,12 @@ title: MyBatis 与 Spring Boot 3.x 集成
 
 已有笔记中的图片需要维护时：
 
-- **发现图片失效（外链 404）**：重新下载或找替代图，若无法替代改为文字描述
-- **图片未转 webp**：运行 `utils/compress/compress_images.py`
-- **发现冗余图片占用空间**：运行 `utils/compress/search_unused_images.py` 找出未引用图片后删除
+- **发现图片失效（外链 404）**：用 `kb:download` 重新下载本地化，若无法替代改为文字描述
+- **图片未转 webp**：运行 `kb:compress` 批量转 webp（原图进 `backup/`，产 `*_new.md`）
+- **发现冗余图片占用空间**：运行 `kb:scan`（全仓库模式）找出未引用图片，人工确认后删除
+- **发现绝对路径图片引用**：`kb:scan` 或 `md:check` 会告警，手动改为相对路径
+
+> 命令速查见 [工具命令速查表](./scripts-cheatsheet.md)，决策树见 [图片处理决策树](./image-pipeline.md)。删除永远不自动，脚本只出报告。
 
 ---
 
