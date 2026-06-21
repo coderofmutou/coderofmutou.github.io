@@ -22,10 +22,10 @@
 
 ```bash
 cd utils/compress
-npm run kb:scan -- docs                    # 全仓库报告绝对路径引用
+npm run kb:scan -- ../../docs                    # 全仓库报告绝对路径引用
 # 或
 cd utils/normalize
-npm run md:check -- docs/01.Java/10.基础.md # 单篇检查
+npm run md:check -- ../../docs/01.Java/10.基础.md # 单篇检查
 ```
 
 报告形如：`行 42 [markdown] /docs/03.微服务生态/.../result.png`，按行号手动改为相对路径。
@@ -41,6 +41,7 @@ npm run md:check -- docs/01.Java/10.基础.md # 单篇检查
 | 新文章不在导航中 | `config.ts` nav 未更新 | 按 [config.ts 导航维护指南](./config-guide.md) 添加条目 |
 | permalink 冲突 | 多文件用了相同路径 | 全局唯一，发布后不轻易改（死链） |
 | 侧边栏不显示 H4+ | `sidebarDepth: 2` | 只显示到 H3，深层标题用正文锚点 |
+| 笔记间链接 404 / 死链 | 链接目标被删/改名/移动 | `npm run build` 报 broken link；删除笔记前先查引用（见 [笔记维护](./note-maintenance.md) 第七节） |
 
 ---
 
@@ -50,7 +51,6 @@ npm run md:check -- docs/01.Java/10.基础.md # 单篇检查
 |------|------|----------|
 | 文章不进归档/分类页 | `article: false` 或缺 `categories` | 普通文章确保 `article` 不设 false 且 `categories` 已填 |
 | 分类归属错误 | `categories` 与目录结构不对应 | 两级分类对应一级/二级目录 |
-| 批量改 frontmatter 累 | 逐个手改 | `npm run editFm` 交互式批量修改 |
 | `date` 误改 | 把 date 当最后修改时间 | `date` 是创建日期不改；`lastUpdated` 依赖 git 提交时间自动生成 |
 
 ---
@@ -79,7 +79,7 @@ npm run md:check -- docs/01.Java/10.基础.md # 单篇检查
 
 ```bash
 # 结构问题一键检查
-cd utils/normalize && npm run md:check -- docs/01.Java/10.基础.md
+cd utils/normalize && npm run md:check -- ../../docs/01.Java/10.基础.md
 # 排版问题一键检查
 cd utils/textlint && npm run kb:lint:one -- ../../docs/01.Java/10.基础.md
 ```
@@ -89,5 +89,5 @@ cd utils/textlint && npm run kb:lint:one -- ../../docs/01.Java/10.基础.md
 ## 六、调试技巧
 
 - **工具改动不覆盖原文件**：所有写操作产 `*_new.md`，确认无误后手动替换。`kb:lint:fix` 例外（直接覆盖），跑前确保 `git status` 干净。
-- **`kb:all` 中间失败**：保留 `*_working.md` 供调试，可从中断点继续。
+- **`kb:all` 中间失败**：会残留 `*_working.md` 供调试；重跑从头开始（`prepareWorkingFile` 会先删旧 working 文件），不支持断点续传。
 - **scan 报"找到 0 张图片"**：检查图目录命名是否为 `<篇名>.assets` 或 `images`，且图片在 asset 目录下（不在的图不被计入）。

@@ -31,11 +31,11 @@
 
 ```bash
 cd utils/compress
-npm run kb:download -- docs/02.微服务核心/50.持久层框架/10.MyBatis.md
-npm run kb:compress -- docs/02.微服务核心/50.持久层框架/10.MyBatis.md
-npm run kb:scan -- docs                              # 全仓库
-npm run kb:scan -- --local=docs/01.Java/10.基础.md   # 单篇（注意 -- 传参）
-npm run kb:all -- docs/01.Java/10.基础.md
+npm run kb:download -- ../../docs/02.微服务核心/50.持久层框架/10.MyBatis.md
+npm run kb:compress -- ../../docs/02.微服务核心/50.持久层框架/10.MyBatis.md
+npm run kb:scan -- ../../docs                              # 全仓库
+npm run kb:scan -- --local=../../docs/01.Java/10.基础.md   # 单篇（注意 -- 传参）
+npm run kb:all -- ../../docs/01.Java/10.基础.md
 npm run kb:test
 ```
 
@@ -60,8 +60,8 @@ npm run kb:test
 
 ```bash
 cd utils/normalize
-npm run md:check -- docs/01.Java/10.基础.md
-npm run md:fix -- docs/01.Java/10.基础.md
+npm run md:check -- ../../docs/01.Java/10.基础.md
+npm run md:fix -- ../../docs/01.Java/10.基础.md
 node --test tests/                    # 跑单测（包内无 test 脚本，直接 node --test）
 ```
 
@@ -99,7 +99,7 @@ npm run kb:lint:one:fix -- ../../docs/01.Java/10.基础.md
 
 | 命令 | 脚本 | 用途 | 触发方式 |
 |------|------|------|---------|
-| `npm run editFm` | `utils/editFrontmatter.js` | 交互式批量修改 frontmatter 字段 | 手动调用 |
+| `npm run editFm` | `utils/editFrontmatter.js` | 配 `utils/config.yml` 批量改 frontmatter（基本用不到，单篇手改） | 手动调用 |
 | `npm run dev` / `npm run build` | — | 本地预览 / 构建 | `predev`/`prebuild` 钩子自动先跑 `utils/check.js` 做环境检查 |
 | `npm run baiduPush` | `utils/baiduPush.js` | 百度推送 | 手动调用 |
 
@@ -117,5 +117,5 @@ npm run kb:lint:one:fix -- ../../docs/01.Java/10.基础.md
 | 只转 webp | `kb:compress` |
 | 清理前查未使用图片 | `kb:scan`（全仓库）或 `kb:scan --local=`（单篇） |
 | 全仓库排版修复 | `kb:lint:fix` |
-| 批量改 frontmatter | `npm run editFm` |
+| 全仓库健康体检（发布前） | `md:check docs` → `kb:lint` → `kb:scan docs` → `npm run build` |
 | 跑工具链回归测试 | compress `kb:test` + normalize `node --test tests/` |

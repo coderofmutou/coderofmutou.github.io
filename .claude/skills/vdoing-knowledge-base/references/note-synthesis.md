@@ -53,7 +53,7 @@
 ```bash
 cd utils/compress
 # 扫描 md 中所有 http/https 图片，下载到同级 <篇名>.assets/，替换为相对路径，生成 *_new.md
-npm run kb:download -- docs/02.微服务核心/50.持久层框架/10.MyBatis.md
+npm run kb:download -- ../../docs/02.微服务核心/50.持久层框架/10.MyBatis.md
 ```
 
 下载后再用 `kb:compress` 统一转 webp。

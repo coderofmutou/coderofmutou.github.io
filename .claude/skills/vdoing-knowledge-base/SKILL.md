@@ -1,7 +1,7 @@
 ---
 name: vdoing-knowledge-base
-description: "本仓库 vuepress-theme-vdoing 知识库维护入口，遇以下情形立即触发（勿直接动手，有仓库专属规范）：新增/整合/更新/拆分笔记；图片不显示/外链失效/路径错误，或运行 kb:all / kb:download / kb:compress / kb:scan / kb:convert；修改 config.ts 导航或新增目录页；写 Git commit message（有 [笔记]/[图片]/[配置] 前缀规范）；批量改 frontmatter（author/categories/tags 等字段）；跑 md:check / kb:lint:one 检查或修复排版结构。不确定时先用它——它会指引到对应规范和命令。"
-argument-hint: "描述你想做的事，例如：新增 Spring Security 6 笔记、整合 Redis 多份课程笔记、处理某篇文档的外链图片并转 webp、检查并修复笔记排版与结构、更新 config.ts 导航"
+description: "本仓库 vuepress-theme-vdoing 知识库维护入口，遇以下情形立即触发（勿直接动手，有仓库专属规范）：新增/整合/更新/拆分笔记，或删除/归档已发布笔记；图片不显示/外链失效/路径错误，或运行 kb:all / kb:download / kb:compress / kb:scan / kb:convert；修改 config.ts 导航或新增目录页；写 Git commit message（有 [笔记]/[图片]/[配置] 前缀规范）；改 frontmatter 字段（author/categories/tags 等）；跑 md:check / kb:lint:one 检查或修复排版结构。不确定时先用它——它会指引到对应规范和命令。"
+argument-hint: "描述你想做的事，例如：新增 Spring Security 6 笔记、整合 Redis 多份课程笔记、处理某篇文档的外链图片并转 webp、检查并修复笔记排版与结构、更新 config.ts 导航、删除过时笔记"
 ---
 
 # VuePress Vdoing 知识库维护
@@ -17,7 +17,7 @@ argument-hint: "描述你想做的事，例如：新增 Spring Security 6 笔记
 3. **更新笔记**：技术版本升级、补充遗漏、修正错误、单文件拆分
 4. **图片治理**：外链下载、转 webp、查未使用、路径修复
 5. **导航维护**：更新 `config.ts` 导航栏、新增目录页
-6. **批量改 frontmatter**：用 `editFm` 批量修改字段
+6. **frontmatter 维护**：手改字段规范（title/date/permalink/categories/tags/author）
 7. **发布前质量验收**：跑工具自动检查 + 人工复核
 8. **常见问题排查**：图片不显示、侧边栏乱、404、路径问题
 9. **Git 提交**：编写规范的 commit message
@@ -37,7 +37,7 @@ argument-hint: "描述你想做的事，例如：新增 Spring Security 6 笔记
 **示例 3：图片处理**
 
 - 输入："处理 docs/02.微服务核心/50.持久层框架/10.MyBatis.md 的外链图片并转 webp"
-- 处理：执行 `cd utils/compress && npm run kb:all -- docs/02.微服务核心/50.持久层框架/10.MyBatis.md`；输出最终 `*_new.md` 和扫描报告，并提示删除操作需人工确认。
+- 处理：执行 `cd utils/compress && npm run kb:all -- ../../docs/02.微服务核心/50.持久层框架/10.MyBatis.md`；输出最终 `*_new.md` 和扫描报告，并提示删除操作需人工确认。
 
 **示例 4：发布前质量验收**
 
@@ -146,7 +146,7 @@ author:
 
 ```bash
 cd utils/compress
-npm run kb:all -- docs/02.微服务核心/50.持久层框架/10.MyBatis.md
+npm run kb:all -- ../../docs/02.微服务核心/50.持久层框架/10.MyBatis.md
 ```
 
 串行执行 download → convert → compress → scan，产 `*_new.md`。详见 [图片处理决策树](./references/image-pipeline.md)。
@@ -171,6 +171,10 @@ npm run kb:all -- docs/02.微服务核心/50.持久层框架/10.MyBatis.md
 - 差异极大 → 文件级分离，文件名含版本信息
 - `permalink` 一旦发布不要轻易修改（会造成死链）
 - 单文件超过 500 行考虑按章节拆分
+
+### 删除或归档笔记
+
+删除已发布笔记是高风险操作（死链、导航残留）。完整流程——查死链 → 处理 `.assets/` → 移除导航 → permalink 取舍（彻底删 vs 归档保留占位）→ 提交——见 [已有笔记更新维护指南](./references/note-maintenance.md) 第七节。
 
 ---
 
@@ -224,13 +228,11 @@ author:
 
 ---
 
-## 六、批量改 frontmatter
+## 六、frontmatter 维护
 
-```bash
-npm run editFm    # 交互式批量修改 frontmatter 字段
-```
+单篇 frontmatter 直接手改即可。字段模板见 [frontmatter 模板](./references/frontmatter-template.md)，字段更新注意事项（`date` 不改、`permalink` 谨慎、`categories`/`tags`/`author` 可改）见 [已有笔记更新维护指南](./references/note-maintenance.md) 第六节。
 
-`utils/editFrontmatter.js` 提供交互式批量修改。适合统一改 author、补 categories、批量加 tags 等场景。详细字段更新注意事项见 [已有笔记更新维护指南](./references/note-maintenance.md) 第六节。
+> `npm run editFm`（`utils/editFrontmatter.js`）是配置 `utils/config.yml` 驱动的批量改工具，日常维护基本用不到，单篇手改更直接。
 
 ---
 
@@ -265,7 +267,29 @@ cd utils/compress && npm run kb:scan -- --local=<md文件>
 - [ ] `**加粗**` / `*斜体*` 边界与中文间有空格（textlint 盲区，见 [排版规范](./references/typography-rules.md)）
 - [ ] 中文语境用全角标点，代码/命令用半角（textlint 盲区）
 - [ ] 涉及新增栏目时，`config.ts` 与目录页已同步
-- [ ] 文档无明显广告噪声、重复段落和失效链接
+- [ ] 文档无明显广告噪声、重复段落（全仓库死链检测见下方「全仓库体检」的 `npm run build`）
+
+### 全仓库体检（发布前 / 定期）
+
+上面是单篇质检。发布前或定期维护时，对整个 `docs/` 做一次体检——四条命令各有侧重，按需跑：
+
+```bash
+# 1. 结构问题（列表/标题/空行/多 H1/绝对路径图片，目录递归）
+(cd utils/normalize && npm run md:check -- ../../docs)
+
+# 2. 排版问题（中英文间距，全仓库）
+(cd utils/textlint && npm run kb:lint)
+
+# 3. 图片引用（未使用/绝对路径/外链残留，全仓库反向索引）
+(cd utils/compress && npm run kb:scan -- ../../docs)
+
+# 4. 死链 / permalink 冲突 / 构造错误（最终兜底，最权威但最慢，在仓库根执行）
+npm run build
+```
+
+> 前三条用子 shell `(cd ... && ...)` 避免切换目录污染后续命令；第 4 条 `npm run build` 需在仓库根执行（根 `package.json` 才有 `build` 脚本）。
+
+> `npm run build` 是最权威的全仓库健康检查：broken link、permalink 重复、frontmatter 错误都会在构建期暴露。它较慢（大仓库 + `--max_old_space_size=4096`），作发布前最终验收即可，不必日常跑；日常用 1–3 条快速扫一遍。
 
 ---
 
@@ -313,7 +337,8 @@ cd utils/compress && npm run kb:scan -- --local=<md文件>
 - [ ] 新增一篇笔记（普通/目录页/随笔/@pages）
 - [ ] 整合多份课程资料
 - [ ] 更新/拆分/版本共存已有笔记
-- [ ] 处理 frontmatter（新增/批量改 `editFm`/字段规范）
+- [ ] 删除/归档已发布笔记（死链预防 + permalink 取舍）
+- [ ] 处理 frontmatter（新增/字段规范，单篇手改）
 - [ ] 更新 config.ts 导航/目录页
 - [ ] 处理图片（外链下载/转 webp/查未用/路径修复）
 - [ ] Markdown 结构归一化（`md:check`/`md:fix`）
@@ -329,7 +354,7 @@ cd utils/compress && npm run kb:scan -- --local=<md文件>
 | [frontmatter-template.md](./references/frontmatter-template.md) | 普通/目录页/随笔/@pages frontmatter 模板 |
 | [config-guide.md](./references/config-guide.md) | config.ts nav 维护 + sidebar 自动规则 |
 | [note-synthesis.md](./references/note-synthesis.md) | 整合多份资料的工作流 |
-| [note-maintenance.md](./references/note-maintenance.md) | 更新、版本共存、拆分 |
+| [note-maintenance.md](./references/note-maintenance.md) | 更新、版本共存、拆分、删除/归档 |
 | [image-pipeline.md](./references/image-pipeline.md) | 图片处理决策树 + 命令映射 |
 | [scripts-cheatsheet.md](./references/scripts-cheatsheet.md) | 全部工具命令速查表 |
 | [typography-rules.md](./references/typography-rules.md) | 中英文混排排版规范 |

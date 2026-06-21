@@ -30,7 +30,7 @@ kb:scan 复查未使用图片 + 绝对路径告警
 
 ```bash
 cd utils/compress
-npm run kb:all -- docs/02.微服务核心/50.持久层框架/10.MyBatis.md
+npm run kb:all -- ../../docs/02.微服务核心/50.持久层框架/10.MyBatis.md
 ```
 
 - 外链图下载到同级 `<篇名>.assets/`，md 引用替换为相对路径
@@ -41,12 +41,12 @@ npm run kb:all -- docs/02.微服务核心/50.持久层框架/10.MyBatis.md
 
 ```bash
 cd utils/compress
-npm run kb:scan -- docs
+npm run kb:scan -- ../../docs
 ```
 
 输出三段报告：
 - **全仓库未引用（可考虑删除）**：建反向索引后确认无任何 md 引用，可删
-- **仅 1 篇引用**：列出引用者，保留
+- **仅 1 篇文章引用**：列出引用者，保留
 - **多篇引用**：列出所有引用者，保留
 
 > ⚠️ **单篇模式 `kb:scan --local=<md>` 的扫描范围**：会递归扫描 md 所在目录下的所有 asset 目录（含同目录其他文档的 `<篇名>.assets/`），因此"本篇未引用"清单可能列出**同目录其他文档的图片**——需人工剔除。单篇模式只报告、不附删除建议；要可靠删图，用全仓库模式 `kb:scan <docs根>` 建反向索引确认。

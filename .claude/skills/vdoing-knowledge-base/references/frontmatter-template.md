@@ -27,7 +27,7 @@ author:
 - 全部小写英文 + 连字符（kebab-case）
 - 与 `config.ts` 的 nav `link` 字段保持一致
 - 系列笔记最后一级加章节路径，如：`/java-basic/java-from-entry-to-proficiency/chapter-1/`
-- 独立文章可用 `/pages/{6位十六进制}/` 格式（如：`/pages/pojo/`）
+- 独立文章可用 `/pages/{自定义字符串}/` 格式（如：`/pages/pojo/`）
 
 ---
 
