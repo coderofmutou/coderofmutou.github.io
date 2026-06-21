@@ -86,11 +86,6 @@ export async function encodeToWebp(imagePath, options = {}) {
   }
 }
 
-export function isCompressibleImage(imagePath) {
-  const ext = path.extname(imagePath).toLowerCase();
-  return COMPRESSIBLE_EXTENSIONS.has(ext);
-}
-
 export function isWebpImage(imagePath) {
   return path.extname(imagePath).toLowerCase() === '.webp';
 }

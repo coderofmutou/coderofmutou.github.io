@@ -19,8 +19,11 @@ function resolveImagePath(ref) {
   }
 
   for (const candidate of candidates) {
-    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
-      return candidate;
+    if (!candidate) continue;
+    try {
+      if (fs.statSync(candidate).isFile()) return candidate;
+    } catch {
+      // 路径不存在或不可访问，尝试下一候选
     }
   }
 
@@ -31,7 +34,7 @@ function isWithinDir(filePath, dirPath) {
   if (!dirPath) return true;
   const normalizedFile = path.resolve(filePath);
   const normalizedDir = path.resolve(dirPath);
-  return normalizedFile.startsWith(normalizedDir + path.sep) || normalizedFile === normalizedDir;
+  return normalizedFile.startsWith(normalizedDir + path.sep);
 }
 
 async function compressMarkdownFile(mdPath, explicitDir) {

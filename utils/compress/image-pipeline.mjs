@@ -12,7 +12,7 @@ function runScript(scriptName, args) {
 }
 
 function getWorkingPath(mdPath) {
-  return mdPath.replace(/\.md$/, '_working.md');
+  return mdPath.replace(/\.md$/i, '_working.md');
 }
 
 function prepareWorkingFile(mdPath) {
@@ -42,6 +42,16 @@ function finalizeWorkingFile(mdPath) {
   return finalPath;
 }
 
+// 把某阶段脚本生成的 <working>_new.md 吸收回 working 文件；无 _new（该阶段无改动）
+// 则保持 working 不变。各阶段脚本本身只管生成 _new.md，是否原地累积由 pipeline
+// 显式控制，共享 lib 因此无需感知 _working 约定。
+function absorbStageOutput(workingPath) {
+  const newPath = resolveNewMarkdownPath(workingPath);
+  if (!fs.existsSync(newPath)) return;
+  fs.copyFileSync(newPath, workingPath);
+  fs.unlinkSync(newPath);
+}
+
 async function main() {
   const args = process.argv.slice(2);
   if (args.length < 1) {
@@ -62,7 +72,7 @@ async function main() {
   }
 
   console.log(`\n找到 ${mdFiles.length} 个 Markdown 文件\n`);
-  console.log('流水线：download → compress → scan --local\n');
+  console.log('流水线：download → convert → compress → scan --local\n');
 
   let totalGenerated = 0;
 
@@ -72,6 +82,8 @@ async function main() {
     const workingPath = prepareWorkingFile(originalMdPath);
 
     // Phase 1: download (reads original, writes _new.md if changed)
+    // extract-image-references handles both ![]() and <img src>, so external
+    // <img> tags are downloaded and their src replaced with a local relative path.
     const downloadArgs = [originalMdPath];
     if (explicitAssetsDir) downloadArgs.push(explicitAssetsDir);
     const downloadOk = runScript('download.mjs', downloadArgs);
@@ -79,7 +91,7 @@ async function main() {
       console.warn(`  ⚠️ download 阶段失败，外链图片可能未被本地化，继续后续步骤`);
     }
 
-    // If download produced _new.md, use it as the working base.
+    // If download produced _new.md, use it as working base; otherwise copy original.
     const downloadNewPath = resolveNewMarkdownPath(originalMdPath);
     if (fs.existsSync(downloadNewPath)) {
       fs.copyFileSync(downloadNewPath, workingPath);
@@ -88,14 +100,27 @@ async function main() {
       fs.copyFileSync(originalMdPath, workingPath);
     }
 
-    // Phase 2: compress (reads/writes _working.md)
+    // Phase 2: convert <img> tags to ![]() syntax（生成 _working_new.md，吸收回 _working.md）
+    // Run after download so that external <img> tags are already localized —
+    // all remaining <img src="relative/path"> can now be safely converted.
+    const convertOk = runScript('convert-html-img.mjs', [workingPath]);
+    if (!convertOk) {
+      console.warn(`  ⚠️ convert 阶段失败，继续后续步骤`);
+    }
+    absorbStageOutput(workingPath);
+
+    // Phase 3: compress（生成 _working_new.md，吸收回 _working.md）
     const compressOk = runScript('compress.mjs', [workingPath]);
     if (!compressOk) {
       console.warn(`  ⚠️ compress 阶段失败`);
     }
+    absorbStageOutput(workingPath);
 
-    // Phase 3: scan local (reads _working.md)
-    runScript('scan.mjs', [`--local=${workingPath}`]);
+    // Phase 4: scan local (reads _working.md)
+    const scanOk = runScript('scan.mjs', [`--local=${workingPath}`]);
+    if (!scanOk) {
+      console.warn(`  ⚠️ scan 阶段失败（不影响输出文件）`);
+    }
 
     // Finalize: _working.md -> _new.md
     const finalPath = finalizeWorkingFile(originalMdPath);

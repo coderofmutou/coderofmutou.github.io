@@ -40,4 +40,16 @@ describe('replaceImageRef', () => {
     assert.ok(result.includes('images/%E5%9F%BA%E7%A1%80.webp'));
     assert.ok(result.includes('images/基础.webp'));
   });
+
+  it('aligns encoding levels by kind, not by array index', () => {
+    // old 含 [raw, encoded, fullEncoded] 三层，new 含 [raw, decoded, encoded] 三层。
+    // 若按下标对齐，old 的 encoded 变体会错位映射到 new 的 decoded 变体，
+    // 写出带空格的 URL（断链）。应按编码层级对齐。
+    const content = '![a](a/b c.png) ![b](a/b%20c.png) ![c](a%2Fb%20c.png)';
+    const result = replaceImageRef(content, 'a/b c.png', 'x%20y.png');
+    assert.ok(!result.includes('x y.png'), '不应出现解码后带空格的引用');
+    assert.ok(result.includes('![a](x%20y.png)'));
+    assert.ok(result.includes('![b](x%2520y.png)'));
+    assert.ok(result.includes('![c](x%20y.png)'));
+  });
 });

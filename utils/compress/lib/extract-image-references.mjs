@@ -2,11 +2,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 
-const MARKDOWN_IMAGE_RE = /!\[[^\]]*\]\(([^)]+)\)/g;
-const HTML_IMG_SRC_RE = /<img\s+[^>]*src=["']([^"']+)["'][^>]*>/gi;
+// 捕获 url，排除可选的 "title"（避免把 `pic.png "示意图"` 整体当 src）
+export const MARKDOWN_IMAGE_RE = /!\[[^\]]*\]\(\s*([^)\s"]+)(?:\s+"[^"]*")?\s*\)/g;
+export const HTML_IMG_SRC_RE = /<img\s+[^>]*src=["']([^"']+)["'][^>]*>/gi;
 const EXTERNAL_LINK_RE = /^https?:\/\//i;
 
-const IMAGE_EXTENSIONS = new Set([
+export const IMAGE_EXTENSIONS = new Set([
   '.png',
   '.jpg',
   '.jpeg',
@@ -16,6 +17,17 @@ const IMAGE_EXTENSIONS = new Set([
   '.svg',
 ]);
 
+// 判断 src 是否为本地绝对路径：站内 `/` 开头 或 Windows 盘符路径（C:\ / C:/），
+// 排除 http/https 外链。供 scan / convert-html-img / normalize 复用，
+// 避免四处各写一份判定（且旧 buildReference 漏判盘符，把 C:\x.png 当相对路径去 resolve）。
+export function isAbsoluteLocalSrc(src) {
+  if (!src) return false;
+  if (EXTERNAL_LINK_RE.test(src)) return false;
+  if (src.startsWith('/')) return true;
+  if (/^[A-Za-z]:[/\\]/.test(src)) return true;
+  return false;
+}
+
 function hasImageExtension(value) {
   const lower = value.toLowerCase();
   for (const ext of IMAGE_EXTENSIONS) {
@@ -24,22 +36,15 @@ function hasImageExtension(value) {
   return false;
 }
 
-function isImageLike(value) {
-  if (typeof value !== 'string' || value.length === 0) return false;
-  // frontmatter 字段只有带图片扩展名才视为图片，避免把 source/link 等
-  // 普通 http 链接误当成外链图片去下载（正文 ![]() 与 <img> 不走此判定）。
-  return hasImageExtension(value);
-}
-
 function collectFrontmatterImages(frontmatter, images = new Set()) {
   if (!frontmatter || typeof frontmatter !== 'object') return images;
 
   for (const [key, value] of Object.entries(frontmatter)) {
-    if (typeof value === 'string' && isImageLike(value)) {
+    if (typeof value === 'string' && hasImageExtension(value)) {
       images.add(value);
     } else if (Array.isArray(value)) {
       value.forEach((item) => {
-        if (typeof item === 'string' && isImageLike(item)) {
+        if (typeof item === 'string' && hasImageExtension(item)) {
           images.add(item);
         } else if (typeof item === 'object' && item !== null) {
           collectFrontmatterImages(item, images);
@@ -69,7 +74,7 @@ function buildReference(src, mdDir) {
   const normalized = normalizeSrc(src);
   const decoded = decodeSrc(normalized);
   const isExternal = EXTERNAL_LINK_RE.test(normalized);
-  const isAbsolute = !isExternal && normalized.startsWith('/');
+  const isAbsolute = isAbsoluteLocalSrc(normalized);
 
   let absolutePath = null;
   if (!isExternal && !isAbsolute) {
@@ -122,16 +127,4 @@ export async function extractImageReferences(mdFilePath, options = {}) {
   }
 
   return refs;
-}
-
-export function isExternalReference(src) {
-  return EXTERNAL_LINK_RE.test(src);
-}
-
-export function isAbsoluteReference(src) {
-  return !isExternalReference(src) && src.startsWith('/');
-}
-
-export function isRelativeReference(src) {
-  return !isExternalReference(src) && !isAbsoluteReference(src);
 }

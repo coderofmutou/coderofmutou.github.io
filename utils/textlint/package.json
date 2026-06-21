@@ -2,17 +2,17 @@
   "name": "markdown-file-check-and-fix",
   "version": "1.0.0",
   "scripts": {
-	"checkOne": "npx textlint",
-    "fixOne": "npx textlint --fix",
-	"checkAll": "npx textlint ../../docs/**/*.md",
-    "fixAll": "npx textlint --fix ../../docs/**/*.md",
-	"checkWithUrl": "npx textlint --rule textlint-rule-alive-link ../../docs/**/*.md",
-	"fixWithUrl": "npx textlint --fix --rule textlint-rule-alive-link ../../docs/**/*.md"
+    "kb:lint": "textlint ../../docs/**/*.md",
+    "kb:lint:fix": "textlint --fix ../../docs/**/*.md",
+    "kb:lint:one": "textlint",
+    "kb:lint:one:fix": "textlint --fix"
   },
   "devDependencies": {
     "textlint": "^14.0.4",
-    "textlint-rule-alive-link": "^0.1.2",
-    "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2",
-    "textlint-rule-zh-half-and-full-width-bracket": "^1.1.0"
+    "textlint-rule-ja-space-around-code": "^3.0.0",
+    "textlint-rule-ja-space-between-half-and-full-width": "^2.4.2"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

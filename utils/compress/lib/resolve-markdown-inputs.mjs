@@ -13,10 +13,10 @@ function matchesGlob(filePath, pattern) {
   // 再还原 glob 语义，避免文件名中的 ( ) [ ] . 等被当成 regex 元字符。
   const regexPattern = normalizedPattern
     .replace(/[.+^${}()|[\]\\]/g, '\\$&')
-    .replace(/\*\*/g, '{{GLOBSTAR}}')
-    .replace(/\*/g, '[^/]*')
-    .replace(/\?/g, '.')
-    .replace(/\{\{GLOBSTAR\}\}/g, '.*');
+    .replace(/\?/g, '.') // glob 单字符通配符（先于 **/ 处理，避免误伤正则量词 ?）
+    .replace(/\*\*\//g, '(?:.*/)?') // **/ 匹配零或多层目录（含根层）
+    .replace(/\*\*/g, '.*') // 裸 ** 匹配任意字符（含 /）
+    .replace(/\*/g, '[^/]*');
 
   const regex = new RegExp(`^${regexPattern}$`);
   return regex.test(normalizedFile);
@@ -26,7 +26,7 @@ function isGlobPattern(input) {
   return input.includes('*') || input.includes('?');
 }
 
-function findMdFiles(dir) {
+export function findMdFiles(dir) {
   const results = [];
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
@@ -51,13 +51,7 @@ function expandGlob(pattern, cwd = process.cwd()) {
   let relativePattern = normalizedPattern;
 
   const parts = normalizedPattern.split('/');
-  let rootIndex = 0;
-  for (let i = 0; i < parts.length; i++) {
-    if (parts[i].includes('*') || parts[i].includes('?')) {
-      rootIndex = i;
-      break;
-    }
-  }
+  const rootIndex = parts.findIndex((p) => isGlobPattern(p));
 
   if (rootIndex > 0) {
     const rootParts = parts.slice(0, rootIndex);

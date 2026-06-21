@@ -27,8 +27,6 @@ async function downloadMarkdownFile(mdPath, explicitAssetsDir) {
   const mdStem = path.basename(mdPath, '.md');
   const assetsDir = explicitAssetsDir || discoverAssetDir(mdPath) || path.join(mdDir, `${mdStem}.assets`);
 
-  fs.mkdirSync(assetsDir, { recursive: true });
-
   const allRefs = await extractImageReferences(mdPath);
   const externalRefs = allRefs.filter((ref) => ref.isExternal);
 
@@ -37,6 +35,8 @@ async function downloadMarkdownFile(mdPath, explicitAssetsDir) {
     return { mdPath, newMdPath: null, downloadedCount: 0, failedCount: 0 };
   }
 
+  // 只在确有外链时才创建目录，避免无外链文档留下空 assets 目录。
+  fs.mkdirSync(assetsDir, { recursive: true });
   console.log(`  发现 ${externalRefs.length} 个外部图片链接`);
   console.log(`  保存目录: ${assetsDir}\n`);
 
@@ -80,7 +80,9 @@ async function downloadMarkdownFile(mdPath, explicitAssetsDir) {
     console.log(`\n  📝 已生成: ${newMdPath}`);
   }
 
-  if (failedCount > 0) {
+  // 仅当全部外链都下载失败时才标记阶段失败。部分失败（外站图片易失效）
+  // 不应让整条 pipeline 报「download 阶段失败」，失败数已在上方日志中体现。
+  if (failedCount > 0 && downloadedCount === 0) {
     process.exitCode = 1;
   }
 

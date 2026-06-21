@@ -7,10 +7,14 @@
     "kb:compress": "node compress.mjs",
     "kb:scan": "node scan.mjs",
     "kb:all": "node image-pipeline.mjs",
+    "kb:convert": "node convert-html-img.mjs",
     "kb:test": "node --test tests/extract-image-references.test.mjs tests/resolve-markdown-inputs.test.mjs tests/markdown-link.test.mjs tests/download-image.test.mjs"
   },
   "dependencies": {
     "sharp": "^0.33.5",
     "gray-matter": "^4.0.3"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

@@ -1,0 +1,13 @@
+{
+  "name": "md-normalize",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Markdown 文档结构归一化工具",
+  "scripts": {
+    "md:check": "node normalize.mjs check",
+    "md:fix": "node normalize.mjs fix"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
