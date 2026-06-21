@@ -20,15 +20,15 @@
 
 | 命令 | 用途 | 示例 |
 |------|------|------|
-| `kb:download` | 外链图片本地化 | `npm run kb:download ./docs/01.Java/10.基础.md` |
-| `kb:compress` | 本地图片压缩为 webp，更新 md 引用 | `npm run kb:compress ./docs/01.Java/10.基础.md` |
-| `kb:scan` | 扫描未使用图片 / 绝对路径引用 | `npm run kb:scan ./docs` |
-| `kb:all` | 单篇流水线：download → convert → compress → scan | `npm run kb:all ./docs/01.Java/10.基础.md` |
-| `kb:convert` | 将文档中 `<img>` 标签转为 `![]()` 语法 | `npm run kb:convert ./docs/01.Java/10.基础.md` |
+| `kb:download` | 外链图片本地化 | `npm run kb:download ../../docs/01.Java/10.基础.md` |
+| `kb:compress` | 本地图片压缩为 webp，更新 md 引用 | `npm run kb:compress ../../docs/01.Java/10.基础.md` |
+| `kb:scan` | 扫描未使用图片 / 绝对路径引用 | `npm run kb:scan ../../docs` |
+| `kb:all` | 单篇流水线：download → convert → compress → scan | `npm run kb:all ../../docs/01.Java/10.基础.md` |
+| `kb:convert` | 将文档中 `<img>` 标签转为 `![]()` 语法 | `npm run kb:convert ../../docs/01.Java/10.基础.md` |
 
 ### 输入支持
 
-`<md输入>` 支持以下形式：单个文件、多个文件、glob（`./docs/01.Java/**/*.md`）、目录（递归处理该目录下所有 `.md`）。约定：`<必选>` 表示必填，`[可选]` 表示可省略。
+`<md输入>` 支持以下形式：单个文件、多个文件、glob（`../../docs/01.Java/**/*.md`）、目录（递归处理该目录下所有 `.md`）。约定：`<必选>` 表示必填，`[可选]` 表示可省略。
 
 ### kb:download（download.mjs）
 
@@ -106,8 +106,8 @@ node convert-html-img.mjs <md输入>
 `cd utils/normalize` 后执行：
 
 ```bash
-npm run md:check ./docs/01.Java/10.基础.md   # 只报告，不修改
-npm run md:fix   ./docs/01.Java/10.基础.md   # 修复可自动化项，输出 *_new.md
+npm run md:check ../../docs/01.Java/10.基础.md   # 只报告，不修改
+npm run md:fix   ../../docs/01.Java/10.基础.md   # 修复可自动化项，输出 *_new.md
 ```
 
 检查/修复项：
