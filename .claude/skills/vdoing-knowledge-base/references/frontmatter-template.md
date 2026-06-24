@@ -12,14 +12,13 @@ permalink: /{一级路径}/{二级路径}/
 categories:
   - {一级分类，如：Java基础}
   - {二级分类，如：Java从入门到精通(JDK17版)}
-tags:
-  - {标签1，如：Java}
-  - {标签2，如：JDK17}
 author:
   name: bombax
   link: https://github.com/coderofmutou
 ---
 ```
+
+> **`tags` 字段可省略**：本项目 config.ts 中标签导航入口已注释，无需填写。如有需要保留 tags 时写 `tags: []` 即可。
 
 **permalink 路径规则：**
 - 全部小写英文 + 连字符（kebab-case）
@@ -68,13 +67,13 @@ permalink: /pages/{自定义字符串}/
 sidebar: auto
 categories:
   - 随笔
-tags:
-  - {标签}
 author:
   name: bombax
   link: https://github.com/coderofmutou
 ---
 ```
+
+> `tags` 同样可省略，原因同普通文章。
 
 ---
 

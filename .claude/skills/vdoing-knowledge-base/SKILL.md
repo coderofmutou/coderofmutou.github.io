@@ -17,7 +17,7 @@ argument-hint: "描述你想做的事，例如：新增 Spring Security 6 笔记
 3. **更新笔记**：技术版本升级、补充遗漏、修正错误、单文件拆分
 4. **图片治理**：外链下载、转 webp、查未使用、路径修复
 5. **导航维护**：更新 `config.ts` 导航栏、新增目录页
-6. **frontmatter 维护**：手改字段规范（title/date/permalink/categories/tags/author）
+6. **frontmatter 维护**：手改字段规范（title/date/permalink/categories/author）
 7. **发布前质量验收**：跑工具自动检查 + 人工复核
 8. **常见问题排查**：图片不显示、侧边栏乱、404、路径问题
 9. **写作规范与语法**：Markdown 内容规范、VuePress / Vdoing 容器与扩展语法
@@ -28,7 +28,7 @@ argument-hint: "描述你想做的事，例如：新增 Spring Security 6 笔记
 **示例 1：新增笔记**
 
 - 输入："新增一篇 Spring Security 6 的笔记，放在微服务生态/安全框架下"
-- 处理：按路径规范创建 Markdown 文件；参照 [frontmatter 模板](./references/frontmatter-template.md) 填写 `title` / `date` / `permalink` / `categories` / `tags` / `author`；建议是否需要更新 `config.ts` 导航与目录页。
+- 处理：按路径规范创建 Markdown 文件；参照 [frontmatter 模板](./references/frontmatter-template.md) 填写各字段；建议是否需要更新 `config.ts` 导航与目录页。
 
 **示例 2：整合他人笔记**
 
@@ -80,27 +80,7 @@ docs/
 
 ### 2. 编写 frontmatter
 
-见 [frontmatter 模板](./references/frontmatter-template.md)。
-
-**普通文章 frontmatter 最小集：**
-
-```yaml
----
-title: {标题（中文，与 H1 一致）}
-date: {YYYY-MM-DD HH:mm:ss}
-permalink: /{kebab-case 路径}/
-categories:
-  - {一级分类中文名}
-  - {二级分类中文名（可选）}
-tags:
-  - {标签1}
-author:
-  name: bombax
-  link: https://github.com/coderofmutou
----
-```
-
-`permalink` 规则：小写英文 + 连字符，无中文，与 config.ts 中 nav 的 link 对齐。
+见 [frontmatter 模板](./references/frontmatter-template.md)。`permalink` 规则：小写英文 + 连字符，无中文，与 config.ts 中 nav 的 link 对齐。
 
 ### 3. 文章内容结构
 
@@ -145,7 +125,7 @@ author:
 - **资料冲突**：以官方文档/新版本语义为准；旧版本保留并标注版本边界。
 - **示例代码重复**：保留最短可运行示例，复杂示例放折叠或拆子节。
 - **图片过多**：保留必要流程图和结果图，删重复截图。
-- **篇幅过长（>500 行）**：按主题拆分子文件，主文档加目录跳转。
+- **单个文件跨越了多个可独立检索的主题**：按主题拆分子文件，主文档加目录跳转。
 
 ---
 
@@ -159,7 +139,7 @@ author:
 - Breaking Change → 章节标题加版本括注，如 `## 安全配置（Spring Security 6.x）`
 - 差异极大 → 文件级分离，文件名含版本信息
 - `permalink` 一旦发布不要轻易修改（会造成死链）
-- 单文件超过 500 行考虑按章节拆分
+- 何时拆分文件见 [已有笔记更新维护指南](./references/note-maintenance.md)
 
 ### 删除或归档笔记
 
@@ -194,7 +174,7 @@ author:
 
 ## 六、frontmatter 维护
 
-单篇 frontmatter 直接手改即可。字段模板见 [frontmatter 模板](./references/frontmatter-template.md)；字段修改边界（`date` 不改、`permalink` 谨慎、`categories` / `tags` / `author` 可改）见 [已有笔记更新维护指南](./references/note-maintenance.md) 第六节。
+单篇 frontmatter 直接手改即可。字段模板见 [frontmatter 模板](./references/frontmatter-template.md)；字段修改边界（`date` 不改、`permalink` 谨慎、`categories` / `author` 可改）见 [已有笔记更新维护指南](./references/note-maintenance.md) 第六节。
 
 > 批量统一字段时再使用 `npm run editFm`（`utils/editFrontmatter.js`）；单篇修改直接手改。
 
