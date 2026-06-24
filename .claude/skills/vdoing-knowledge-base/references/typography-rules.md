@@ -2,8 +2,6 @@
 
 知识库笔记的排版硬规则。分两部分：**textlint 能自动修的**（跑命令即可）和 **textlint 修不到的盲区**（写作时手动保证）。
 
-参考来源：`D:\Study\AI\markdown-note-guidelines.md`。
-
 ---
 
 ## 一、textlint 能自动修复（跑命令）
@@ -17,8 +15,8 @@
 
 ```bash
 cd utils/textlint
-npm run kb:lint:one -- ../../docs/01.Java/10.基础.md      # 单篇检查
-npm run kb:lint:one:fix -- ../../docs/01.Java/10.基础.md   # 单篇修复（覆盖原文件）
+npm run kb:lint:one -- ../../docs/04.实用工具/10.Git.md    # 单篇检查
+npm run kb:lint:one:fix -- ../../docs/04.实用工具/10.Git.md # 单篇修复（覆盖原文件）
 npm run kb:lint:fix                                        # 全仓库修复
 ```
 

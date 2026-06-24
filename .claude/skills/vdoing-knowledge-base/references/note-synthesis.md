@@ -156,22 +156,7 @@ npm run kb:download -- ../../docs/02.微服务核心/50.持久层框架/10.MyBat
 ### 文件与格式
 
 1. **文件命名**：`{两位数序号}.{标题}.md`，标题与 frontmatter `title` 一致
-2. **frontmatter**：参照 [frontmatter 模板](./frontmatter-template.md) 填写，最小集：
-
-```yaml
----
-title: {标题}
-date: {YYYY-MM-DD HH:mm:ss}
-permalink: /{english-path}/
-categories:
-  - {一级分类}
-tags:
-  - {标签}
-author:
-  name: bombax
-  link: https://github.com/coderofmutou
----
-```
+2. **frontmatter**：参照 [frontmatter 模板](./frontmatter-template.md) 填写（必填：`title` / `date` / `permalink` / `categories` / `author`）
 
 3. **代码块**：所有代码块必须标注语言（\```java, \```xml, \```yaml 等）
 4. **标题层级**：H1 只用于文档标题，正文从 H2 开始

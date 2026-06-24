@@ -8,7 +8,7 @@
 
 | 问题 | 原因 | 解决方案 |
 |------|------|----------|
-| 图片不显示 | 路径含中文，部署环境编码差异 | 图片文件名改英文/拼音；或启用 `markdown-it-disable-url-encode` 插件 |
+| 图片不显示 | 相对路径错误、文件名空格/特殊字符、或部署环境存在中文路径兼容差异 | 项目已启用 `markdown-it-disable-url-encode`；仍异常时优先检查相对路径、文件名与大小写 |
 | 图片不显示 | 用了绝对路径（`/img/x.png`、`C:\...`） | 跑 `kb:scan` 定位绝对路径引用，手动改为相对路径 |
 | 图片不显示 | 外链图床失效（404） | `kb:download` 本地化，见 [图片处理](./image-pipeline.md) |
 | 图片不显示 | 路径大小写不一致 | 统一大小写，Windows 不敏感但 Linux 部署敏感 |
@@ -25,7 +25,7 @@ cd utils/compress
 npm run kb:scan -- ../../docs                    # 全仓库报告绝对路径引用
 # 或
 cd utils/normalize
-npm run md:check -- ../../docs/01.Java/10.基础.md # 单篇检查
+npm run md:check -- ../../docs/04.实用工具/10.Git.md # 单篇检查
 ```
 
 报告形如：`行 42 [markdown] /docs/03.微服务生态/.../result.png`，按行号手动改为相对路径。
@@ -79,9 +79,9 @@ npm run md:check -- ../../docs/01.Java/10.基础.md # 单篇检查
 
 ```bash
 # 结构问题一键检查
-cd utils/normalize && npm run md:check -- ../../docs/01.Java/10.基础.md
+cd utils/normalize && npm run md:check -- ../../docs/04.实用工具/10.Git.md
 # 排版问题一键检查
-cd utils/textlint && npm run kb:lint:one -- ../../docs/01.Java/10.基础.md
+cd utils/textlint && npm run kb:lint:one -- ../../docs/04.实用工具/10.Git.md
 ```
 
 ---

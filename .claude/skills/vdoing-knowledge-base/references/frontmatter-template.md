@@ -1,7 +1,5 @@
 # Frontmatter 模板参考
 
-本项目所有笔记 frontmatter 均基于 vuepress-theme-vdoing 规范，结合项目实际约定。
-
 ---
 
 ## 普通文章（最常用）

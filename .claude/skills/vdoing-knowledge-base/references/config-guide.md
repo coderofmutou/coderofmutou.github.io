@@ -40,7 +40,7 @@ nav (数组)
 },
 ```
 
-2. 在 `docs/00.目录页/` 下新建目录页文件（参见 [frontmatter 模板 - 目录页](./frontmatter-template.md#目录页catalogue-page)）。
+2. 在 `docs/00.目录页/` 下新建目录页文件（见 [frontmatter 模板 - 目录页](./frontmatter-template.md#目录页catalogue-page)）。
 
 3. 在 `docs/` 下新建对应的一级文件夹，如 `05.新主题/`（注意数字前缀要在已有文件夹之后）。
 

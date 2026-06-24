@@ -127,7 +127,7 @@ title: MyBatis 与 Spring Boot 3.x 集成
 1. 确认该知识点应归属的章节位置（参照现有大纲）
 2. 补充时保持与原文风格一致（标题层级、代码风格）
 3. 若是个人实践中发现的用法，用 `> 💡 个人注：` 格式标注来源
-4. 更新 frontmatter 的 `date` 字段为修改日期（`lastUpdated` 依赖 git 提交时间，frontmatter 的 date 是创建日期，一般**不需要修改**）
+4. 不要修改 `date` 字段（代表创建日期；最后更新时间由 `lastUpdated` 基于 git 提交时间自动生成）
 
 ---
 
@@ -152,9 +152,9 @@ title: MyBatis 与 Spring Boot 3.x 集成
 **注意事项：**
 - 原文件的 `permalink` 如果已发布并被外部引用，不要随意变更（会造成死链）
 - 拆分后每个文件需独立的 frontmatter，`permalink` 在原基础上加子路径
-- 若原文件 permalink 为 `/micro-service-core/MyBatis/`，则子文件改为：
-  - `/micro-service-core/MyBatis/basics/`
-  - `/micro-service-core/MyBatis/dynamic-sql/`
+- 若原文件 permalink 为 `/micro-service-core/mybatis/`，则子文件改为：
+  - `/micro-service-core/mybatis/basics/`
+  - `/micro-service-core/mybatis/dynamic-sql/`
 - 原文件可改为目录索引页（`article: false`），或直接删除后在 `config.ts` 更新导航链接
 
 ---
