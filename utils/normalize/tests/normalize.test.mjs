@@ -32,11 +32,16 @@ describe('checkFile', () => {
     assert.ok(has(checkFile('![](/img/x.png)\n'), 'absolute-image-path'));
   });
 
-  it('代码块内的列表/标题不被误报', () => {
+  it('代码块内列表/标题不被误报', () => {
     const content = '```\n-foo\n## 标题\n```\n';
     const issues = checkFile(content);
     assert.ok(!has(issues, 'list-no-space'));
     assert.ok(!has(issues, 'heading-spacing'));
+  });
+
+  it('代码块内 `# ` 注释行不被误报为多余 H1', () => {
+    const content = '# 标题\n\n```bash\n# 查看本地镜像\ndocker images\n```\n';
+    assert.ok(!has(checkFile(content), 'multiple-h1'));
   });
 
   it('4 反引号围栏内的 3 反引号不提前闭合', () => {

@@ -34,7 +34,6 @@ const ORDERED_LIST_RE = /^(\s*)(\d+\.)(?=[^\s\d.])/;
 export function checkFile(content) {
   const issues = [];
   const segments = splitCodeFences(content);
-  const lines = content.split('\n');
 
   // 非代码块部分一次遍历完成：连续空行 + 列表空格 + 标题空行 + 绝对路径图片。
   // 作用域与 fixContent 对齐（只在 segment 内检测），避免 check 报告而 fix 修不掉的假阳性。
@@ -95,8 +94,15 @@ export function checkFile(content) {
   }
 
   // --- H1 唯一性（只报告） ---
-  const h1Lines = lines
-    .map((l, i) => ({ line: i + 1, content: l }))
+  // 注意：必须从 segments 里筛，不能直接扫原始 lines，否则代码块内的 `# ` 注释行会被误判为 H1。
+  const h1Lines = segments
+    .filter(seg => !seg.isCode)
+    .flatMap(seg =>
+      seg.text.split('\n').map((content, j) => ({
+        line: seg.startLine + j + 1,
+        content,
+      }))
+    )
     .filter(({ content }) => /^#\s/.test(content));
   if (h1Lines.length > 1) {
     issues.push({
