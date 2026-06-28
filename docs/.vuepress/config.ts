@@ -51,7 +51,7 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           {
             text: '前置',
             items: [
-              { text: '尚硅谷Java学习', link: '/java-basic/java-learning/' },
+              { text: '尚硅谷 Java 学习路线', link: '/java-basic/java-learning/' },
               { text: '基础软件安装与配置', link: '/java-basic/software-install-config/' },
             ],
           },
@@ -100,21 +100,21 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
           {
             text: 'Spring Cloud',
             items: [
-              { text: 'SpringCloud', link: '/micro-service-core/SpringCloud/' },
-              { text: 'SpringCloud-Alibaba', link: '/micro-service-core/SpringCloud-Alibaba/' },
+              { text: 'Spring Cloud', link: '/micro-service-core/spring-cloud/' },
+              { text: 'Spring Cloud Alibaba', link: '/micro-service-core/spring-cloud-alibaba/' },
             ]
           },
           {
             text: '持久层框架',
             items: [
-              { text: 'MyBatis', link: '/micro-service-core/MyBatis/' },
-              { text: 'MyBatis-Plus', link: '/micro-service-core/MyBatisPlus/' },
+              { text: 'MyBatis', link: '/micro-service-core/mybatis/' },
+              { text: 'MyBatis-Plus', link: '/micro-service-core/mybatis-plus/' },
             ]
           },
           {
             text: '相关知识',
             items: [
-              { text: 'Mybatis 代码生成工具比较', link: '/pages/20b7dd/' },
+              { text: 'MyBatis 代码生成工具比较', link: '/pages/20b7dd/' },
             ],
           }
         ],
