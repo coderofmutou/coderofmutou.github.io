@@ -309,6 +309,7 @@ public class Demo {
 - 附加阅读：用 `details`
 - 资源推荐页：用 `cardList` / `cardImgList`
 - 不到必要时，不引入大段 HTML
+- **例外**：文档层级过深导致 TOC 失焦时，可用 `<h4>` / `<h5>` HTML 标签替代对应 Markdown 标题，使其不被 VuePress 计入侧边栏（详见 markdown-writing-guide.md §三.4）
 
 ---
 
@@ -323,7 +324,7 @@ public class Demo {
    - 是否可用取决于 `docs/.vuepress/config.ts` 是否启用
 
 3. 用自定义 HTML 代替正常 Markdown
-   - 除非为了 demo、布局或主题能力，否则优先 Markdown
+   - 除非为了 demo、布局、主题能力，或用 `<h4>`/`<h5>` 控制 TOC 深度，否则优先 Markdown
 
 4. 在知识型笔记中滥用卡片容器
    - 漂亮归漂亮，但过量会让正文失去连续性

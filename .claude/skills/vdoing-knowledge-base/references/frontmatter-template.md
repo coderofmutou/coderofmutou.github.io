@@ -12,13 +12,15 @@ permalink: /{一级路径}/{二级路径}/
 categories:
   - {一级分类，如：Java基础}
   - {二级分类，如：Java从入门到精通(JDK17版)}
+tags:
+  - 
 author:
   name: bombax
   link: https://github.com/coderofmutou
 ---
 ```
 
-> **`tags` 字段可省略**：本项目 config.ts 中标签导航入口已注释，无需填写。如有需要保留 tags 时写 `tags: []` 即可。
+> **`tags` 字段**：必填，固定留空（`tags:\n  - `），位于 `categories` 与 `author` 之间。虽然本项目标签导航已关闭，但字段本身仍须保留。
 
 **permalink 路径规则：**
 - 全部小写英文 + 连字符（kebab-case）
@@ -67,13 +69,15 @@ permalink: /pages/{自定义字符串}/
 sidebar: auto
 categories:
   - 随笔
+tags:
+  - 
 author:
   name: bombax
   link: https://github.com/coderofmutou
 ---
 ```
 
-> `tags` 同样可省略，原因同普通文章。
+> 随笔同样需要保留 `tags:\n  - ` 字段，位于 `categories` 与 `author` 之间。
 
 ---
 
@@ -103,7 +107,7 @@ editLink: false
 | `date` | ✅ | 创建时间，用于归档排序，格式 `YYYY-MM-DD HH:mm:ss` |
 | `permalink` | ✅ | 永久链接，一旦发布不要修改 |
 | `categories` | ✅（普通文章）| 分类，最多两级，与目录结构对应 |
-| `tags` | ⬜ | 标签，可为空数组 `[]` |
+| `tags` | ✅ | 固定留空（`tags:\n  - `），位于 `categories` 与 `author` 之间；标签导航已关闭，值留空即可 |
 | `author` | ✅ | 作者，项目默认 bombax |
 | `sidebar` | ⬜ | 目录页设为 `false`；随笔可设为 `auto` |
 | `article` | ⬜ | 设为 `false` 表示非文章页（不参与归档） |

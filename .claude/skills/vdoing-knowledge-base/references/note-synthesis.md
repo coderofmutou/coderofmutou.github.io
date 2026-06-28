@@ -142,11 +142,17 @@ npm run kb:download -- ../../docs/02.微服务核心/50.持久层框架/10.MyBat
 在整合后，对以下类型的内容进行个人标注：
 
 ```markdown
-> 💡 **个人注**：这里要注意 XXX，实际项目中建议 YYY。
+::: note 💡 个人注
+这里要注意 XXX，实际项目中建议 YYY。
+:::
 
-> ⚠️ **踩坑记录**：升级到 X.X 版本后，此处行为变更为 ZZZ。
+::: warning ⚠️ 踩坑记录
+升级到 X.X 版本后，此处行为变更为 ZZZ。
+:::
 
-> 🔗 **扩展阅读**：[官方文档链接](https://...)
+::: tip 🔗 扩展阅读
+[官方文档链接](https://...)
+:::
 ```
 
 ---
@@ -156,7 +162,7 @@ npm run kb:download -- ../../docs/02.微服务核心/50.持久层框架/10.MyBat
 ### 文件与格式
 
 1. **文件命名**：`{两位数序号}.{标题}.md`，标题与 frontmatter `title` 一致
-2. **frontmatter**：参照 [frontmatter 模板](./frontmatter-template.md) 填写（必填：`title` / `date` / `permalink` / `categories` / `author`）
+2. **frontmatter**：参照 [frontmatter 模板](./frontmatter-template.md) 填写（必填：`title` / `date` / `permalink` / `categories` / `tags` / `author`）
 
 3. **代码块**：所有代码块必须标注语言（\```java, \```xml, \```yaml 等）
 4. **标题层级**：H1 只用于文档标题，正文从 H2 开始
@@ -210,23 +216,22 @@ docs/
 
 ## 质量自检清单
 
-整合完成后，逐项确认：
+整合完成后，逐项核查：
 
-**内容质量：**
-- [ ] 已删除无关噪声（讲师介绍、广告、社群引导文字）
-- [ ] 操作步骤截图已替换为文字描述；纯装饰图已删除
-- [ ] 重复的概念只保留一份最清晰的表述
-- [ ] 所有代码块已标注语言
-- [ ] 个人补充内容使用 `> 💡 个人注：` 格式标注
+**agent 自动确认**（无问题则静默，有问题直接修复或报告）：
+- 无关噪声（讲师介绍、广告、社群引导）已删除
+- 所有代码块已标注语言
+- frontmatter 必填字段完整（title / date / permalink / categories / tags / author）
+- permalink 在全项目中唯一（grep 全库确认）
+- H1 标题与 frontmatter `title` 一致
+- 无绝对路径图片引用（`/img/...`、`C:\...`）
+- 无死链或引用了不存在的图片路径
+- 个人补充内容已容器化（`>` 引用块中为个人注/建议的 → 已转为对应容器）
 
-**格式规范：**
-- [ ] frontmatter 字段完整（title / date / permalink / categories / author）
-- [ ] permalink 在全项目中唯一
-- [ ] H1 标题与 frontmatter `title` 一致
+**agent 扫描并列出候选**（无异常则静默，有问题列清单由用户确认）：
+- 操作步骤截图、纯装饰图：列出所有疑似可替换截图，附建议（建议替换为文字 / 建议保留），由用户决定
 
-**图片处理：**
-- [ ] 外部 URL 图片已下载本地化，无依赖他人图床的链接
-- [ ] 已运行 `kb:compress`，图片全部转为 `.webp`
-- [ ] 已运行 `kb:scan`，未使用的图片已确认
-- [ ] 无死链或引用了不存在的图片路径
-- [ ] 无绝对路径图片引用（`/img/...`、`C:\...`）
+**工具已执行**（输出结果供用户确认）：
+- 外部 URL 图片已下载本地化（`kb:download` 结果）
+- 图片已全部转为 `.webp`（`kb:compress` 结果）
+- 未使用图片已扫描确认（`kb:scan` 结果）
