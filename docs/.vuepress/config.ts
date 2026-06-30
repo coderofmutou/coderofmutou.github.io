@@ -63,6 +63,8 @@ export default defineConfig4CustomTheme<VdoingThemeConfig>({
               { text: 'MySQL从入门到高级-高级篇', link: '/java-basic/mysql-from-beginners-to-advanced/advanced/' },
               { text: 'JDBC 核心技术(JDK21版)', link: '/java-basic/jdbc-core/' },
               { text: 'JavaWeb 技术', link: '/java-basic/java-web/' },
+              { text: 'Maven 依赖管理与项目构建', link: '/java-basic/maven/' },
+              { text: 'Gradle 依赖管理与项目构建', link: '/java-basic/gradle/' },
             ],
           },
           {
