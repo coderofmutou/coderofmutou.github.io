@@ -151,8 +151,6 @@ docs/
 (cd utils/textlint && npm run kb:lint)
 # 3. 图片引用
 (cd utils/compress && npm run kb:scan -- ../../docs)
-# 4. 构建兜底（仓库根执行）
-npm run build
 ```
 
 ---

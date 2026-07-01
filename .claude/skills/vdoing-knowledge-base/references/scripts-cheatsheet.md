@@ -117,5 +117,5 @@ npm run kb:lint:one:fix -- ../../docs/04.实用工具/10.Git.md
 | 只转 webp | `kb:compress` |
 | 清理前查未使用图片 | `kb:scan`（全仓库）或 `kb:scan --local=`（单篇） |
 | 全仓库排版修复 | `kb:lint:fix` |
-| 全仓库健康体检（发布前） | `md:check docs` → `kb:lint` → `kb:scan docs` → `npm run build` |
+| 全仓库健康体检（发布前） | `md:check docs` → `kb:lint` → `kb:scan docs` |
 | 跑工具链回归测试 | compress `kb:test` + normalize `node --test tests/` |
